@@ -457,6 +457,9 @@ public class SparkInterpreter extends Interpreter {
       intp.interpret("import org.apache.spark.sql.functions._");
     }
 
+    // Utility functions for display
+    intp.interpret("import org.apache.zeppelin.spark.utils.DisplayUtils._");
+
     // add jar
     if (depInterpreter != null) {
       DependencyContext depc = depInterpreter.getDependencyContext();
