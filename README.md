@@ -1,7 +1,7 @@
 Spark Cassandra Demo
 ====================
 
-This branch has been built to hightlight the integration of Spark and Cassandra.
+This branch has been built to highlight the integration of Spark and Cassandra.
 
 For the demos to work, you'll need:
 
