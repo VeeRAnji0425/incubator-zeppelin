@@ -28,7 +28,7 @@ For the demos to work, you'll need:
 
 ## Running instructions 
 
-1. Checkout the branch `https://github.com/doanduyhai/incubator-zeppelin/tree/Spark_Cassandra_Demo` 
+1. Clone my Zeppelin forked repo (until my pull requests are merged into official master): `git clone -b Spark_Cassandra_Demo https://github.com/doanduyhai/incubator-zeppelin`
 2. Build your own **Zeppelin** with the Spark-Cassandra connector embedded using the special profile `cassandra-spark-1.2`:
     `mvn clean package -Pcassandra-spark-1.2 -Dhadoop.version=2.5.0-cdh5.3.0 -Phadoop-2.4 -DskipTests`
 3. Start your **Cassandra** server
