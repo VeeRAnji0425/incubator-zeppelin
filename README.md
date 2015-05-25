@@ -1,3 +1,17 @@
+Spark Cassandra Demo
+====================
+
+This branch has been built to hightlight the integration of Spark and Cassandra.
+
+For the demos to work, you'll need:
+
+1. A working **Cassandra** server, version **2.0.x**, **2.1.x** or **Datastax Enterprise 4.7.x**
+2. A running **Spark** cluster deployed in **stand-alone mode** (a stand-alone local deployment is fine)
+3. The notebooks **07-DSE Search in action** and **08-SearchAnalytics Mode** require **Datastax Enterprise 4.7.x**. Do not run them if you're using an open-source **Cassandra**
+4. The notebook **09-Demos Cleanup** will clean up all data downloaded and created for those demos
+5. `wget` and `curl` commands **installed** and **working**
+
+
 #Zeppelin 
 
 **Documentation:** [User Guide](http://zeppelin.incubator.apache.org/docs/index.html)<br/>

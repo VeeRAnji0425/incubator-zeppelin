@@ -1,0 +1,1107 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n\nHow to use Spark to copy data from old schema\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432130828543_-1202605713",
+      "id": "20150520-160708_1993643854",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch1\u003eHow to use Spark to copy data from old schema\u003c/h1\u003e\n"
+      },
+      "dateCreated": "May 20, 2015 4:07:08 PM",
+      "dateStarted": "May 20, 2015 4:08:01 PM",
+      "dateFinished": "May 20, 2015 4:08:02 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\nDepending on the partition key of the new schema, we may or may not have **perfect data locality**\n\nWe want to migrate data from\n\n```sql\nCREATE TABLE spark_demo.albums (\n    title text PRIMARY KEY,\n    country text,\n    performer text,\n    quality text,\n    status text,\n    year int\n)\n```\nto this new table\n\n```sql\nCREATE TABLE spark_demo.albums_by_country (\n    title text,\n    country text,\n    performer text,\n    quality text,\n    status text,\n    year int,\n    PRIMARY KEY((country,year),title)\n)\n```",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432130881795_-96929319",
+      "id": "20150520-160801_427876585",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cp\u003eDepending on the partition key of the new schema, we may or may not have \u003cstrong\u003eperfect data locality\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003eWe want to migrate data from\u003c/p\u003e\n\u003cpre\u003e\u003ccode class\u003d\"sql\"\u003eCREATE TABLE spark_demo.albums (\n    title text PRIMARY KEY,\n    country text,\n    performer text,\n    quality text,\n    status text,\n    year int\n)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eto this new table\u003c/p\u003e\n\u003cpre\u003e\u003ccode class\u003d\"sql\"\u003eCREATE TABLE spark_demo.albums_by_country (\n    title text,\n    country text,\n    performer text,\n    quality text,\n    status text,\n    year int,\n    PRIMARY KEY((country,year),title)\n)\n\u003c/code\u003e\u003c/pre\u003e\n"
+      },
+      "dateCreated": "May 20, 2015 4:08:01 PM",
+      "dateStarted": "May 24, 2015 10:04:27 PM",
+      "dateFinished": "May 24, 2015 10:04:29 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "truncate table albums_by_country",
+      "text": "import com.datastax.spark.connector.cql.CassandraConnector\nCassandraConnector(sc.getConf).withSessionDo { session \u003d\u003e session.execute(\"Truncate spark_demo.albums_by_country\")}",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "title": true,
+        "tableHide": true,
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432130928531_-1930981353",
+      "id": "20150520-160848_1834682060",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import com.datastax.spark.connector.cql.CassandraConnector\nres155: com.datastax.driver.core.ResultSet \u003d ResultSet[ exhausted: true, Columns[]]\n"
+      },
+      "dateCreated": "May 20, 2015 4:08:48 PM",
+      "dateStarted": "May 25, 2015 8:56:32 AM",
+      "dateFinished": "May 25, 2015 8:56:33 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Migrate data with spark",
+      "text": "import scala.collection.JavaConversions._\nimport com.datastax.spark.connector._\nimport com.datastax.spark.connector.cql.CassandraConnector\nimport org.apache.spark.{SparkConf, SparkContext}\n\ncase class Albums(title: String, country: String, performer:String, quality:String,status:String,year:Int)\n\nsc.cassandraTable[Albums](\"spark_demo\", \"albums\").saveToCassandra(\"spark_demo\",\"albums_by_country\")\n\nvar countries:List[(String,String)] \u003d Nil \nvar years: List[(String,String)] \u003d Nil\n\nCassandraConnector(sc.getConf).withSessionDo { \n    session \u003d\u003e {\n        val countriesAndYear \u003d session.execute(\"SELECT DISTINCT country,year FROM spark_demo.albums_by_country\").\n            all().\n            toList\n            \n        countries \u003d countriesAndYear.\n            map(row \u003d\u003e row.getString(\"country\")).\n            toSet.\n            toList.\n            sorted.\n            map(country \u003d\u003e (country,country))\n            \n        years \u003d countriesAndYear.\n            map(row \u003d\u003e row.getInt(\"year\")).\n            filter(year \u003d\u003e year\u003e1900).\n            toSet.\n            toList.\n            sorted.\n            map(year \u003d\u003e (year.toString,year.toString))\n    }\n}\n",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "tableHide": true,
+        "title": true,
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432131174055_-2116093191",
+      "id": "20150520-161254_1942103078",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import scala.collection.JavaConversions._\nimport com.datastax.spark.connector._\nimport com.datastax.spark.connector.cql.CassandraConnector\nimport org.apache.spark.{SparkConf, SparkContext}\ndefined class Albums\ncountries: List[(String, String)] \u003d List()\nyears: List[(String, String)] \u003d List()\n"
+      },
+      "dateCreated": "May 20, 2015 4:12:54 PM",
+      "dateStarted": "May 25, 2015 8:56:44 AM",
+      "dateFinished": "May 25, 2015 8:57:06 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Reset data",
+      "text": "import org.apache.spark.rdd.RDD\n\nvar data:RDD[(String,Int,String,String)] \u003d sc.parallelize(Nil)",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "title": true,
+        "tableHide": true,
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432131455926_-1839060303",
+      "id": "20150520-161735_780521082",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.apache.spark.rdd.RDD\ndata: org.apache.spark.rdd.RDD[(String, Int, String, String)] \u003d ParallelCollectionRDD[170] at parallelize at \u003cconsole\u003e:133\n"
+      },
+      "dateCreated": "May 20, 2015 4:17:35 PM",
+      "dateStarted": "May 25, 2015 8:58:18 AM",
+      "dateFinished": "May 25, 2015 8:58:19 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Search table albums_by_country_and_year",
+      "text": "data \u003d sc.cassandraTable(\"spark_demo\", \"albums_by_country\").\n    select(\"country\",\"year\",\"performer\",\"title\").\n    as((_:String,_:Int,_:String,_:String)).\n    where(s\"\"\"country\u003d\u0027${z.select(\"country\", \"USA\", countries)}\u0027 AND year\u003d${z.select(\"year\", \"2014\", years)}\"\"\")",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "tableHide": false,
+        "title": true,
+        "editorHide": false
+      },
+      "settings": {
+        "params": {
+          "country": "Germany",
+          "year": "2014"
+        },
+        "forms": {
+          "country": {
+            "name": "country",
+            "displayName": "country",
+            "defaultValue": "USA",
+            "options": [
+              {
+                "value": "Andorra",
+                "displayName": "Andorra"
+              },
+              {
+                "value": "Argentina",
+                "displayName": "Argentina"
+              },
+              {
+                "value": "Armenia",
+                "displayName": "Armenia"
+              },
+              {
+                "value": "Aruba",
+                "displayName": "Aruba"
+              },
+              {
+                "value": "Australia",
+                "displayName": "Australia"
+              },
+              {
+                "value": "Austria",
+                "displayName": "Austria"
+              },
+              {
+                "value": "Barbados",
+                "displayName": "Barbados"
+              },
+              {
+                "value": "Belarus",
+                "displayName": "Belarus"
+              },
+              {
+                "value": "Belgium",
+                "displayName": "Belgium"
+              },
+              {
+                "value": "Benin",
+                "displayName": "Benin"
+              },
+              {
+                "value": "Bolivia",
+                "displayName": "Bolivia"
+              },
+              {
+                "value": "Bosnia and Herzegovina",
+                "displayName": "Bosnia and Herzegovina"
+              },
+              {
+                "value": "Brazil",
+                "displayName": "Brazil"
+              },
+              {
+                "value": "Bulgaria",
+                "displayName": "Bulgaria"
+              },
+              {
+                "value": "Canada",
+                "displayName": "Canada"
+              },
+              {
+                "value": "Chile",
+                "displayName": "Chile"
+              },
+              {
+                "value": "China",
+                "displayName": "China"
+              },
+              {
+                "value": "Colombia",
+                "displayName": "Colombia"
+              },
+              {
+                "value": "Costa Rica",
+                "displayName": "Costa Rica"
+              },
+              {
+                "value": "Croatia",
+                "displayName": "Croatia"
+              },
+              {
+                "value": "Cuba",
+                "displayName": "Cuba"
+              },
+              {
+                "value": "Cyprus",
+                "displayName": "Cyprus"
+              },
+              {
+                "value": "Czech Republic",
+                "displayName": "Czech Republic"
+              },
+              {
+                "value": "Denmark",
+                "displayName": "Denmark"
+              },
+              {
+                "value": "Dominican Republic",
+                "displayName": "Dominican Republic"
+              },
+              {
+                "value": "Ecuador",
+                "displayName": "Ecuador"
+              },
+              {
+                "value": "Egypt",
+                "displayName": "Egypt"
+              },
+              {
+                "value": "Estonia",
+                "displayName": "Estonia"
+              },
+              {
+                "value": "Ethiopia",
+                "displayName": "Ethiopia"
+              },
+              {
+                "value": "Faroe Islands",
+                "displayName": "Faroe Islands"
+              },
+              {
+                "value": "Finland",
+                "displayName": "Finland"
+              },
+              {
+                "value": "France",
+                "displayName": "France"
+              },
+              {
+                "value": "Gabon",
+                "displayName": "Gabon"
+              },
+              {
+                "value": "Germany",
+                "displayName": "Germany"
+              },
+              {
+                "value": "Greece",
+                "displayName": "Greece"
+              },
+              {
+                "value": "Guatemala",
+                "displayName": "Guatemala"
+              },
+              {
+                "value": "Hong Kong",
+                "displayName": "Hong Kong"
+              },
+              {
+                "value": "Hungary",
+                "displayName": "Hungary"
+              },
+              {
+                "value": "Iceland",
+                "displayName": "Iceland"
+              },
+              {
+                "value": "India",
+                "displayName": "India"
+              },
+              {
+                "value": "Indonesia",
+                "displayName": "Indonesia"
+              },
+              {
+                "value": "Ireland",
+                "displayName": "Ireland"
+              },
+              {
+                "value": "Israel",
+                "displayName": "Israel"
+              },
+              {
+                "value": "Italy",
+                "displayName": "Italy"
+              },
+              {
+                "value": "Jamaica",
+                "displayName": "Jamaica"
+              },
+              {
+                "value": "Japan",
+                "displayName": "Japan"
+              },
+              {
+                "value": "Jordan",
+                "displayName": "Jordan"
+              },
+              {
+                "value": "Latvia",
+                "displayName": "Latvia"
+              },
+              {
+                "value": "Lebanon",
+                "displayName": "Lebanon"
+              },
+              {
+                "value": "Liechtenstein",
+                "displayName": "Liechtenstein"
+              },
+              {
+                "value": "Lithuania",
+                "displayName": "Lithuania"
+              },
+              {
+                "value": "Luxembourg",
+                "displayName": "Luxembourg"
+              },
+              {
+                "value": "Malaysia",
+                "displayName": "Malaysia"
+              },
+              {
+                "value": "Malta",
+                "displayName": "Malta"
+              },
+              {
+                "value": "Mexico",
+                "displayName": "Mexico"
+              },
+              {
+                "value": "Moldova",
+                "displayName": "Moldova"
+              },
+              {
+                "value": "Monaco",
+                "displayName": "Monaco"
+              },
+              {
+                "value": "Netherlands",
+                "displayName": "Netherlands"
+              },
+              {
+                "value": "New Zealand",
+                "displayName": "New Zealand"
+              },
+              {
+                "value": "Nigeria",
+                "displayName": "Nigeria"
+              },
+              {
+                "value": "Norway",
+                "displayName": "Norway"
+              },
+              {
+                "value": "Pakistan",
+                "displayName": "Pakistan"
+              },
+              {
+                "value": "Peru",
+                "displayName": "Peru"
+              },
+              {
+                "value": "Philippines",
+                "displayName": "Philippines"
+              },
+              {
+                "value": "Poland",
+                "displayName": "Poland"
+              },
+              {
+                "value": "Portugal",
+                "displayName": "Portugal"
+              },
+              {
+                "value": "Puerto Rico",
+                "displayName": "Puerto Rico"
+              },
+              {
+                "value": "Reunion",
+                "displayName": "Reunion"
+              },
+              {
+                "value": "Romania",
+                "displayName": "Romania"
+              },
+              {
+                "value": "Russian Federation",
+                "displayName": "Russian Federation"
+              },
+              {
+                "value": "Saint-Barthelemy",
+                "displayName": "Saint-Barthelemy"
+              },
+              {
+                "value": "Saudi Arabia",
+                "displayName": "Saudi Arabia"
+              },
+              {
+                "value": "Serbia",
+                "displayName": "Serbia"
+              },
+              {
+                "value": "Singapore",
+                "displayName": "Singapore"
+              },
+              {
+                "value": "Slovakia",
+                "displayName": "Slovakia"
+              },
+              {
+                "value": "Slovenia",
+                "displayName": "Slovenia"
+              },
+              {
+                "value": "South Africa",
+                "displayName": "South Africa"
+              },
+              {
+                "value": "South Korea",
+                "displayName": "South Korea"
+              },
+              {
+                "value": "Spain",
+                "displayName": "Spain"
+              },
+              {
+                "value": "Sweden",
+                "displayName": "Sweden"
+              },
+              {
+                "value": "Switzerland",
+                "displayName": "Switzerland"
+              },
+              {
+                "value": "Syria",
+                "displayName": "Syria"
+              },
+              {
+                "value": "Taiwan",
+                "displayName": "Taiwan"
+              },
+              {
+                "value": "Thailand",
+                "displayName": "Thailand"
+              },
+              {
+                "value": "Trinidad and Tobago",
+                "displayName": "Trinidad and Tobago"
+              },
+              {
+                "value": "Turkey",
+                "displayName": "Turkey"
+              },
+              {
+                "value": "USA",
+                "displayName": "USA"
+              },
+              {
+                "value": "Ukraine",
+                "displayName": "Ukraine"
+              },
+              {
+                "value": "United Arab Emirates",
+                "displayName": "United Arab Emirates"
+              },
+              {
+                "value": "United Kingdom",
+                "displayName": "United Kingdom"
+              },
+              {
+                "value": "United States Minor Outlying Islands",
+                "displayName": "United States Minor Outlying Islands"
+              },
+              {
+                "value": "Unknown",
+                "displayName": "Unknown"
+              },
+              {
+                "value": "Uruguay",
+                "displayName": "Uruguay"
+              },
+              {
+                "value": "Venezuela",
+                "displayName": "Venezuela"
+              },
+              {
+                "value": "Virgin Islands",
+                "displayName": "Virgin Islands"
+              }
+            ],
+            "hidden": false
+          },
+          "year": {
+            "name": "year",
+            "displayName": "year",
+            "defaultValue": "2014",
+            "options": [
+              {
+                "value": "1906",
+                "displayName": "1906"
+              },
+              {
+                "value": "1907",
+                "displayName": "1907"
+              },
+              {
+                "value": "1909",
+                "displayName": "1909"
+              },
+              {
+                "value": "1911",
+                "displayName": "1911"
+              },
+              {
+                "value": "1912",
+                "displayName": "1912"
+              },
+              {
+                "value": "1913",
+                "displayName": "1913"
+              },
+              {
+                "value": "1914",
+                "displayName": "1914"
+              },
+              {
+                "value": "1916",
+                "displayName": "1916"
+              },
+              {
+                "value": "1917",
+                "displayName": "1917"
+              },
+              {
+                "value": "1918",
+                "displayName": "1918"
+              },
+              {
+                "value": "1919",
+                "displayName": "1919"
+              },
+              {
+                "value": "1920",
+                "displayName": "1920"
+              },
+              {
+                "value": "1921",
+                "displayName": "1921"
+              },
+              {
+                "value": "1922",
+                "displayName": "1922"
+              },
+              {
+                "value": "1923",
+                "displayName": "1923"
+              },
+              {
+                "value": "1924",
+                "displayName": "1924"
+              },
+              {
+                "value": "1925",
+                "displayName": "1925"
+              },
+              {
+                "value": "1926",
+                "displayName": "1926"
+              },
+              {
+                "value": "1927",
+                "displayName": "1927"
+              },
+              {
+                "value": "1928",
+                "displayName": "1928"
+              },
+              {
+                "value": "1929",
+                "displayName": "1929"
+              },
+              {
+                "value": "1930",
+                "displayName": "1930"
+              },
+              {
+                "value": "1931",
+                "displayName": "1931"
+              },
+              {
+                "value": "1932",
+                "displayName": "1932"
+              },
+              {
+                "value": "1933",
+                "displayName": "1933"
+              },
+              {
+                "value": "1934",
+                "displayName": "1934"
+              },
+              {
+                "value": "1935",
+                "displayName": "1935"
+              },
+              {
+                "value": "1936",
+                "displayName": "1936"
+              },
+              {
+                "value": "1937",
+                "displayName": "1937"
+              },
+              {
+                "value": "1938",
+                "displayName": "1938"
+              },
+              {
+                "value": "1939",
+                "displayName": "1939"
+              },
+              {
+                "value": "1940",
+                "displayName": "1940"
+              },
+              {
+                "value": "1941",
+                "displayName": "1941"
+              },
+              {
+                "value": "1942",
+                "displayName": "1942"
+              },
+              {
+                "value": "1943",
+                "displayName": "1943"
+              },
+              {
+                "value": "1944",
+                "displayName": "1944"
+              },
+              {
+                "value": "1945",
+                "displayName": "1945"
+              },
+              {
+                "value": "1946",
+                "displayName": "1946"
+              },
+              {
+                "value": "1947",
+                "displayName": "1947"
+              },
+              {
+                "value": "1948",
+                "displayName": "1948"
+              },
+              {
+                "value": "1949",
+                "displayName": "1949"
+              },
+              {
+                "value": "1950",
+                "displayName": "1950"
+              },
+              {
+                "value": "1951",
+                "displayName": "1951"
+              },
+              {
+                "value": "1952",
+                "displayName": "1952"
+              },
+              {
+                "value": "1953",
+                "displayName": "1953"
+              },
+              {
+                "value": "1954",
+                "displayName": "1954"
+              },
+              {
+                "value": "1955",
+                "displayName": "1955"
+              },
+              {
+                "value": "1956",
+                "displayName": "1956"
+              },
+              {
+                "value": "1957",
+                "displayName": "1957"
+              },
+              {
+                "value": "1958",
+                "displayName": "1958"
+              },
+              {
+                "value": "1959",
+                "displayName": "1959"
+              },
+              {
+                "value": "1960",
+                "displayName": "1960"
+              },
+              {
+                "value": "1961",
+                "displayName": "1961"
+              },
+              {
+                "value": "1962",
+                "displayName": "1962"
+              },
+              {
+                "value": "1963",
+                "displayName": "1963"
+              },
+              {
+                "value": "1964",
+                "displayName": "1964"
+              },
+              {
+                "value": "1965",
+                "displayName": "1965"
+              },
+              {
+                "value": "1966",
+                "displayName": "1966"
+              },
+              {
+                "value": "1967",
+                "displayName": "1967"
+              },
+              {
+                "value": "1968",
+                "displayName": "1968"
+              },
+              {
+                "value": "1969",
+                "displayName": "1969"
+              },
+              {
+                "value": "1970",
+                "displayName": "1970"
+              },
+              {
+                "value": "1971",
+                "displayName": "1971"
+              },
+              {
+                "value": "1972",
+                "displayName": "1972"
+              },
+              {
+                "value": "1973",
+                "displayName": "1973"
+              },
+              {
+                "value": "1974",
+                "displayName": "1974"
+              },
+              {
+                "value": "1975",
+                "displayName": "1975"
+              },
+              {
+                "value": "1976",
+                "displayName": "1976"
+              },
+              {
+                "value": "1977",
+                "displayName": "1977"
+              },
+              {
+                "value": "1978",
+                "displayName": "1978"
+              },
+              {
+                "value": "1979",
+                "displayName": "1979"
+              },
+              {
+                "value": "1980",
+                "displayName": "1980"
+              },
+              {
+                "value": "1981",
+                "displayName": "1981"
+              },
+              {
+                "value": "1982",
+                "displayName": "1982"
+              },
+              {
+                "value": "1983",
+                "displayName": "1983"
+              },
+              {
+                "value": "1984",
+                "displayName": "1984"
+              },
+              {
+                "value": "1985",
+                "displayName": "1985"
+              },
+              {
+                "value": "1986",
+                "displayName": "1986"
+              },
+              {
+                "value": "1987",
+                "displayName": "1987"
+              },
+              {
+                "value": "1988",
+                "displayName": "1988"
+              },
+              {
+                "value": "1989",
+                "displayName": "1989"
+              },
+              {
+                "value": "1990",
+                "displayName": "1990"
+              },
+              {
+                "value": "1991",
+                "displayName": "1991"
+              },
+              {
+                "value": "1992",
+                "displayName": "1992"
+              },
+              {
+                "value": "1993",
+                "displayName": "1993"
+              },
+              {
+                "value": "1994",
+                "displayName": "1994"
+              },
+              {
+                "value": "1995",
+                "displayName": "1995"
+              },
+              {
+                "value": "1996",
+                "displayName": "1996"
+              },
+              {
+                "value": "1997",
+                "displayName": "1997"
+              },
+              {
+                "value": "1998",
+                "displayName": "1998"
+              },
+              {
+                "value": "1999",
+                "displayName": "1999"
+              },
+              {
+                "value": "2000",
+                "displayName": "2000"
+              },
+              {
+                "value": "2001",
+                "displayName": "2001"
+              },
+              {
+                "value": "2002",
+                "displayName": "2002"
+              },
+              {
+                "value": "2003",
+                "displayName": "2003"
+              },
+              {
+                "value": "2004",
+                "displayName": "2004"
+              },
+              {
+                "value": "2005",
+                "displayName": "2005"
+              },
+              {
+                "value": "2006",
+                "displayName": "2006"
+              },
+              {
+                "value": "2007",
+                "displayName": "2007"
+              },
+              {
+                "value": "2008",
+                "displayName": "2008"
+              },
+              {
+                "value": "2009",
+                "displayName": "2009"
+              },
+              {
+                "value": "2010",
+                "displayName": "2010"
+              },
+              {
+                "value": "2011",
+                "displayName": "2011"
+              },
+              {
+                "value": "2012",
+                "displayName": "2012"
+              },
+              {
+                "value": "2013",
+                "displayName": "2013"
+              },
+              {
+                "value": "2014",
+                "displayName": "2014"
+              },
+              {
+                "value": "2015",
+                "displayName": "2015"
+              }
+            ],
+            "hidden": false
+          }
+        }
+      },
+      "jobName": "paragraph_1432131291196_-961310145",
+      "id": "20150520-161451_757442583",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "data: org.apache.spark.rdd.RDD[(String, Int, String, String)] \u003d CassandraTableScanRDD[169] at RDD at CassandraRDD.scala:15\n"
+      },
+      "dateCreated": "May 20, 2015 4:14:51 PM",
+      "dateStarted": "May 25, 2015 8:58:13 AM",
+      "dateFinished": "May 25, 2015 8:58:14 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "display data",
+      "text": "data.displayAsTable(\"Country\",\"Year\",\"Performer\",\"Title\")",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": true,
+          "keys": [
+            {
+              "name": "Country",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "Year",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "Country",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "title": true,
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432131588210_1727541219",
+      "id": "20150520-161948_459128832",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "Country\n"
+      },
+      "dateCreated": "May 20, 2015 4:19:48 PM",
+      "dateStarted": "May 25, 2015 8:58:19 AM",
+      "dateFinished": "May 25, 2015 8:58:20 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432131634668_1347686786",
+      "id": "20150520-162034_2044470361",
+      "dateCreated": "May 20, 2015 4:20:34 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "04-Cassandra Spark For Schema Migration",
+  "id": "2AR1MKVYA",
+  "angularObjects": {},
+  "config": {
+    "looknfeel": "default"
+  },
+  "info": {}
+}

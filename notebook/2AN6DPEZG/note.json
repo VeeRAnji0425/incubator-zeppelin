@@ -1,0 +1,227 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n\nPreparing data for all Spark/Cassandra demos\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\nFor those demos to work, you\u0027ll need:\n\n1. A working **Cassandra** server, version **2.0.x**, **2.1.x** or **Datastax Enterprise 4.7.x**\n2. A running **Spark** cluster deployed in **stand-alone mode** (a stand-alone local deployment is fine)\n3. The notebooks **07-DSE Search in action** and **08-SearchAnalytics Mode** require **Datastax Enterprise 4.7.x**. Do not run them if you\u0027re using an open-source **Cassandra**\n4. The notebook **09-Demos Cleanup** will clean up all data downloaded and created for those demos\n5. `wget` and `curl` commands **installed** and **working**\n",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432496238052_819756186",
+      "id": "20150524-213718_341550253",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch1\u003ePreparing data for all Spark/Cassandra demos\u003c/h1\u003e\n\u003cp\u003eFor those demos to work, you\u0027ll need:\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eA working \u003cstrong\u003eCassandra\u003c/strong\u003e server, version \u003cstrong\u003e2.0.x\u003c/strong\u003e, \u003cstrong\u003e2.1.x\u003c/strong\u003e or \u003cstrong\u003eDatastax Enterprise 4.7.x\u003c/strong\u003e\u003c/li\u003e\n\u003cli\u003eA running \u003cstrong\u003eSpark\u003c/strong\u003e cluster deployed in \u003cstrong\u003estand-alone mode\u003c/strong\u003e (a stand-alone local deployment is fine)\u003c/li\u003e\n\u003cli\u003eThe notebooks \u003cstrong\u003e07-DSE Search in action\u003c/strong\u003e and \u003cstrong\u003e08-SearchAnalytics Mode\u003c/strong\u003e require \u003cstrong\u003eDatastax Enterprise 4.7.x\u003c/strong\u003e. Do not run them if you\u0027re using an open-source \u003cstrong\u003eCassandra\u003c/strong\u003e\u003c/li\u003e\n\u003cli\u003eThe notebook \u003cstrong\u003e09-Demos Cleanup\u003c/strong\u003e will clean up all data downloaded and created for those demos\u003c/li\u003e\n\u003cli\u003e\u003ccode\u003ewget\u003c/code\u003e and \u003ccode\u003ecurl\u003c/code\u003e commands \u003cstrong\u003einstalled\u003c/strong\u003e and \u003cstrong\u003eworking\u003c/strong\u003e\u003c/li\u003e\n\u003c/ol\u003e\n"
+      },
+      "dateCreated": "May 24, 2015 9:37:18 PM",
+      "dateStarted": "May 25, 2015 9:19:46 AM",
+      "dateFinished": "May 25, 2015 9:19:46 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Downloading cassandra data for demo",
+      "text": "%sh\n\nrm -rf /tmp/spark_cassandra_demo 2\u003e/dev/null\n\nmkdir /tmp/spark_cassandra_demo\nchmod -R 777 /tmp/spark_cassandra_demo\n\nwget -O /tmp/spark_cassandra_demo/music.cql \u0027https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/data/music.cql\u0027\nwget -O /tmp/spark_cassandra_demo/performers.csv \u0027https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/data/performers.csv\u0027\nwget -O /tmp/spark_cassandra_demo/albums.csv \u0027https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/data/albums.csv\u0027\nwget -O /tmp/spark_cassandra_demo/countries.csv \u0027https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/data/countries.csv\u0027\n\nwget -O /tmp/spark_cassandra_demo/us_unemployment.cql \u0027https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/data/us_unemployment.cql\u0027\nwget -O /tmp/spark_cassandra_demo/us_unemployment.csv \u0027https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/data/us_unemployment.csv\u0027\n\nwget -O /tmp/spark_cassandra_demo/solrconfig.xml \u0027https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/solr_config/solrconfig.xml\u0027\nwget -O /tmp/spark_cassandra_demo/performers_schema.xml \u0027https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/solr_config/performers_schema.xml\u0027\nwget -O /tmp/spark_cassandra_demo/albums_schema.xml \u0027https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/solr_config/albums_schema.xml\u0027",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "title": true,
+        "tableHide": true,
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432493973555_421925300",
+      "id": "20150524-205933_220541203",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "--2015-05-25 08:45:12--  https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/data/music.cql\nResolving raw.githubusercontent.com... 185.31.17.133\nConnecting to raw.githubusercontent.com|185.31.17.133|:443... connected.\nHTTP request sent, awaiting response... 200 OK\nLength: 1561 (1.5K) [text/plain]\nSaving to: \u0027/tmp/spark_cassandra_demo/music.cql\u0027\n\n     0K .                                                     100% 29.2M\u003d0s\n\n2015-05-25 08:45:13 (29.2 MB/s) - \u0027/tmp/spark_cassandra_demo/music.cql\u0027 saved [1561/1561]\n\n--2015-05-25 08:45:13--  https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/data/performers.csv\nResolving raw.githubusercontent.com... 185.31.17.133\nConnecting to raw.githubusercontent.com|185.31.17.133|:443... connected.\nHTTP request sent, awaiting response... 200 OK\nLength: 615999 (602K) [text/plain]\nSaving to: \u0027/tmp/spark_cassandra_demo/performers.csv\u0027\n\n     0K .......... .......... .......... .......... ..........  8%  356K 2s\n    50K .......... .......... .......... .......... .......... 16%  351K 1s\n   100K .......... .......... .......... .......... .......... 24%  365K 1s\n   150K .......... .......... .......... .......... .......... 33%  356K 1s\n   200K .......... .......... .......... .......... .......... 41%  363K 1s\n   250K .......... .......... .......... .......... .......... 49%  353K 1s\n   300K .......... .......... .......... .......... .......... 58%  367K 1s\n   350K .......... .......... .......... .......... .......... 66%  267K 1s\n   400K .......... .......... .......... .......... .......... 74%  364K 0s\n   450K .......... .......... .......... .......... .......... 83%  355K 0s\n   500K .......... .......... .......... .......... .......... 91%  353K 0s\n   550K .......... .......... .......... .......... .......... 99%  424K 0s\n   600K .                                                     100% 31.2K\u003d1.7s\n\n2015-05-25 08:45:16 (354 KB/s) - \u0027/tmp/spark_cassandra_demo/performers.csv\u0027 saved [615999/615999]\n\n--2015-05-25 08:45:16--  https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/data/albums.csv\nResolving raw.githubusercontent.com... 185.31.17.133\nConnecting to raw.githubusercontent.com|185.31.17.133|:443... connected.\nHTTP request sent, awaiting response... 200 OK\nLength: 6851536 (6.5M) [text/plain]\nSaving to: \u0027/tmp/spark_cassandra_demo/albums.csv\u0027\n\n     0K .......... .......... .......... .......... ..........  0%  355K 19s\n    50K .......... .......... .......... .......... ..........  1%  351K 19s\n   100K .......... .......... .......... .......... ..........  2%  368K 18s\n   150K .......... .......... .......... .......... ..........  2%  353K 18s\n   200K .......... .......... .......... .......... ..........  3%  363K 18s\n   250K .......... .......... .......... .......... ..........  4%  358K 18s\n   300K .......... .......... .......... .......... ..........  5%  362K 18s\n   350K .......... .......... .......... .......... ..........  5%  267K 18s\n   400K .......... .......... .......... .......... ..........  6%  364K 18s\n   450K .......... .......... .......... .......... ..........  7%  354K 18s\n   500K .......... .......... .......... .......... ..........  8%  355K 18s\n   550K .......... .......... .......... .......... ..........  8%  361K 17s\n   600K .......... .......... .......... .......... ..........  9%  353K 17s\n   650K .......... .......... .......... .......... .......... 10%  370K 17s\n   700K .......... .......... .......... .......... .......... 11%  353K 17s\n   750K .......... .......... .......... .......... .......... 11%  269K 17s\n   800K .......... .......... .......... .......... .......... 12%  350K 17s\n   850K .......... .......... .......... .......... .......... 13%  310K 17s\n   900K .......... .......... .......... .......... .......... 14%  216K 17s\n   950K .......... .......... .......... .......... .......... 14%  300K 17s\n  1000K .......... .......... .......... .......... .......... 15%  362K 17s\n  1050K .......... .......... .......... .......... .......... 16%  351K 17s\n  1100K .......... .......... .......... .......... .......... 17%  369K 17s\n  1150K .......... .......... .......... .......... .......... 17%  265K 17s\n  1200K .......... .......... .......... .......... .......... 18%  365K 16s\n  1250K .......... .......... .......... .......... .......... 19%  354K 16s\n  1300K .......... .......... .......... .......... .......... 20%  357K 16s\n  1350K .......... .......... .......... .......... .......... 20%  361K 16s\n  1400K .......... .......... .......... .......... .......... 21%  357K 16s\n  1450K .......... .......... .......... .......... .......... 22%  363K 15s\n  1500K .......... .......... .......... .......... .......... 23%  356K 15s\n  1550K .......... .......... .......... .......... .......... 23%  271K 15s\n  1600K .......... .......... .......... .......... .......... 24%  355K 15s\n  1650K .......... .......... .......... .......... .......... 25%  366K 15s\n  1700K .......... .......... .......... .......... .......... 26%  353K 15s\n  1750K .......... .......... .......... .......... .......... 26%  354K 15s\n  1800K .......... .......... .......... .......... .......... 27%  364K 14s\n  1850K .......... .......... .......... .......... .......... 28%  357K 14s\n  1900K .......... .......... .......... .......... .......... 29%  364K 14s\n  1950K .......... .......... .......... .......... .......... 29%  266K 14s\n  2000K .......... .......... .......... .......... .......... 30%  368K 14s\n  2050K .......... .......... .......... .......... .......... 31%  351K 14s\n  2100K .......... .......... .......... .......... .......... 32%  364K 13s\n  2150K .......... .......... .......... .......... .......... 32%  355K 13s\n  2200K .......... .......... .......... .......... .......... 33%  353K 13s\n  2250K .......... .......... .......... .......... .......... 34%  365K 13s\n  2300K .......... .......... .......... .......... .......... 35%  356K 13s\n  2350K .......... .......... .......... .......... .......... 35%  272K 13s\n  2400K .......... .......... .......... .......... .......... 36%  353K 13s\n  2450K .......... .......... .......... .......... .......... 37%  365K 12s\n  2500K .......... .......... .......... .......... .......... 38%  353K 12s\n  2550K .......... .......... .......... .......... .......... 38%  362K 12s\n  2600K .......... .......... .......... .......... .......... 39%  358K 12s\n  2650K .......... .......... .......... .......... .......... 40%  352K 12s\n  2700K .......... .......... .......... .......... .......... 41%  364K 12s\n  2750K .......... .......... .......... .......... .......... 41%  266K 12s\n  2800K .......... .......... .......... .......... .......... 42%  363K 11s\n  2850K .......... .......... .......... .......... .......... 43%  356K 11s\n  2900K .......... .......... .......... .......... .......... 44%  361K 11s\n  2950K .......... .......... .......... .......... .......... 44%  355K 11s\n  3000K .......... .......... .......... .......... .......... 45%  356K 11s\n  3050K .......... .......... .......... .......... .......... 46%  365K 11s\n  3100K .......... .......... .......... .......... .......... 47%  354K 10s\n  3150K .......... .......... .......... .......... .......... 47%  272K 10s\n  3200K .......... .......... .......... .......... .......... 48%  352K 10s\n  3250K .......... .......... .......... .......... .......... 49%  364K 10s\n  3300K .......... .......... .......... .......... .......... 50%  356K 10s\n  3350K .......... .......... .......... .......... .......... 50%  366K 10s\n  3400K .......... .......... .......... .......... .......... 51% 56.6K 10s\n  3450K .......... .......... .......... .......... .......... 52%  923K 10s\n  3500K .......... .......... .......... .......... .......... 53%  220M 10s\n  3550K .......... .......... .......... .......... .......... 53%  902K 9s\n  3600K .......... .......... .......... .......... .......... 54%  108M 9s\n  3650K .......... .......... .......... .......... .......... 55%  872K 9s\n  3700K .......... .......... .......... .......... .......... 56%  195K 9s\n  3750K .......... .......... .......... .......... .......... 56%  354K 9s\n  3800K .......... .......... .......... .......... .......... 57%  364K 9s\n  3850K .......... .......... .......... .......... .......... 58%  354K 8s\n  3900K .......... .......... .......... .......... .......... 59%  353K 8s\n  3950K .......... .......... .......... .......... .......... 59%  275K 8s\n  4000K .......... .......... .......... .......... .......... 60%  354K 8s\n  4050K .......... .......... .......... .......... .......... 61%  363K 8s\n  4100K .......... .......... .......... .......... .......... 62%  356K 8s\n  4150K .......... .......... .......... .......... .......... 62%  362K 7s\n  4200K .......... .......... .......... .......... .......... 63%  354K 7s\n  4250K .......... .......... .......... .......... .......... 64%  354K 7s\n  4300K .......... .......... .......... .......... .......... 65%  366K 7s\n  4350K .......... .......... .......... .......... .......... 65%  265K 7s\n  4400K .......... .......... .......... .......... .......... 66%  362K 7s\n  4450K .......... .......... .......... .......... .......... 67%  355K 7s\n  4500K .......... .......... .......... .......... .......... 68%  362K 6s\n  4550K .......... .......... .......... .......... .......... 68%  354K 6s\n  4600K .......... .......... .......... .......... .......... 69%  366K 6s\n  4650K .......... .......... .......... .......... .......... 70%  353K 6s\n  4700K .......... .......... .......... .......... .......... 70%  351K 6s\n  4750K .......... .......... .......... .......... .......... 71%  274K 6s\n  4800K .......... .......... .......... .......... .......... 72%  354K 6s\n  4850K .......... .......... .......... .......... .......... 73%  363K 5s\n  4900K .......... .......... .......... .......... .......... 73%  355K 5s\n  4950K .......... .......... .......... .......... .......... 74%  364K 5s\n  5000K .......... .......... .......... .......... .......... 75%  353K 5s\n  5050K .......... .......... .......... .......... .......... 76%  357K 5s\n  5100K .......... .......... .......... .......... .......... 76%  365K 5s\n  5150K .......... .......... .......... .......... .......... 77%  265K 4s\n  5200K .......... .......... .......... .......... .......... 78%  362K 4s\n  5250K .......... .......... .......... .......... .......... 79%  350K 4s\n  5300K .......... .......... .......... .......... .......... 79%  365K 4s\n  5350K .......... .......... .......... .......... .......... 80%  355K 4s\n  5400K .......... .......... .......... .......... .......... 81%  364K 4s\n  5450K .......... .......... .......... .......... .......... 82%  355K 4s\n  5500K .......... .......... .......... .......... .......... 82%  353K 3s\n  5550K .......... .......... .......... .......... .......... 83%  272K 3s\n  5600K .......... .......... .......... .......... .......... 84%  354K 3s\n  5650K .......... .......... .......... .......... .......... 85%  364K 3s\n  5700K .......... .......... .......... .......... .......... 85%  358K 3s\n  5750K .......... .......... .......... .......... .......... 86%  363K 3s\n  5800K .......... .......... .......... .......... .......... 87%  353K 3s\n  5850K .......... .......... .......... .......... .......... 88%  363K 2s\n  5900K .......... .......... .......... .......... .......... 88%  355K 2s\n  5950K .......... .......... .......... .......... .......... 89%  272K 2s\n  6000K .......... .......... .......... .......... .......... 90%  355K 2s\n  6050K .......... .......... .......... .......... .......... 91%  356K 2s\n  6100K .......... .......... .......... .......... .......... 91%  364K 2s\n  6150K .......... .......... .......... .......... .......... 92%  355K 1s\n  6200K .......... .......... .......... .......... .......... 93%  362K 1s\n  6250K .......... .......... .......... .......... .......... 94%  358K 1s\n  6300K .......... .......... .......... .......... .......... 94%  354K 1s\n  6350K .......... .......... .......... .......... .......... 95%  270K 1s\n  6400K .......... .......... .......... .......... .......... 96%  353K 1s\n  6450K .......... .......... .......... .......... .......... 97%  365K 1s\n  6500K .......... .......... .......... .......... .......... 97%  355K 0s\n  6550K .......... .......... .......... .......... .......... 98%  363K 0s\n  6600K .......... .......... .......... .......... .......... 99%  353K 0s\n  6650K .......... .......... .......... ..........           100%  402K\u003d20s\n\n2015-05-25 08:45:37 (338 KB/s) - \u0027/tmp/spark_cassandra_demo/albums.csv\u0027 saved [6851536/6851536]\n\n--2015-05-25 08:45:37--  https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/data/countries.csv\nResolving raw.githubusercontent.com... 185.31.17.133\nConnecting to raw.githubusercontent.com|185.31.17.133|:443... connected.\nHTTP request sent, awaiting response... 200 OK\nLength: 814 [text/plain]\nSaving to: \u0027/tmp/spark_cassandra_demo/countries.csv\u0027\n\n     0K                                                       100% 86.3M\u003d0s\n\n2015-05-25 08:45:37 (86.3 MB/s) - \u0027/tmp/spark_cassandra_demo/countries.csv\u0027 saved [814/814]\n\n--2015-05-25 08:45:37--  https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/data/us_unemployment.cql\nResolving raw.githubusercontent.com... 185.31.17.133\nConnecting to raw.githubusercontent.com|185.31.17.133|:443... connected.\nHTTP request sent, awaiting response... 200 OK\nLength: 434 [text/plain]\nSaving to: \u0027/tmp/spark_cassandra_demo/us_unemployment.cql\u0027\n\n     0K                                                       100% 69.0M\u003d0s\n\n2015-05-25 08:45:38 (69.0 MB/s) - \u0027/tmp/spark_cassandra_demo/us_unemployment.cql\u0027 saved [434/434]\n\n--2015-05-25 08:45:38--  https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/data/us_unemployment.csv\nResolving raw.githubusercontent.com... 185.31.17.133\nConnecting to raw.githubusercontent.com|185.31.17.133|:443... connected.\nHTTP request sent, awaiting response... 200 OK\nLength: 4693 (4.6K) [text/plain]\nSaving to: \u0027/tmp/spark_cassandra_demo/us_unemployment.csv\u0027\n\n     0K ....                                                  100%  344M\u003d0s\n\n2015-05-25 08:45:38 (344 MB/s) - \u0027/tmp/spark_cassandra_demo/us_unemployment.csv\u0027 saved [4693/4693]\n\n--2015-05-25 08:45:38--  https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/solr_config/solrconfig.xml\nResolving raw.githubusercontent.com... 185.31.17.133\nConnecting to raw.githubusercontent.com|185.31.17.133|:443... connected.\nHTTP request sent, awaiting response... 200 OK\nLength: 52036 (51K) [text/plain]\nSaving to: \u0027/tmp/spark_cassandra_demo/solrconfig.xml\u0027\n\n     0K .......... .......... .......... .......... .......... 98%  486K 0s\n    50K                                                       100% 16.3K\u003d0.1s\n\n2015-05-25 08:45:39 (494 KB/s) - \u0027/tmp/spark_cassandra_demo/solrconfig.xml\u0027 saved [52036/52036]\n\n--2015-05-25 08:45:39--  https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/solr_config/performers_schema.xml\nResolving raw.githubusercontent.com... 185.31.17.133\nConnecting to raw.githubusercontent.com|185.31.17.133|:443... connected.\nHTTP request sent, awaiting response... 200 OK\nLength: 2216 (2.2K) [text/plain]\nSaving to: \u0027/tmp/spark_cassandra_demo/performers_schema.xml\u0027\n\n     0K ..                                                    100%  192M\u003d0s\n\n2015-05-25 08:45:39 (192 MB/s) - \u0027/tmp/spark_cassandra_demo/performers_schema.xml\u0027 saved [2216/2216]\n\n--2015-05-25 08:45:39--  https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/solr_config/albums_schema.xml\nResolving raw.githubusercontent.com... 185.31.17.133\nConnecting to raw.githubusercontent.com|185.31.17.133|:443... connected.\nHTTP request sent, awaiting response... 200 OK\nLength: 1934 (1.9K) [text/plain]\nSaving to: \u0027/tmp/spark_cassandra_demo/albums_schema.xml\u0027\n\n     0K .                                                     100%  168M\u003d0s\n\n2015-05-25 08:45:39 (168 MB/s) - \u0027/tmp/spark_cassandra_demo/albums_schema.xml\u0027 saved [1934/1934]\n\n"
+      },
+      "dateCreated": "May 24, 2015 8:59:33 PM",
+      "dateStarted": "May 25, 2015 8:45:12 AM",
+      "dateFinished": "May 25, 2015 8:45:39 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Create Cassandra schema",
+      "text": "%sh\n`which cqlsh` -e \"CREATE KEYSPACE IF NOT EXISTS spark_demo WITH replication \u003d {\u0027class\u0027: \u0027SimpleStrategy\u0027,\u0027replication_factor\u0027 : 1}\"\n`which cqlsh` -e \"CREATE TABLE IF NOT EXISTS spark_demo.performers(name TEXT,country TEXT,gender TEXT,type TEXT,born TEXT,died TEXT,styles LIST\u003cTEXT\u003e,PRIMARY KEY (name))\"\n\n`which cqlsh` -e \"CREATE TABLE IF NOT EXISTS spark_demo.albums(performer TEXT,title TEXT,year INT,country TEXT,quality TEXT,status TEXT,PRIMARY KEY(title))\"\n\n`which cqlsh` -e \"CREATE TABLE IF NOT EXISTS spark_demo.albums_by_country(title text,country text,performer text,quality text,status text,year int,PRIMARY KEY((country,year),title))\"\n\n`which cqlsh` -e \"CREATE TABLE IF NOT EXISTS spark_demo.countries(name TEXT PRIMARY KEY)\"\n\n`which cqlsh` -e \"CREATE TABLE IF NOT EXISTS spark_demo.performers_distribution_by_style(type text,style text,count int,PRIMARY KEY (type, style))\"\n\n`which cqlsh` -e \"CREATE TABLE IF NOT EXISTS spark_demo.top10_styles(type text,count int,style text,PRIMARY KEY (type, count)) WITH CLUSTERING ORDER BY (count DESC)\"\n\n`which cqlsh` -f /tmp/spark_cassandra_demo/us_unemployment.cql",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "title": true,
+        "tableHide": true,
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432496486196_748727069",
+      "id": "20150524-214126_766782953",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "May 24, 2015 9:41:26 PM",
+      "dateStarted": "May 25, 2015 8:50:10 AM",
+      "dateFinished": "May 25, 2015 8:50:14 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Insert data into Cassandra",
+      "text": "%sh\n\ncd /tmp/spark_cassandra_demo\n\n`which cqlsh` -e \"COPY spark_demo.performers(name, country, gender, type, born, died,styles) FROM \u0027performers.csv\u0027\"\n`which cqlsh` -e \"COPY spark_demo.albums(performer,title, year, country, quality, status) FROM \u0027albums.csv\u0027\"\n`which cqlsh` -e \"COPY spark_demo.countries(name) FROM \u0027countries.csv\u0027\"",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "title": true,
+        "editorHide": true,
+        "tableHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432496822417_604722067",
+      "id": "20150524-214702_1686342206",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "Processed 10000 rows; Write: 6772.15 rows/s\r11100 rows imported in 1.820 seconds.\nProcessed 10000 rows; Write: 7455.56 rows/s\rProcessed 20000 rows; Write: 7283.86 rows/s\rProcessed 30000 rows; Write: 9220.40 rows/s\rProcessed 40000 rows; Write: 8649.98 rows/s\rProcessed 50000 rows; Write: 8387.01 rows/s\rProcessed 60000 rows; Write: 8535.07 rows/s\rProcessed 70000 rows; Write: 7774.69 rows/s\rProcessed 80000 rows; Write: 7535.63 rows/s\rProcessed 90000 rows; Write: 7545.15 rows/s\rProcessed 100000 rows; Write: 7420.11 rows/s\rProcessed 110000 rows; Write: 7543.05 rows/s\r112835 rows imported in 14.581 seconds.\n89 rows imported in 0.172 seconds.\n"
+      },
+      "dateCreated": "May 24, 2015 9:47:02 PM",
+      "dateStarted": "May 25, 2015 8:46:17 AM",
+      "dateFinished": "May 25, 2015 8:46:35 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\nBelow tasks are for Datastax Enterprise Only\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\n#### Please ensure that you have started your **DSE** instance in **SearchAnalytics Mode** (e.g. `dse cassandra -s -k`)",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432499507993_-167807229",
+      "id": "20150524-223147_439267751",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch1\u003eBelow tasks are for Datastax Enterprise Only\u003c/h1\u003e\n\u003ch4\u003ePlease ensure that you have started your \u003cstrong\u003eDSE\u003c/strong\u003e instance in \u003cstrong\u003eSearchAnalytics Mode\u003c/strong\u003e (e.g. \u003ccode\u003edse cassandra -s -k\u003c/code\u003e)\u003c/h4\u003e\n"
+      },
+      "dateCreated": "May 24, 2015 10:31:47 PM",
+      "dateStarted": "May 24, 2015 10:41:02 PM",
+      "dateFinished": "May 24, 2015 10:41:02 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Creating Solr cores for albums and performers tables",
+      "text": "%sh\ncd /tmp/spark_cassandra_demo\n\ncurl http://localhost:8983/solr/resource/spark_demo.performers/solrconfig.xml --data-binary @solrconfig.xml -H \u0027Content-type:text/xml; charset\u003dutf-8\u0027\ncurl http://localhost:8983/solr/resource/spark_demo.albums/solrconfig.xml --data-binary @solrconfig.xml -H \u0027Content-type:text/xml; charset\u003dutf-8\u0027\n\ncurl http://localhost:8983/solr/resource/spark_demo.performers/schema.xml --data-binary @performers_schema.xml -H \u0027Content-type:text/xml; charset\u003dutf-8\u0027\ncurl http://localhost:8983/solr/resource/spark_demo.albums/schema.xml --data-binary @albums_schema.xml -H \u0027Content-type:text/xml; charset\u003dutf-8\u0027\n\ncurl \"http://localhost:8983/solr/admin/cores?action\u003dCREATE\u0026name\u003dspark_demo.performers\"\ncurl \"http://localhost:8983/solr/admin/cores?action\u003dCREATE\u0026name\u003dspark_demo.albums\"",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "tableHide": true,
+        "title": true,
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432500229820_-1423814294",
+      "id": "20150524-224349_1585587232",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r100 52044  100     8  100 52036   1575   9.7M --:--:-- --:--:-- --:--:--  9.9M\nSUCCESS\n  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r100 52044  100     8  100 52036   1836  11.3M --:--:-- --:--:-- --:--:-- 12.4M\nSUCCESS\n  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r100  2224  100     8  100  2216   2827   764k --:--:-- --:--:-- --:--:-- 1082k\nSUCCESS\n  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r100  1942  100     8  100  1934   2887   681k --:--:-- --:--:-- --:--:--  944k\nSUCCESS\n  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0\r100   150    0   150    0     0    136      0 --:--:--  0:00:01 --:--:--   136\n\u003c?xml version\u003d\"1.0\" encoding\u003d\"UTF-8\"?\u003e\n\u003cresponse\u003e\n\u003clst name\u003d\"responseHeader\"\u003e\u003cint name\u003d\"status\"\u003e0\u003c/int\u003e\u003cint name\u003d\"QTime\"\u003e1098\u003c/int\u003e\u003c/lst\u003e\n\u003c/response\u003e\n  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0\r  0     0    0     0    0     0      0      0 --:--:--  0:00:02 --:--:--     0\r  0     0    0     0    0     0      0      0 --:--:--  0:00:03 --:--:--     0\r100   150    0   150    0     0     40      0 --:--:--  0:00:03 --:--:--    40\r100   150    0   150    0     0     40      0 --:--:--  0:00:03 --:--:--    40\n\u003c?xml version\u003d\"1.0\" encoding\u003d\"UTF-8\"?\u003e\n\u003cresponse\u003e\n\u003clst name\u003d\"responseHeader\"\u003e\u003cint name\u003d\"status\"\u003e0\u003c/int\u003e\u003cint name\u003d\"QTime\"\u003e3659\u003c/int\u003e\u003c/lst\u003e\n\u003c/response\u003e\n"
+      },
+      "dateCreated": "May 24, 2015 10:43:49 PM",
+      "dateStarted": "May 25, 2015 8:47:02 AM",
+      "dateFinished": "May 25, 2015 8:47:07 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432499958257_177527597",
+      "id": "20150524-223918_406484560",
+      "dateCreated": "May 24, 2015 10:39:18 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "00-Prepare Cassandra Data For Demo",
+  "id": "2AN6DPEZG",
+  "angularObjects": {},
+  "config": {
+    "looknfeel": "default"
+  },
+  "info": {}
+}

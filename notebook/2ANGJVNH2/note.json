@@ -1,0 +1,912 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n\nSpark-Cassandra-Solr combo\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\n\u003eWarning: to use this demo, you\u0027ll need to have **Datastax Enterprise 4.7.0**",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432136878086_787836253",
+      "id": "20150520-174758_534900824",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch1\u003eSpark-Cassandra-Solr combo\u003c/h1\u003e\n\u003cblockquote\u003e\u003cp\u003eWarning: to use this demo, you\u0027ll need to have \u003cstrong\u003eDatastax Enterprise 4.7.0\u003c/strong\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n"
+      },
+      "dateCreated": "May 20, 2015 5:47:58 PM",
+      "dateStarted": "May 24, 2015 8:59:22 PM",
+      "dateFinished": "May 24, 2015 8:59:22 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Prepare data",
+      "text": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\nimport scala.collection.JavaConversions._\n\nvar data:RDD[(Int,String,String)] \u003d sc.parallelize(Nil)\nval cc \u003d new CassandraSQLContext(sc)\n\nvar musicStyles:List[(String,String)] \u003d Nil \nvar countries:List[(String,String)] \u003d Nil \n\nCassandraConnector(sc.getConf).withSessionDo { \n    session \u003d\u003e {\n        musicStyles \u003d session.execute(\"SELECT style FROM spark_demo.performers_distribution_by_style\").\n            all().\n            toList.\n            map(row \u003d\u003e row.getString(\"style\")).\n            toSet.\n            toList.\n            sorted.\n            map(style \u003d\u003e (style,style))\n            \n        countries \u003d session.execute(\"SELECT DISTINCT name FROM spark_demo.countries\").\n            all().\n            toList.\n            map(row \u003d\u003e row.getString(\"name\")).\n            toSet.\n            toList.\n            sorted.\n            map(country \u003d\u003e (country,country))    \n    }\n}\n",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "tableHide": true,
+        "title": true,
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432483305349_2122532186",
+      "id": "20150524-180145_111739812",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\nimport scala.collection.JavaConversions._\ndata: org.apache.spark.rdd.RDD[(Int, String, String)] \u003d ParallelCollectionRDD[288] at parallelize at \u003cconsole\u003e:202\ncc: org.apache.spark.sql.cassandra.CassandraSQLContext \u003d org.apache.spark.sql.cassandra.CassandraSQLContext@59d668c7\nmusicStyles: List[(String, String)] \u003d List()\ncountries: List[(String, String)] \u003d List()\n"
+      },
+      "dateCreated": "May 24, 2015 6:01:45 PM",
+      "dateStarted": "May 25, 2015 9:09:11 AM",
+      "dateFinished": "May 25, 2015 9:09:23 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "restrict with solr then aggregate with spark",
+      "text": "//List all albums release of American artists having style Rock after 2010\ndata \u003d cc.cassandraSql(\n     s\"\"\"\n        SELECT a.year,a.performer,a.title\n        FROM spark_demo.albums a\n        JOIN spark_demo.performers p\n        ON a.performer \u003d p.name\n        WHERE a.solr_query\u003d\u0027year:${z.input(\"Album Year\",\"[2010 TO *]\")}\u0027 \n        AND p.solr_query\u003d\u0027country:\"${z.select(\"Artist Country\",\"USA\",countries)}\" AND styles:*${z.select(\"Artist Style\",\"Rock\",musicStyles)}*\u0027\n      \"\"\".stripMargin).\n    map(row \u003d\u003e (row.getInt(0),row.getString(1),row.getString(2))).\n    sortBy(tuple \u003d\u003e (tuple._1,tuple._2,tuple._3))",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "title": true,
+        "tableHide": false,
+        "editorHide": true
+      },
+      "settings": {
+        "params": {
+          "Album Release Country": "USA",
+          "Album Release Year": "[2010 TO *]",
+          "Album Year": "[2000 TO *]",
+          "Artist Country": "Germany",
+          "Artist Style": "Rock"
+        },
+        "forms": {
+          "Album Year": {
+            "name": "Album Year",
+            "displayName": "Album Year",
+            "defaultValue": "[2010 TO *]",
+            "hidden": false
+          },
+          "Artist Country": {
+            "name": "Artist Country",
+            "displayName": "Artist Country",
+            "defaultValue": "USA",
+            "options": [
+              {
+                "value": "Algeria",
+                "displayName": "Algeria"
+              },
+              {
+                "value": "Argentina",
+                "displayName": "Argentina"
+              },
+              {
+                "value": "Armenia",
+                "displayName": "Armenia"
+              },
+              {
+                "value": "Australia",
+                "displayName": "Australia"
+              },
+              {
+                "value": "Austria",
+                "displayName": "Austria"
+              },
+              {
+                "value": "Belgium",
+                "displayName": "Belgium"
+              },
+              {
+                "value": "Belize",
+                "displayName": "Belize"
+              },
+              {
+                "value": "Bermuda",
+                "displayName": "Bermuda"
+              },
+              {
+                "value": "Bolivia",
+                "displayName": "Bolivia"
+              },
+              {
+                "value": "Bosnia and Herzegovina",
+                "displayName": "Bosnia and Herzegovina"
+              },
+              {
+                "value": "Brazil",
+                "displayName": "Brazil"
+              },
+              {
+                "value": "Bulgaria",
+                "displayName": "Bulgaria"
+              },
+              {
+                "value": "Cameroon",
+                "displayName": "Cameroon"
+              },
+              {
+                "value": "Canada",
+                "displayName": "Canada"
+              },
+              {
+                "value": "Cape Verde",
+                "displayName": "Cape Verde"
+              },
+              {
+                "value": "Chile",
+                "displayName": "Chile"
+              },
+              {
+                "value": "China",
+                "displayName": "China"
+              },
+              {
+                "value": "Colombia",
+                "displayName": "Colombia"
+              },
+              {
+                "value": "Croatia",
+                "displayName": "Croatia"
+              },
+              {
+                "value": "Cuba",
+                "displayName": "Cuba"
+              },
+              {
+                "value": "Cyprus",
+                "displayName": "Cyprus"
+              },
+              {
+                "value": "Czech Republic",
+                "displayName": "Czech Republic"
+              },
+              {
+                "value": "Democratic Republic of the Congo",
+                "displayName": "Democratic Republic of the Congo"
+              },
+              {
+                "value": "Denmark",
+                "displayName": "Denmark"
+              },
+              {
+                "value": "Dominica",
+                "displayName": "Dominica"
+              },
+              {
+                "value": "Egypt",
+                "displayName": "Egypt"
+              },
+              {
+                "value": "Estonia",
+                "displayName": "Estonia"
+              },
+              {
+                "value": "Ethiopia",
+                "displayName": "Ethiopia"
+              },
+              {
+                "value": "Faroe Islands",
+                "displayName": "Faroe Islands"
+              },
+              {
+                "value": "Finland",
+                "displayName": "Finland"
+              },
+              {
+                "value": "France",
+                "displayName": "France"
+              },
+              {
+                "value": "Georgia",
+                "displayName": "Georgia"
+              },
+              {
+                "value": "Germany",
+                "displayName": "Germany"
+              },
+              {
+                "value": "Greece",
+                "displayName": "Greece"
+              },
+              {
+                "value": "Guatemala",
+                "displayName": "Guatemala"
+              },
+              {
+                "value": "Guyana",
+                "displayName": "Guyana"
+              },
+              {
+                "value": "Hong Kong",
+                "displayName": "Hong Kong"
+              },
+              {
+                "value": "Hungary",
+                "displayName": "Hungary"
+              },
+              {
+                "value": "Iceland",
+                "displayName": "Iceland"
+              },
+              {
+                "value": "India",
+                "displayName": "India"
+              },
+              {
+                "value": "Ireland",
+                "displayName": "Ireland"
+              },
+              {
+                "value": "Israel",
+                "displayName": "Israel"
+              },
+              {
+                "value": "Italy",
+                "displayName": "Italy"
+              },
+              {
+                "value": "Jamaica",
+                "displayName": "Jamaica"
+              },
+              {
+                "value": "Japan",
+                "displayName": "Japan"
+              },
+              {
+                "value": "Kenya",
+                "displayName": "Kenya"
+              },
+              {
+                "value": "Latvia",
+                "displayName": "Latvia"
+              },
+              {
+                "value": "Lebanon",
+                "displayName": "Lebanon"
+              },
+              {
+                "value": "Lithuania",
+                "displayName": "Lithuania"
+              },
+              {
+                "value": "Luxembourg",
+                "displayName": "Luxembourg"
+              },
+              {
+                "value": "Malaysia",
+                "displayName": "Malaysia"
+              },
+              {
+                "value": "Mali",
+                "displayName": "Mali"
+              },
+              {
+                "value": "Mexico",
+                "displayName": "Mexico"
+              },
+              {
+                "value": "Moldova",
+                "displayName": "Moldova"
+              },
+              {
+                "value": "Mozambique",
+                "displayName": "Mozambique"
+              },
+              {
+                "value": "Nepal",
+                "displayName": "Nepal"
+              },
+              {
+                "value": "Netherlands",
+                "displayName": "Netherlands"
+              },
+              {
+                "value": "New Zealand",
+                "displayName": "New Zealand"
+              },
+              {
+                "value": "Nigeria",
+                "displayName": "Nigeria"
+              },
+              {
+                "value": "Norway",
+                "displayName": "Norway"
+              },
+              {
+                "value": "Pakistan",
+                "displayName": "Pakistan"
+              },
+              {
+                "value": "Peru",
+                "displayName": "Peru"
+              },
+              {
+                "value": "Poland",
+                "displayName": "Poland"
+              },
+              {
+                "value": "Portugal",
+                "displayName": "Portugal"
+              },
+              {
+                "value": "Puerto Rico",
+                "displayName": "Puerto Rico"
+              },
+              {
+                "value": "Romania",
+                "displayName": "Romania"
+              },
+              {
+                "value": "Russian Federation",
+                "displayName": "Russian Federation"
+              },
+              {
+                "value": "Senegal",
+                "displayName": "Senegal"
+              },
+              {
+                "value": "Serbia",
+                "displayName": "Serbia"
+              },
+              {
+                "value": "Singapore",
+                "displayName": "Singapore"
+              },
+              {
+                "value": "Slovakia",
+                "displayName": "Slovakia"
+              },
+              {
+                "value": "Slovenia",
+                "displayName": "Slovenia"
+              },
+              {
+                "value": "South Africa",
+                "displayName": "South Africa"
+              },
+              {
+                "value": "South Korea",
+                "displayName": "South Korea"
+              },
+              {
+                "value": "Spain",
+                "displayName": "Spain"
+              },
+              {
+                "value": "Sweden",
+                "displayName": "Sweden"
+              },
+              {
+                "value": "Switzerland",
+                "displayName": "Switzerland"
+              },
+              {
+                "value": "Taiwan",
+                "displayName": "Taiwan"
+              },
+              {
+                "value": "Thailand",
+                "displayName": "Thailand"
+              },
+              {
+                "value": "Trinidad and Tobago",
+                "displayName": "Trinidad and Tobago"
+              },
+              {
+                "value": "Tunisia",
+                "displayName": "Tunisia"
+              },
+              {
+                "value": "Turkey",
+                "displayName": "Turkey"
+              },
+              {
+                "value": "USA",
+                "displayName": "USA"
+              },
+              {
+                "value": "Ukraine",
+                "displayName": "Ukraine"
+              },
+              {
+                "value": "United Kingdom",
+                "displayName": "United Kingdom"
+              },
+              {
+                "value": "Unknown",
+                "displayName": "Unknown"
+              },
+              {
+                "value": "Uruguay",
+                "displayName": "Uruguay"
+              },
+              {
+                "value": "Venezuela",
+                "displayName": "Venezuela"
+              },
+              {
+                "value": "Virgin Islands",
+                "displayName": "Virgin Islands"
+              }
+            ],
+            "hidden": false
+          },
+          "Artist Style": {
+            "name": "Artist Style",
+            "displayName": "Artist Style",
+            "defaultValue": "Rock",
+            "options": [
+              {
+                "value": "Acoustic",
+                "displayName": "Acoustic"
+              },
+              {
+                "value": "African",
+                "displayName": "African"
+              },
+              {
+                "value": "Afrobeat",
+                "displayName": "Afrobeat"
+              },
+              {
+                "value": "Alternative",
+                "displayName": "Alternative"
+              },
+              {
+                "value": "Ambient",
+                "displayName": "Ambient"
+              },
+              {
+                "value": "Baroque",
+                "displayName": "Baroque"
+              },
+              {
+                "value": "Bass",
+                "displayName": "Bass"
+              },
+              {
+                "value": "Beat",
+                "displayName": "Beat"
+              },
+              {
+                "value": "Blues",
+                "displayName": "Blues"
+              },
+              {
+                "value": "Boca",
+                "displayName": "Boca"
+              },
+              {
+                "value": "Bossa",
+                "displayName": "Bossa"
+              },
+              {
+                "value": "Cappella",
+                "displayName": "Cappella"
+              },
+              {
+                "value": "Celtique",
+                "displayName": "Celtique"
+              },
+              {
+                "value": "Chamber",
+                "displayName": "Chamber"
+              },
+              {
+                "value": "Chillout",
+                "displayName": "Chillout"
+              },
+              {
+                "value": "Chip",
+                "displayName": "Chip"
+              },
+              {
+                "value": "Classic",
+                "displayName": "Classic"
+              },
+              {
+                "value": "Comedy",
+                "displayName": "Comedy"
+              },
+              {
+                "value": "Contemporary",
+                "displayName": "Contemporary"
+              },
+              {
+                "value": "Country",
+                "displayName": "Country"
+              },
+              {
+                "value": "Crossover",
+                "displayName": "Crossover"
+              },
+              {
+                "value": "Dance",
+                "displayName": "Dance"
+              },
+              {
+                "value": "Disco",
+                "displayName": "Disco"
+              },
+              {
+                "value": "Downtempo",
+                "displayName": "Downtempo"
+              },
+              {
+                "value": "Drum",
+                "displayName": "Drum"
+              },
+              {
+                "value": "Easy listening",
+                "displayName": "Easy listening"
+              },
+              {
+                "value": "Electro",
+                "displayName": "Electro"
+              },
+              {
+                "value": "Ethereal",
+                "displayName": "Ethereal"
+              },
+              {
+                "value": "Ethnic",
+                "displayName": "Ethnic"
+              },
+              {
+                "value": "Experimental",
+                "displayName": "Experimental"
+              },
+              {
+                "value": "Flamenco",
+                "displayName": "Flamenco"
+              },
+              {
+                "value": "Folk",
+                "displayName": "Folk"
+              },
+              {
+                "value": "Funk",
+                "displayName": "Funk"
+              },
+              {
+                "value": "Fusion",
+                "displayName": "Fusion"
+              },
+              {
+                "value": "Gangsta",
+                "displayName": "Gangsta"
+              },
+              {
+                "value": "Garage",
+                "displayName": "Garage"
+              },
+              {
+                "value": "Glam",
+                "displayName": "Glam"
+              },
+              {
+                "value": "Gospel",
+                "displayName": "Gospel"
+              },
+              {
+                "value": "Gothic",
+                "displayName": "Gothic"
+              },
+              {
+                "value": "Hip hop",
+                "displayName": "Hip hop"
+              },
+              {
+                "value": "House",
+                "displayName": "House"
+              },
+              {
+                "value": "Indie",
+                "displayName": "Indie"
+              },
+              {
+                "value": "Industrial",
+                "displayName": "Industrial"
+              },
+              {
+                "value": "Instrumental",
+                "displayName": "Instrumental"
+              },
+              {
+                "value": "J-pop",
+                "displayName": "J-pop"
+              },
+              {
+                "value": "Jam",
+                "displayName": "Jam"
+              },
+              {
+                "value": "Jazz",
+                "displayName": "Jazz"
+              },
+              {
+                "value": "Medieval",
+                "displayName": "Medieval"
+              },
+              {
+                "value": "Melodic",
+                "displayName": "Melodic"
+              },
+              {
+                "value": "Metal",
+                "displayName": "Metal"
+              },
+              {
+                "value": "Opera",
+                "displayName": "Opera"
+              },
+              {
+                "value": "Orchestral",
+                "displayName": "Orchestral"
+              },
+              {
+                "value": "Pop",
+                "displayName": "Pop"
+              },
+              {
+                "value": "Progressive",
+                "displayName": "Progressive"
+              },
+              {
+                "value": "Psychedelic",
+                "displayName": "Psychedelic"
+              },
+              {
+                "value": "Punk",
+                "displayName": "Punk"
+              },
+              {
+                "value": "Rap",
+                "displayName": "Rap"
+              },
+              {
+                "value": "Reggae",
+                "displayName": "Reggae"
+              },
+              {
+                "value": "Rhythm",
+                "displayName": "Rhythm"
+              },
+              {
+                "value": "Rnb",
+                "displayName": "Rnb"
+              },
+              {
+                "value": "Rock",
+                "displayName": "Rock"
+              },
+              {
+                "value": "Romantic",
+                "displayName": "Romantic"
+              },
+              {
+                "value": "Samba",
+                "displayName": "Samba"
+              },
+              {
+                "value": "Ska",
+                "displayName": "Ska"
+              },
+              {
+                "value": "Soft",
+                "displayName": "Soft"
+              },
+              {
+                "value": "Soprano",
+                "displayName": "Soprano"
+              },
+              {
+                "value": "Soul",
+                "displayName": "Soul"
+              },
+              {
+                "value": "Swing",
+                "displayName": "Swing"
+              },
+              {
+                "value": "Symphonic",
+                "displayName": "Symphonic"
+              },
+              {
+                "value": "Synth",
+                "displayName": "Synth"
+              },
+              {
+                "value": "Tango",
+                "displayName": "Tango"
+              },
+              {
+                "value": "Techno",
+                "displayName": "Techno"
+              },
+              {
+                "value": "Trance",
+                "displayName": "Trance"
+              },
+              {
+                "value": "Underground",
+                "displayName": "Underground"
+              },
+              {
+                "value": "Unknown",
+                "displayName": "Unknown"
+              },
+              {
+                "value": "Unplugged",
+                "displayName": "Unplugged"
+              },
+              {
+                "value": "Uplifting",
+                "displayName": "Uplifting"
+              },
+              {
+                "value": "Urban",
+                "displayName": "Urban"
+              },
+              {
+                "value": "Vocal",
+                "displayName": "Vocal"
+              },
+              {
+                "value": "World",
+                "displayName": "World"
+              }
+            ],
+            "hidden": false
+          }
+        }
+      },
+      "jobName": "paragraph_1432137037555_-826772635",
+      "id": "20150520-175037_1545340445",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "data: org.apache.spark.rdd.RDD[(Int, String, String)] \u003d MappedRDD[309] at sortBy at \u003cconsole\u003e:226\n"
+      },
+      "dateCreated": "May 20, 2015 5:50:37 PM",
+      "dateStarted": "May 25, 2015 9:09:30 AM",
+      "dateFinished": "May 25, 2015 9:09:39 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "display results",
+      "text": "data.displayAsTable(\"Year\",\"Performer\",\"Title\")",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "Year",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "Year",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "title": true,
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432137432270_1269908011",
+      "id": "20150520-175712_983682397",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "Year\tPerformer\tTitle\n2000\tBeatsteaks\tLaunched\n2000\tGuano Apes\tCuts \u0026 Clips From Don’t Give Me Names\n2000\tGuano Apes\tDödel Up\n2000\tGuano Apes\tNo Speech\n2000\tUntoten\tVampire Book\n2001\t4LYN\t4LYN\n2001\t4LYN\tBahama Mama\n2001\t4LYN\tLyn\n2001\t4LYN\tWhooo\n2001\tASP\t:Duett: Der schwarze Schmetterling Teil II\n2001\tDiary of Dreams\tO\u0027 Brother Sleep\n2001\tFarin Urlaub\tEndlich Urlaub!\n2001\tFarin Urlaub\tGlücklich\n2001\tFarin Urlaub\tSumisu\n2001\tKante\tZweilicht\n2001\tKettcar\tSo lang die dicke Frau noch singt ist die Oper nicht zu Ende\n2001\tNeu!\tNeu! 2\n2001\tOxymoron\tFeed the Breed\n2001\tOxymoron\tFuck the Nineties... Here\u0027s Our Noize!\n2001\tSubway to Sally\tHerzblut\n2001\tSubway to Sally\tVeitstanz\n2002\t4LYN\tHusky\n2002\t4LYN\tWhooo Soccer Slam\n2002\tBeatsteaks\tLiving Targets\n2002\tDiary of Dreams\tAmoK\n2002\tFarin Urlaub\tPhänomenal egal\n2002\tKettcar\t2002-03-28: Oelde Germany\n2002\tKettcar\tDu und wieviel von deinen Freunden\n2002\tModeselektor\tDeath Medley\n2002\tOxymoron\tFuck the Nineties… Here\u0027s Our Noize\n2002\tZeraphine\tKalte Sonne\n2003\tASP\tWeltunter\n2003\tDiary of Dreams\tDream Collector\n2003\tKettcar\tLandungsbrücken raus\n2003\tSchandmaul\tHexenkessel\n2003\tSlick Idiot\tReDickUlous\n2003\tSubway to Sally\t2003-08-02: Wacken Germany\n2003\tSubway to Sally\tEngelskrieger\n2003\tSubway to Sally\tFalscher Heiland\n2003\tSubway to Sally\tUnsterblich\n2003\tThe Notwist\t12\n2003\tThe Notwist\tLoup EP\n2003\tUntoten\tGrabsteinland\n2003\tWir sind Helden\tAurélie\n2003\tWir sind Helden\tGuten Tag\n2003\tWir sind Helden\tMüssen nur wollen\n2003\tZeraphine\tBe My Rain\n2003\tZeraphine\tTraumaworld\n2004\t4LYN\tKisses of a Strobelight\n2004\tASP\tIch will brennen\n2004\tBeatsteaks\tSmacksmash\n2004\tDiary of Dreams\tGiftraum\n2004\tDiary of Dreams\tNigredo\n2004\tKante\tZombi\n2004\tKettcar\t2004-09-17: JZ Kamp Bielefeld Germany\n2004\tModeselektor\tTurn Deaf!\n2004\tSchandmaul\tWie Pech \u0026 Schwefel\n2004\tSlick Idiot\tDickNity\n2004\tSlick Idiot\tScrewtinized\n2004\tUntoten\tRaben\n2004\tWir sind Helden\tDenkmal\n2005\t4LYN\tCompadres\n2005\t4LYN\tDrrty Rokka\n2005\tASP\tHast Du mich vermisst? Der schwarze Schmetterling Teil I\n2005\tBeatsteaks\tFrieda und die Bomben\n2005\tFarin Urlaub\tAm Ende der Sonne\n2005\tFarin Urlaub\tDusche\n2005\tKettcar\t48 Stunden\n2005\tKettcar\tBalu\n2005\tKettcar\tDeiche\n2005\tKettcar\tFritz Radiokonzert\n2005\tModeselektor\tLabland\n2005\tSchandmaul\tBin unterwegs\n2005\tSchandmaul\tKunststück\n2005\tSchandmaul\tNarrenkönig\n2005\tSchandmaul\tVon Spitzbuben und anderen Halunken\n2005\tSubway to Sally\tSeemannslied\n2005\tTangerine Dream\tUltima Thule\n2005\tWir sind Helden\tGekommen um zu bleiben\n2005\tWir sind Helden\tNur ein Wort\n2006\tASP\tHumility\n2006\tASP\tHässlich\n2006\tASP\tWerben\n2006\tDigitalism\tDigitalism in Cairo\n2006\tDigitalism\tZdarlight\n2006\tFarin Urlaub\tDer Frauenflüsterer\n2006\tKante\tAkustik-Sessions\n2006\tKante\tZwischen Den Orten\n2006\tMichael Kiske\tKiske\n2006\tModeselektor\tHello Mom!\n2006\tSchandmaul\tKein Weg zu weit\n2006\tSchandmaul\tMit Leib und Seele\n2006\tSlick Idiot\txSCREWciating\n2006\tSubway to Sally\tNackt\n2007\t4LYN\tGo Sea Devils!\n2007\tDigitalism\tIdealism\n2007\tDigitalism\tIdealistic\n2007\tDigitalism\tPogo\n2007\tDigitalism\tTerrorlight\n2007\tDigitalism\tZdarlight: The Unrealized E.P.\n2007\tKante\tPlays Rhythmus Berlin\n2007\tThe Whitest Boy Alive\tDreams\n2007\tUntoten\tBest of Untoten\n2007\tZeraphine\tYears in Black\n2008\tKettcar\tAm Tisch\n2008\tKettcar\tNullsummenspiel\n2008\tKettcar\tSylt\n2008\tMichael Kiske\tPast in Different Ways\n2008\tSchandmaul\tAnderswelt\n2008\tSubway to Sally\tSieben\n2008\tThe Notwist\tChemicals\n2008\tThe Whitest Boy Alive\tGolden Cage\n2009\tModeselektor\tArt and Cash\n2009\tModeselektor\tRA.173: Modeselektor\n2009\tSchandmaul\tSinnfonie\n2009\tSlick Idiot\tSucksess\n2009\tThe Whitest Boy Alive\t1517\n2009\tThe Whitest Boy Alive\tRules\n2009\tUntoten\tAkustisch: Des Raben Flug\n2010\tKettcar\tFliegende Bauten\n2010\tModeselektor\tArt \u0026 Cash\n2010\tNeu!\tNeu! \u002786\n2010\tNeu!\tVinyl Box\n2010\tUntoten\tHaus der Lüge\n2010\tUntoten\tLiebe oder Tod\n2010\tZeraphine\tWhiteout\n2011\tSchandmaul\tTraumtänzer\n2012\t4LYN\tQuasar\n2012\tKettcar\tZwischen den Runden\n2013\tSchandmaul\tSo weit so gut\n2014\tSchandmaul\tEuch zum Geleit\n2014\tSchandmaul\tUnendlich\n2015\tKante\tIn der Zuckerfabrik - Theatermusik\n"
+      },
+      "dateCreated": "May 20, 2015 5:57:12 PM",
+      "dateStarted": "May 25, 2015 9:09:41 AM",
+      "dateFinished": "May 25, 2015 9:09:44 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Expand me!",
+      "text": "%md\n\nThis Spark/Cassandra/Solr combo is so ...\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\n![Mind Blowing!](http://www.reactiongifs.com/r/2013/10/tim-and-eric-mind-blown.gif \"Mind Blowing\")",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorHide": true,
+        "tableHide": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432137020882_1490169917",
+      "id": "20150520-175020_1051483185",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch1\u003eThis Spark/Cassandra/Solr combo is so \u0026hellip;\u003c/h1\u003e\n\u003cp\u003e\u003cimg src\u003d\"http://www.reactiongifs.com/r/2013/10/tim-and-eric-mind-blown.gif\" alt\u003d\"Mind Blowing!\" title\u003d\"Mind Blowing\" /\u003e\u003c/p\u003e\n"
+      },
+      "dateCreated": "May 20, 2015 5:50:20 PM",
+      "dateStarted": "May 25, 2015 9:12:38 AM",
+      "dateFinished": "May 25, 2015 9:12:38 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432140672315_-1191708350",
+      "id": "20150520-185112_1247005157",
+      "dateCreated": "May 20, 2015 6:51:12 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "08-SearchAnalytics Mode",
+  "id": "2ANGJVNH2",
+  "angularObjects": {},
+  "config": {
+    "looknfeel": "default"
+  },
+  "info": {}
+}

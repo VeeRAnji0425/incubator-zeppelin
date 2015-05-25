@@ -1,0 +1,278 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n\nReading data from Cassandra\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432125137469_650840895",
+      "id": "20150520-143217_474596748",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch1\u003eReading data from Cassandra\u003c/h1\u003e\n"
+      },
+      "dateCreated": "May 20, 2015 2:32:17 PM",
+      "dateStarted": "May 20, 2015 2:33:38 PM",
+      "dateFinished": "May 20, 2015 2:33:39 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\n**Many ways to read data from Cassandra**:\n\n1. using plain **CassandraRDD[CassandraRow]**\n2. converting **CassandraRow** columns into **tuples**\n3. using **Scala case classes** with the integrated **object mapper**",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "tableHide": false,
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432125218563_-1408664128",
+      "id": "20150520-143338_1132207280",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cp\u003e\u003cstrong\u003eMany ways to read data from Cassandra\u003c/strong\u003e:\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eusing plain \u003cstrong\u003eCassandraRDD[CassandraRow]\u003c/strong\u003e\u003c/li\u003e\n\u003cli\u003econverting \u003cstrong\u003eCassandraRow\u003c/strong\u003e columns into \u003cstrong\u003etuples\u003c/strong\u003e\u003c/li\u003e\n\u003cli\u003eusing \u003cstrong\u003eScala case classes\u003c/strong\u003e with the integrated \u003cstrong\u003eobject mapper\u003c/strong\u003e\u003c/li\u003e\n\u003c/ol\u003e\n"
+      },
+      "dateCreated": "May 20, 2015 2:33:38 PM",
+      "dateStarted": "May 20, 2015 2:35:15 PM",
+      "dateFinished": "May 20, 2015 2:35:15 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Reset table display",
+      "text": "var data:RDD[(Int,Double)] \u003d sc.parallelize(Nil)",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "title": true,
+        "tableHide": true,
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432125938553_1725190640",
+      "id": "20150520-144538_434871993",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "data: org.apache.spark.rdd.RDD[(Int, Double)] \u003d ParallelCollectionRDD[143] at parallelize at \u003cconsole\u003e:105\n"
+      },
+      "dateCreated": "May 20, 2015 2:45:38 PM",
+      "dateStarted": "May 25, 2015 8:54:38 AM",
+      "dateFinished": "May 25, 2015 8:54:39 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Reading data using plain CassandraRow",
+      "text": "import org.apache.spark.SparkContext._\nimport com.datastax.spark.connector._\nimport com.datastax.spark.connector.rdd.CassandraRDD\nimport org.apache.spark.{SparkConf, SparkContext}\n\n\ndata \u003d sc.cassandraTable(\"spark_demo\", \"us_unemployment_stats\").\n    map( row \u003d\u003e (row.getInt(\"year\"),row.getDouble(\"unemployed_percentage_to_labor\")))",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "tableHide": true,
+        "title": true,
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432125315541_2118499250",
+      "id": "20150520-143515_1959047089",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.apache.spark.SparkContext._\nimport com.datastax.spark.connector._\nimport com.datastax.spark.connector.rdd.CassandraRDD\nimport org.apache.spark.{SparkConf, SparkContext}\ndata: org.apache.spark.rdd.RDD[(Int, Double)] \u003d MappedRDD[119] at map at \u003cconsole\u003e:108\n"
+      },
+      "dateCreated": "May 20, 2015 2:35:15 PM",
+      "dateStarted": "May 25, 2015 8:52:40 AM",
+      "dateFinished": "May 25, 2015 8:52:46 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "read data using scala tuples",
+      "text": "data \u003d sc.cassandraTable(\"spark_demo\", \"us_unemployment_stats\").\n    select(\"year\", \"unemployed_percentage_to_labor\").\n    as((_: Int, _: Double)).\n    sortByKey()",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "title": true,
+        "editorHide": false,
+        "tableHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432126014638_1008677629",
+      "id": "20150520-144654_1348217378",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "data: org.apache.spark.rdd.RDD[(Int, Double)] \u003d ShuffledRDD[124] at sortByKey at \u003cconsole\u003e:108\n"
+      },
+      "dateCreated": "May 20, 2015 2:46:54 PM",
+      "dateStarted": "May 25, 2015 8:53:09 AM",
+      "dateFinished": "May 25, 2015 8:53:11 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Read data using sparkSQL",
+      "text": "import org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\n\nval cc \u003d new CassandraSQLContext(sc)\n\nval row: SchemaRDD \u003d cc.cassandraSql(s\"SELECT year,unemployed_percentage_to_labor \" +\n                                     s\"FROM spark_demo.us_unemployment_stats WHERE unemployed_percentage_to_labor \u003e 8 \" +\n                                     s\"ORDER BY year DESC\")\ndata \u003d row.\n    sortBy(row \u003d\u003e row.getInt(0)).\n    map(row \u003d\u003e (row.getInt(0),row.getDouble(1)))",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "title": true,
+        "tableHide": true,
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432126280851_1108867753",
+      "id": "20150520-145120_1566314701",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\ncc: org.apache.spark.sql.cassandra.CassandraSQLContext \u003d org.apache.spark.sql.cassandra.CassandraSQLContext@11905e1e\nrow: org.apache.spark.sql.SchemaRDD \u003d \nSchemaRDD[127] at RDD at SchemaRDD.scala:108\n\u003d\u003d Query Plan \u003d\u003d\n\u003d\u003d Physical Plan \u003d\u003d\nSort [year#24 DESC], true\n Exchange (RangePartitioning [year#24 DESC], 200)\n  Filter (unemployed_percentage_to_labor#35 \u003e 8.0)\n   CassandraTableScan [year#24,unemployed_percentage_to_labor#35], (CassandraRelation TableDef(spark_demo,us_unemployment_stats,ArrayBuffer(ColumnDef(year,PartitionKeyColumn,IntType,false)),ArrayBuffer(),ArrayBuffer(ColumnDef(agriculture_part_count,RegularColumn,IntType,false), ColumnDef(civil_labor_count,RegularColumn,IntType,false), ColumnDef(civil_non_institutional_count,RegularColumn,IntType,false), ColumnDef(employed_count,RegularColumn,IntType,false), ColumnDef(employed_percentage,RegularColumn,DoubleType,false), ColumnDef(footnotes,Regu...data: org.apache.spark.rdd.RDD[(Int, Double)] \u003d MappedRDD[142] at map at \u003cconsole\u003e:113\n"
+      },
+      "dateCreated": "May 20, 2015 2:51:20 PM",
+      "dateStarted": "May 25, 2015 8:54:16 AM",
+      "dateFinished": "May 25, 2015 8:54:21 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "data.displayAsTable(\"Year\",\"Unemployment Percentage\")",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "Year",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "Unemployment Percentage",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "Year",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432125489739_1001031913",
+      "id": "20150520-143809_1476305925",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "Year\n"
+      },
+      "dateCreated": "May 20, 2015 2:38:09 PM",
+      "dateStarted": "May 25, 2015 8:54:41 AM",
+      "dateFinished": "May 25, 2015 8:54:42 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432125656671_-542517733",
+      "id": "20150520-144056_1766733826",
+      "dateCreated": "May 20, 2015 2:40:56 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "02-Reading Data from Cassandra",
+  "id": "2ART2CK3F",
+  "angularObjects": {},
+  "config": {
+    "looknfeel": "default"
+  },
+  "info": {}
+}
