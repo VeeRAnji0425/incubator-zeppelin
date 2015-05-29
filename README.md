@@ -25,6 +25,7 @@ For the demos to work, you'll need:
 7. The notebook **09-Demos Cleanup** will clean up all data downloaded and created for those demos
 8. `wget` and `curl` commands **installed** and **working**
 9. A working **Maven 3.x** installed
+10. A working **[Bower]** installed
 
 ## Running instructions 
 
@@ -38,3 +39,4 @@ For the demos to work, you'll need:
 For the original **Zeppelin** README, click [here]
 
 [here]: https://github.com/apache/incubator-zeppelin/blob/master/README.md
+[Bower]: http://bower.io/
