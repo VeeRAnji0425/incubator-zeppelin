@@ -91,17 +91,17 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "import com.datastax.spark.connector.cql.CassandraConnector\nres155: com.datastax.driver.core.ResultSet \u003d ResultSet[ exhausted: true, Columns[]]\n"
+        "msg": "import com.datastax.spark.connector.cql.CassandraConnector\nres68: com.datastax.driver.core.ResultSet \u003d ResultSet[ exhausted: true, Columns[]]\n"
       },
       "dateCreated": "May 20, 2015 4:08:48 PM",
-      "dateStarted": "May 25, 2015 8:56:32 AM",
-      "dateFinished": "May 25, 2015 8:56:33 AM",
+      "dateStarted": "Jun 1, 2015 10:02:29 PM",
+      "dateFinished": "Jun 1, 2015 10:02:30 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Migrate data with spark",
-      "text": "import scala.collection.JavaConversions._\nimport com.datastax.spark.connector._\nimport com.datastax.spark.connector.cql.CassandraConnector\nimport org.apache.spark.{SparkConf, SparkContext}\n\ncase class Albums(title: String, country: String, performer:String, quality:String,status:String,year:Int)\n\nsc.cassandraTable[Albums](\"spark_demo\", \"albums\").saveToCassandra(\"spark_demo\",\"albums_by_country\")\n\nvar countries:List[(String,String)] \u003d Nil \nvar years: List[(String,String)] \u003d Nil\n\nCassandraConnector(sc.getConf).withSessionDo { \n    session \u003d\u003e {\n        val countriesAndYear \u003d session.execute(\"SELECT DISTINCT country,year FROM spark_demo.albums_by_country\").\n            all().\n            toList\n            \n        countries \u003d countriesAndYear.\n            map(row \u003d\u003e row.getString(\"country\")).\n            toSet.\n            toList.\n            sorted.\n            map(country \u003d\u003e (country,country))\n            \n        years \u003d countriesAndYear.\n            map(row \u003d\u003e row.getInt(\"year\")).\n            filter(year \u003d\u003e year\u003e1900).\n            toSet.\n            toList.\n            sorted.\n            map(year \u003d\u003e (year.toString,year.toString))\n    }\n}\n",
+      "text": "import scala.collection.JavaConversions._\nimport com.datastax.spark.connector._\nimport com.datastax.spark.connector.cql.CassandraConnector\nimport org.apache.spark.{SparkConf, SparkContext}\n\ncase class Albums(title: String, country: String, performer:String, quality:String,status:String,year:Int)\n\nsc.cassandraTable[Albums](\"spark_demo\", \"albums\").saveToCassandra(\"spark_demo\",\"albums_by_country\")\n",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -126,11 +126,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "import scala.collection.JavaConversions._\nimport com.datastax.spark.connector._\nimport com.datastax.spark.connector.cql.CassandraConnector\nimport org.apache.spark.{SparkConf, SparkContext}\ndefined class Albums\ncountries: List[(String, String)] \u003d List()\nyears: List[(String, String)] \u003d List()\n"
+        "msg": "import scala.collection.JavaConversions._\nimport com.datastax.spark.connector._\nimport com.datastax.spark.connector.cql.CassandraConnector\nimport org.apache.spark.{SparkConf, SparkContext}\ndefined class Albums\n"
       },
       "dateCreated": "May 20, 2015 4:12:54 PM",
-      "dateStarted": "May 25, 2015 8:56:44 AM",
-      "dateFinished": "May 25, 2015 8:57:06 AM",
+      "dateStarted": "Jun 1, 2015 10:02:39 PM",
+      "dateFinished": "Jun 1, 2015 10:03:04 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -161,17 +161,17 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "import org.apache.spark.rdd.RDD\ndata: org.apache.spark.rdd.RDD[(String, Int, String, String)] \u003d ParallelCollectionRDD[170] at parallelize at \u003cconsole\u003e:133\n"
+        "msg": "import org.apache.spark.rdd.RDD\ndata: org.apache.spark.rdd.RDD[(String, Int, String, String)] \u003d ParallelCollectionRDD[80] at parallelize at \u003cconsole\u003e:76\n"
       },
       "dateCreated": "May 20, 2015 4:17:35 PM",
-      "dateStarted": "May 25, 2015 8:58:18 AM",
-      "dateFinished": "May 25, 2015 8:58:19 AM",
+      "dateStarted": "Jun 1, 2015 10:03:52 PM",
+      "dateFinished": "Jun 1, 2015 10:03:53 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Search table albums_by_country_and_year",
-      "text": "data \u003d sc.cassandraTable(\"spark_demo\", \"albums_by_country\").\n    select(\"country\",\"year\",\"performer\",\"title\").\n    as((_:String,_:Int,_:String,_:String)).\n    where(s\"\"\"country\u003d\u0027${z.select(\"country\", \"USA\", countries)}\u0027 AND year\u003d${z.select(\"year\", \"2014\", years)}\"\"\")",
+      "text": "var countries:List[(String,String)] \u003d Nil \nvar years: List[(String,String)] \u003d Nil\n\nCassandraConnector(sc.getConf).withSessionDo { \n    session \u003d\u003e {\n        val countriesAndYear \u003d session.execute(\"SELECT DISTINCT country,year FROM spark_demo.albums_by_country\").\n            all().\n            toList\n            \n        countries \u003d countriesAndYear.\n            map(row \u003d\u003e row.getString(\"country\")).\n            toSet.\n            toList.\n            sorted.\n            map(country \u003d\u003e (country,country))\n            \n        years \u003d countriesAndYear.\n            map(row \u003d\u003e row.getInt(\"year\")).\n            filter(year \u003d\u003e year\u003e1900).\n            toSet.\n            toList.\n            sorted.\n            map(year \u003d\u003e (year.toString,year.toString))\n    }\n}\n\ndata \u003d sc.cassandraTable(\"spark_demo\", \"albums_by_country\").\n    select(\"country\",\"year\",\"performer\",\"title\").\n    as((_:String,_:Int,_:String,_:String)).\n    where(s\"\"\"country\u003d\u0027${z.select(\"country\", \"USA\", countries)}\u0027 AND year\u003d${z.select(\"year\", \"2014\", years)}\"\"\")",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -185,7 +185,7 @@
         },
         "tableHide": false,
         "title": true,
-        "editorHide": false
+        "editorHide": true
       },
       "settings": {
         "params": {
@@ -196,7 +196,7 @@
           "country": {
             "name": "country",
             "displayName": "country",
-            "defaultValue": "USA",
+            "defaultValue": "",
             "options": [
               {
                 "value": "Andorra",
@@ -325,10 +325,6 @@
               {
                 "value": "France",
                 "displayName": "France"
-              },
-              {
-                "value": "Gabon",
-                "displayName": "Gabon"
               },
               {
                 "value": "Germany",
@@ -584,7 +580,7 @@
           "year": {
             "name": "year",
             "displayName": "year",
-            "defaultValue": "2014",
+            "defaultValue": "",
             "options": [
               {
                 "value": "1906",
@@ -1024,11 +1020,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "data: org.apache.spark.rdd.RDD[(String, Int, String, String)] \u003d CassandraTableScanRDD[169] at RDD at CassandraRDD.scala:15\n"
+        "msg": "countries: List[(String, String)] \u003d List()\nyears: List[(String, String)] \u003d List()\ndata: org.apache.spark.rdd.RDD[(String, Int, String, String)] \u003d CassandraTableScanRDD[79] at RDD at CassandraRDD.scala:15\n"
       },
       "dateCreated": "May 20, 2015 4:14:51 PM",
-      "dateStarted": "May 25, 2015 8:58:13 AM",
-      "dateFinished": "May 25, 2015 8:58:14 AM",
+      "dateStarted": "Jun 1, 2015 10:03:30 PM",
+      "dateFinished": "Jun 1, 2015 10:03:33 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -1079,8 +1075,8 @@
         "msg": "Country\n"
       },
       "dateCreated": "May 20, 2015 4:19:48 PM",
-      "dateStarted": "May 25, 2015 8:58:19 AM",
-      "dateFinished": "May 25, 2015 8:58:20 AM",
+      "dateStarted": "Jun 1, 2015 10:03:54 PM",
+      "dateFinished": "Jun 1, 2015 10:03:54 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },

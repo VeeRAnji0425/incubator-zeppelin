@@ -59,11 +59,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\nimport scala.collection.JavaConversions._\ndata: org.apache.spark.rdd.RDD[(Int, String, String)] \u003d ParallelCollectionRDD[288] at parallelize at \u003cconsole\u003e:202\ncc: org.apache.spark.sql.cassandra.CassandraSQLContext \u003d org.apache.spark.sql.cassandra.CassandraSQLContext@59d668c7\nmusicStyles: List[(String, String)] \u003d List()\ncountries: List[(String, String)] \u003d List()\n"
+        "msg": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\nimport scala.collection.JavaConversions._\ndata: org.apache.spark.rdd.RDD[(Int, String, String)] \u003d ParallelCollectionRDD[76] at parallelize at \u003cconsole\u003e:63\ncc: org.apache.spark.sql.cassandra.CassandraSQLContext \u003d org.apache.spark.sql.cassandra.CassandraSQLContext@a642a60\nmusicStyles: List[(String, String)] \u003d List()\ncountries: List[(String, String)] \u003d List()\n"
       },
       "dateCreated": "May 24, 2015 6:01:45 PM",
-      "dateStarted": "May 25, 2015 9:09:11 AM",
-      "dateFinished": "May 25, 2015 9:09:23 AM",
+      "dateStarted": "May 28, 2015 4:37:59 PM",
+      "dateFinished": "May 28, 2015 4:38:03 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -83,14 +83,14 @@
         },
         "title": true,
         "tableHide": false,
-        "editorHide": true
+        "editorHide": false
       },
       "settings": {
         "params": {
           "Album Release Country": "USA",
           "Album Release Year": "[2010 TO *]",
-          "Album Year": "[2000 TO *]",
-          "Artist Country": "Germany",
+          "Album Year": "[2010 TO *]",
+          "Artist Country": "France",
           "Artist Style": "Rock"
         },
         "forms": {
@@ -103,7 +103,7 @@
           "Artist Country": {
             "name": "Artist Country",
             "displayName": "Artist Country",
-            "defaultValue": "USA",
+            "defaultValue": "",
             "options": [
               {
                 "value": "Algeria",
@@ -467,7 +467,7 @@
           "Artist Style": {
             "name": "Artist Style",
             "displayName": "Artist Style",
-            "defaultValue": "Rock",
+            "defaultValue": "",
             "options": [
               {
                 "value": "Acoustic",
@@ -799,11 +799,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "data: org.apache.spark.rdd.RDD[(Int, String, String)] \u003d MappedRDD[309] at sortBy at \u003cconsole\u003e:226\n"
+        "msg": "data: org.apache.spark.rdd.RDD[(Int, String, String)] \u003d MappedRDD[66] at sortBy at \u003cconsole\u003e:59\n"
       },
       "dateCreated": "May 20, 2015 5:50:37 PM",
-      "dateStarted": "May 25, 2015 9:09:30 AM",
-      "dateFinished": "May 25, 2015 9:09:39 AM",
+      "dateStarted": "May 28, 2015 3:11:17 PM",
+      "dateFinished": "May 28, 2015 3:11:20 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -823,7 +823,13 @@
               "aggr": "sum"
             }
           ],
-          "values": [],
+          "values": [
+            {
+              "name": "Performer",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
           "groups": [],
           "scatter": {
             "xAxis": {
@@ -846,11 +852,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TABLE",
-        "msg": "Year\tPerformer\tTitle\n2000\tBeatsteaks\tLaunched\n2000\tGuano Apes\tCuts \u0026 Clips From Don’t Give Me Names\n2000\tGuano Apes\tDödel Up\n2000\tGuano Apes\tNo Speech\n2000\tUntoten\tVampire Book\n2001\t4LYN\t4LYN\n2001\t4LYN\tBahama Mama\n2001\t4LYN\tLyn\n2001\t4LYN\tWhooo\n2001\tASP\t:Duett: Der schwarze Schmetterling Teil II\n2001\tDiary of Dreams\tO\u0027 Brother Sleep\n2001\tFarin Urlaub\tEndlich Urlaub!\n2001\tFarin Urlaub\tGlücklich\n2001\tFarin Urlaub\tSumisu\n2001\tKante\tZweilicht\n2001\tKettcar\tSo lang die dicke Frau noch singt ist die Oper nicht zu Ende\n2001\tNeu!\tNeu! 2\n2001\tOxymoron\tFeed the Breed\n2001\tOxymoron\tFuck the Nineties... Here\u0027s Our Noize!\n2001\tSubway to Sally\tHerzblut\n2001\tSubway to Sally\tVeitstanz\n2002\t4LYN\tHusky\n2002\t4LYN\tWhooo Soccer Slam\n2002\tBeatsteaks\tLiving Targets\n2002\tDiary of Dreams\tAmoK\n2002\tFarin Urlaub\tPhänomenal egal\n2002\tKettcar\t2002-03-28: Oelde Germany\n2002\tKettcar\tDu und wieviel von deinen Freunden\n2002\tModeselektor\tDeath Medley\n2002\tOxymoron\tFuck the Nineties… Here\u0027s Our Noize\n2002\tZeraphine\tKalte Sonne\n2003\tASP\tWeltunter\n2003\tDiary of Dreams\tDream Collector\n2003\tKettcar\tLandungsbrücken raus\n2003\tSchandmaul\tHexenkessel\n2003\tSlick Idiot\tReDickUlous\n2003\tSubway to Sally\t2003-08-02: Wacken Germany\n2003\tSubway to Sally\tEngelskrieger\n2003\tSubway to Sally\tFalscher Heiland\n2003\tSubway to Sally\tUnsterblich\n2003\tThe Notwist\t12\n2003\tThe Notwist\tLoup EP\n2003\tUntoten\tGrabsteinland\n2003\tWir sind Helden\tAurélie\n2003\tWir sind Helden\tGuten Tag\n2003\tWir sind Helden\tMüssen nur wollen\n2003\tZeraphine\tBe My Rain\n2003\tZeraphine\tTraumaworld\n2004\t4LYN\tKisses of a Strobelight\n2004\tASP\tIch will brennen\n2004\tBeatsteaks\tSmacksmash\n2004\tDiary of Dreams\tGiftraum\n2004\tDiary of Dreams\tNigredo\n2004\tKante\tZombi\n2004\tKettcar\t2004-09-17: JZ Kamp Bielefeld Germany\n2004\tModeselektor\tTurn Deaf!\n2004\tSchandmaul\tWie Pech \u0026 Schwefel\n2004\tSlick Idiot\tDickNity\n2004\tSlick Idiot\tScrewtinized\n2004\tUntoten\tRaben\n2004\tWir sind Helden\tDenkmal\n2005\t4LYN\tCompadres\n2005\t4LYN\tDrrty Rokka\n2005\tASP\tHast Du mich vermisst? Der schwarze Schmetterling Teil I\n2005\tBeatsteaks\tFrieda und die Bomben\n2005\tFarin Urlaub\tAm Ende der Sonne\n2005\tFarin Urlaub\tDusche\n2005\tKettcar\t48 Stunden\n2005\tKettcar\tBalu\n2005\tKettcar\tDeiche\n2005\tKettcar\tFritz Radiokonzert\n2005\tModeselektor\tLabland\n2005\tSchandmaul\tBin unterwegs\n2005\tSchandmaul\tKunststück\n2005\tSchandmaul\tNarrenkönig\n2005\tSchandmaul\tVon Spitzbuben und anderen Halunken\n2005\tSubway to Sally\tSeemannslied\n2005\tTangerine Dream\tUltima Thule\n2005\tWir sind Helden\tGekommen um zu bleiben\n2005\tWir sind Helden\tNur ein Wort\n2006\tASP\tHumility\n2006\tASP\tHässlich\n2006\tASP\tWerben\n2006\tDigitalism\tDigitalism in Cairo\n2006\tDigitalism\tZdarlight\n2006\tFarin Urlaub\tDer Frauenflüsterer\n2006\tKante\tAkustik-Sessions\n2006\tKante\tZwischen Den Orten\n2006\tMichael Kiske\tKiske\n2006\tModeselektor\tHello Mom!\n2006\tSchandmaul\tKein Weg zu weit\n2006\tSchandmaul\tMit Leib und Seele\n2006\tSlick Idiot\txSCREWciating\n2006\tSubway to Sally\tNackt\n2007\t4LYN\tGo Sea Devils!\n2007\tDigitalism\tIdealism\n2007\tDigitalism\tIdealistic\n2007\tDigitalism\tPogo\n2007\tDigitalism\tTerrorlight\n2007\tDigitalism\tZdarlight: The Unrealized E.P.\n2007\tKante\tPlays Rhythmus Berlin\n2007\tThe Whitest Boy Alive\tDreams\n2007\tUntoten\tBest of Untoten\n2007\tZeraphine\tYears in Black\n2008\tKettcar\tAm Tisch\n2008\tKettcar\tNullsummenspiel\n2008\tKettcar\tSylt\n2008\tMichael Kiske\tPast in Different Ways\n2008\tSchandmaul\tAnderswelt\n2008\tSubway to Sally\tSieben\n2008\tThe Notwist\tChemicals\n2008\tThe Whitest Boy Alive\tGolden Cage\n2009\tModeselektor\tArt and Cash\n2009\tModeselektor\tRA.173: Modeselektor\n2009\tSchandmaul\tSinnfonie\n2009\tSlick Idiot\tSucksess\n2009\tThe Whitest Boy Alive\t1517\n2009\tThe Whitest Boy Alive\tRules\n2009\tUntoten\tAkustisch: Des Raben Flug\n2010\tKettcar\tFliegende Bauten\n2010\tModeselektor\tArt \u0026 Cash\n2010\tNeu!\tNeu! \u002786\n2010\tNeu!\tVinyl Box\n2010\tUntoten\tHaus der Lüge\n2010\tUntoten\tLiebe oder Tod\n2010\tZeraphine\tWhiteout\n2011\tSchandmaul\tTraumtänzer\n2012\t4LYN\tQuasar\n2012\tKettcar\tZwischen den Runden\n2013\tSchandmaul\tSo weit so gut\n2014\tSchandmaul\tEuch zum Geleit\n2014\tSchandmaul\tUnendlich\n2015\tKante\tIn der Zuckerfabrik - Theatermusik\n"
+        "msg": "Year\tPerformer\tTitle\n2010\tThe Dø\tDust It Off\n2011\tDJ Mehdi\tDJ Mehdi : Naissance d\u0027un prince\n2011\tThe Dø\tGonna Be Sick!\n2012\tEmily Loizeau\tMothers \u0026 Tygers\n2012\tWax Tailor\tDusty Rainbow From the Dark\n2013\tColleen\tThe Weighing of the Heart\n2014\tThe Dø\tKeep Your Lips Sealed\n2014\tThe Dø\tShake Shook Shaken\n2015\tSoKo\tMy Dreams Dictate My Reality\n2015\tSoKo\tWho Wears The Pants??\n"
       },
       "dateCreated": "May 20, 2015 5:57:12 PM",
-      "dateStarted": "May 25, 2015 9:09:41 AM",
-      "dateFinished": "May 25, 2015 9:09:44 AM",
+      "dateStarted": "May 28, 2015 3:11:24 PM",
+      "dateFinished": "May 28, 2015 3:11:26 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },

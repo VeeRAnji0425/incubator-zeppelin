@@ -60,11 +60,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\nrows: org.apache.spark.rdd.RDD[(String, String, Long)] \u003d ParallelCollectionRDD[215] at parallelize at \u003cconsole\u003e:159\ncc: org.apache.spark.sql.cassandra.CassandraSQLContext \u003d org.apache.spark.sql.cassandra.CassandraSQLContext@5653c96f\ncomputeDecade: (year: Int)String\n"
+        "msg": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\nrows: org.apache.spark.rdd.RDD[(String, String, Long)] \u003d ParallelCollectionRDD[85] at parallelize at \u003cconsole\u003e:85\ncc: org.apache.spark.sql.cassandra.CassandraSQLContext \u003d org.apache.spark.sql.cassandra.CassandraSQLContext@2c45f17c\ncomputeDecade: (year: Int)String\n"
       },
       "dateCreated": "May 24, 2015 5:40:39 PM",
-      "dateStarted": "May 25, 2015 9:01:10 AM",
-      "dateFinished": "May 25, 2015 9:01:17 AM",
+      "dateStarted": "Jun 1, 2015 10:06:20 PM",
+      "dateFinished": "Jun 1, 2015 10:06:24 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -89,7 +89,7 @@
       "settings": {
         "params": {
           "countThreshold": "1000",
-          "Albums Count Threshold": "1000"
+          "Albums Count Threshold": "500"
         },
         "forms": {
           "Albums Count Threshold": {
@@ -105,11 +105,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "rows: org.apache.spark.rdd.RDD[(String, String, Long)] \u003d MappedRDD[220] at sortBy at \u003cconsole\u003e:179\n"
+        "msg": "rows: org.apache.spark.rdd.RDD[(String, String, Long)] \u003d MappedRDD[50] at sortBy at \u003cconsole\u003e:63\n"
       },
       "dateCreated": "May 18, 2015 10:03:27 PM",
-      "dateStarted": "May 25, 2015 9:01:25 AM",
-      "dateFinished": "May 25, 2015 9:01:27 AM",
+      "dateStarted": "May 28, 2015 4:34:54 PM",
+      "dateFinished": "May 28, 2015 4:34:56 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -119,7 +119,7 @@
       "config": {
         "colWidth": 12.0,
         "graph": {
-          "mode": "multiBarChart",
+          "mode": "table",
           "height": 375.0,
           "optionOpen": false,
           "keys": [
@@ -129,20 +129,8 @@
               "aggr": "sum"
             }
           ],
-          "values": [
-            {
-              "name": "Count",
-              "index": 2.0,
-              "aggr": "sum"
-            }
-          ],
-          "groups": [
-            {
-              "name": "Country",
-              "index": 1.0,
-              "aggr": "sum"
-            }
-          ],
+          "values": [],
+          "groups": [],
           "scatter": {
             "xAxis": {
               "name": "Decade",
@@ -164,16 +152,28 @@
       "result": {
         "code": "SUCCESS",
         "type": "TABLE",
-        "msg": "Decade\tCountry\tCount\n1960-1970\tUSA\t1457\n1970-1980\tUnited Kingdom\t1217\n1970-1980\tUSA\t1764\n1980-1990\tUnited Kingdom\t2816\n1980-1990\tUSA\t2801\n1990-2000\tJapan\t1328\n1990-2000\tUnited Kingdom\t3984\n1990-2000\tUSA\t7823\n1990-2000\tGermany\t1397\n2000-2010\tUnited Kingdom\t5443\n2000-2010\tGermany\t2551\n2000-2010\tJapan\t2569\n2000-2010\tFinland\t1326\n2000-2010\tSweden\t1806\n2000-2010\tFrance\t1102\n2000-2010\tUSA\t13572\n2000-2010\tCanada\t1354\n2010-2020\tUSA\t3476\n"
+        "msg": "Decade\n"
       },
       "dateCreated": "May 18, 2015 11:05:37 PM",
-      "dateStarted": "May 25, 2015 9:01:28 AM",
-      "dateFinished": "May 25, 2015 9:02:07 AM",
+      "dateStarted": "Jun 1, 2015 10:06:26 PM",
+      "dateFinished": "Jun 1, 2015 10:06:27 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "config": {},
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "tableHide": true
+      },
       "settings": {
         "params": {},
         "forms": {}

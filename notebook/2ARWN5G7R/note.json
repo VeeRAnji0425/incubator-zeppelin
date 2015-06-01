@@ -48,7 +48,7 @@
         },
         "title": true,
         "tableHide": true,
-        "editorHide": true
+        "editorHide": false
       },
       "settings": {
         "params": {
@@ -62,11 +62,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "import com.datastax.spark.connector.cql.CassandraConnector\nimport com.datastax.driver.core.Row\nimport scala.collection.JavaConversions._\nimport org.apache.spark.rdd.RDD\ndefined class Album\ndata: org.apache.spark.rdd.RDD[Album] \u003d ParallelCollectionRDD[242] at parallelize at \u003cconsole\u003e:167\n"
+        "msg": "import com.datastax.spark.connector.cql.CassandraConnector\nimport com.datastax.driver.core.Row\nimport scala.collection.JavaConversions._\nimport org.apache.spark.rdd.RDD\ndefined class Album\ndata: org.apache.spark.rdd.RDD[Album] \u003d ParallelCollectionRDD[86] at parallelize at \u003cconsole\u003e:93\n"
       },
       "dateCreated": "May 24, 2015 5:23:34 PM",
-      "dateStarted": "May 25, 2015 9:02:50 AM",
-      "dateFinished": "May 25, 2015 9:02:56 AM",
+      "dateStarted": "Jun 1, 2015 10:07:10 PM",
+      "dateFinished": "Jun 1, 2015 10:07:14 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -86,13 +86,13 @@
         },
         "tableHide": false,
         "title": true,
-        "editorHide": true
+        "editorHide": false
       },
       "settings": {
         "params": {
-          "Performer": "Janet Jackson",
-          "Title": "",
-          "Year": "[1970 TO 1990]"
+          "Performer": "Jackson",
+          "Title": "Extra",
+          "Year": "[1980 TO 1991]"
         },
         "forms": {
           "Performer": {
@@ -123,8 +123,8 @@
         "msg": ""
       },
       "dateCreated": "May 20, 2015 4:27:51 PM",
-      "dateStarted": "May 25, 2015 9:04:47 AM",
-      "dateFinished": "May 25, 2015 9:04:48 AM",
+      "dateStarted": "May 28, 2015 4:37:41 PM",
+      "dateFinished": "May 28, 2015 4:37:41 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -173,11 +173,110 @@
       "result": {
         "code": "SUCCESS",
         "type": "TABLE",
-        "msg": "Performer\tTitle\tYear\n1982\tJanet Jackson\tJanet Jackson\n1982\tJanet Jackson\tSay You Do\n1983\tJanet Jackson\tDon\u0027t Mess Up This Good Thing\n1984\tJanet Jackson\tTwo to the Power of Love\n1985\tJanet Jackson\tStart Anew\n"
+        "msg": "Performer\n"
       },
       "dateCreated": "May 20, 2015 5:40:51 PM",
-      "dateStarted": "May 25, 2015 9:04:50 AM",
-      "dateFinished": "May 25, 2015 9:04:52 AM",
+      "dateStarted": "Jun 1, 2015 10:07:15 PM",
+      "dateFinished": "Jun 1, 2015 10:07:16 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Solr Counting via cQL",
+      "text": "CassandraConnector(sc.getConf).withSessionDo { \n    session \u003d\u003e {\n        println(session.execute(s\"\"\"\n        SELECT * \n        FROM spark_demo.performers \n        WHERE solr_query\u003d\u0027{\"q\":\"name:*\",\"facet\":{\"query\":\"country:USA AND styles:*Rock*\"}}\u0027\n        \"\"\").\n        one().\n        getString(\"facet_queries\"))\n    }\n}    ",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "title": true,
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432136732180_-974160468",
+      "id": "20150520-174532_376890182",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "{\"country:USA AND styles:*Rock*\":1321}\n"
+      },
+      "dateCreated": "May 20, 2015 5:45:32 PM",
+      "dateStarted": "Jun 1, 2015 10:21:42 PM",
+      "dateFinished": "Jun 1, 2015 10:21:43 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Solr Facetting via CQL",
+      "text": "CassandraConnector(sc.getConf).withSessionDo { \n    session \u003d\u003e {\n        sc.parallelize(session.execute(s\"\"\"\n            SELECT * \n            FROM spark_demo.performers \n            WHERE solr_query\u003d\u0027{\"q\":\"*\",\"facet\":{\"field\":\"country\"}}\u0027\n            \"\"\").\n            //Technical code for display, don\u0027t look\n            one().\n            getString(\"facet_fields\").\n            replaceAll(\"\"\"\\{\"country\":\\{\"\"\",\"\").\n            replaceAll(\"\"\"\\}\\}\"\"\",\"\").\n            split(\",\").\n            toSeq.\n            map(keyValue \u003d\u003e {\n                val pair \u003d keyValue.split(\":\").toSeq\n                (pair(0).replaceAll(\"\"\"\"\"\"\",\"\"),pair(1))\n                } \n            ).\n            filter{case(country,_) \u003d\u003e country!\u003d\"Unknown\"}.\n            filter{case(_,count) \u003d\u003e count.toInt \u003e\u003d z.input(\"Low Threshold\",\"100\").asInstanceOf[String].toInt}\n        ).\n        displayAsTable(\"Country\",\"Count\")\n    }\n}",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "multiBarChart",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "Country",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "Count",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "Country",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "Count",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "title": true
+      },
+      "settings": {
+        "params": {
+          "Low Threshold": "100"
+        },
+        "forms": {
+          "Low Threshold": {
+            "name": "Low Threshold",
+            "displayName": "Low Threshold",
+            "defaultValue": "100",
+            "hidden": false
+          }
+        }
+      },
+      "jobName": "paragraph_1433190102899_-1831046649",
+      "id": "20150601-222142_2094408376",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "Country\tCount\nUSA\t5470\nUnited Kingdom\t2409\nGermany\t691\nSweden\t559\nCanada\t551\nJapan\t490\nFrance\t413\nFinland\t324\nItaly\t266\nNorway\t257\nJamaica\t253\nAustralia\t233\nPoland\t201\nSpain\t185\nBrazil\t160\nNetherlands\t153\nTurkey\t124\nBelgium\t115\n"
+      },
+      "dateCreated": "Jun 1, 2015 10:21:42 PM",
+      "dateStarted": "Jun 1, 2015 10:45:54 PM",
+      "dateFinished": "Jun 1, 2015 10:45:55 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -187,9 +286,9 @@
         "params": {},
         "forms": {}
       },
-      "jobName": "paragraph_1432136732180_-974160468",
-      "id": "20150520-174532_376890182",
-      "dateCreated": "May 20, 2015 5:45:32 PM",
+      "jobName": "paragraph_1433190867232_997742757",
+      "id": "20150601-223427_1340439137",
+      "dateCreated": "Jun 1, 2015 10:34:27 PM",
       "status": "READY",
       "progressUpdateIntervalMs": 500
     }

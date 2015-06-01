@@ -1,0 +1,145 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n\nSetting up a Spark Config\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\n```scala\nval conf \u003d new SparkConf(true)\n            .setAppName(\"demo\")\n            .setMaster(\"local[4]\") // Running locally using 4 threads    \n\nval sc \u003d new SparkContext(conf) // the Spark context is the root of EVERYTHING            \n```",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1433186738886_-970330469",
+      "id": "20150601-212538_1654118648",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch1\u003eSetting up a Spark Config\u003c/h1\u003e\n\u003cpre\u003e\u003ccode class\u003d\"scala\"\u003eval conf \u003d new SparkConf(true)\n            .setAppName(\"demo\")\n            .setMaster(\"local[4]\") // Running locally using 4 threads    \n\nval sc \u003d new SparkContext(conf) // the Spark context is the root of EVERYTHING            \n\u003c/code\u003e\u003c/pre\u003e\n"
+      },
+      "dateCreated": "Jun 1, 2015 9:25:38 PM",
+      "dateStarted": "Jun 1, 2015 9:27:50 PM",
+      "dateFinished": "Jun 1, 2015 9:27:52 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Counting users by their age",
+      "text": "import org.apache.spark.rdd.RDD\nimport org.apache.spark.SparkContext._\n\nval users \u003d List((\"jdoe\",\"John DOE\",32),(\"hsue\",\"Helen SUE\",27),(\"rsmith\",\"Richard SMITH\",45))\n\nval people:RDD[(String,String,Int)] \u003d sc.parallelize(users)\n\nval extractAge:RDD[(Int, String)] \u003d people.map{ case(login,name,age) \u003d\u003e (age,login) }\n\nval groupByAge:RDD[(Int, Iterable[String])] \u003d extractAge.groupByKey()\n\nval countByAge:scala.collection.Map[Int, Long] \u003d groupByAge.countByKey()",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "title": true,
+        "editorHide": false,
+        "tableHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1433061427299_-1941377737",
+      "id": "20150531-103707_1804141294",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.apache.spark.rdd.RDD\nimport org.apache.spark.SparkContext._\nusers: List[(String, String, Int)] \u003d List((jdoe,John DOE,32), (hsue,Helen SUE,27), (rsmith,Richard SMITH,45))\npeople: org.apache.spark.rdd.RDD[(String, String, Int)] \u003d ParallelCollectionRDD[18] at parallelize at \u003cconsole\u003e:53\nextractAge: org.apache.spark.rdd.RDD[(Int, String)] \u003d MappedRDD[19] at map at \u003cconsole\u003e:55\ngroupByAge: org.apache.spark.rdd.RDD[(Int, Iterable[String])] \u003d ShuffledRDD[20] at groupByKey at \u003cconsole\u003e:57\ncountByAge: scala.collection.Map[Int,Long] \u003d Map(32 -\u003e 1, 45 -\u003e 1, 27 -\u003e 1)\n"
+      },
+      "dateCreated": "May 31, 2015 10:37:07 AM",
+      "dateStarted": "Jun 1, 2015 9:47:01 PM",
+      "dateFinished": "Jun 1, 2015 9:47:05 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "sc.parallelize(countByAge.toList).displayAsTable(\"Age\",\"Users Count\")",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "Age",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "Users Count",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "Age",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "Users Count",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1433061477920_55545676",
+      "id": "20150531-103757_1090372412",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "Age\tUsers Count\n32\t1\n45\t1\n27\t1\n"
+      },
+      "dateCreated": "May 31, 2015 10:37:57 AM",
+      "dateStarted": "Jun 1, 2015 9:48:03 PM",
+      "dateFinished": "Jun 1, 2015 9:48:03 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1433061506434_13839553",
+      "id": "20150531-103826_2138031601",
+      "dateCreated": "May 31, 2015 10:38:26 AM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "00 - Spark Code Example",
+  "id": "2ARN2TR4Y",
+  "angularObjects": {},
+  "config": {
+    "looknfeel": "default"
+  },
+  "info": {}
+}

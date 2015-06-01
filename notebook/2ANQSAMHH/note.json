@@ -34,7 +34,7 @@
     },
     {
       "title": "Starting a SparkContext",
-      "text": "%md\n\n**To write data to Cassandra, you need to**:\n\u003cbr/\u003e\n\n1. import com.datastax.spark.connector._ (lot of Scala implicits inside)\n2. Create a SparkConfig and a SparkContext\n\n```scala\n\nval conf \u003d new SparkConf(true)\n    .setAppName(\"write_csv_to_cassandra\")\n    .setMaster(\"local\")\n    .set(\"spark.cassandra.connection.host\", \"localhost\")\n\nval sc \u003d new SparkContext(conf)\n```\n\nThe table structure is\n\n```sql\n    CREATE TABLE spark.us_unemploymen_stats (\n      year int PRIMARY KEY,\n      civil_non_institutional_count int,\n      civil_labor_count int,\n      labor_population_percentage double,\n      employed_count int,\n      employed_percentage double,\n      agriculture_part_count int,\n      non_agriculture_part_count int,\n      unemployed_count int,\n      unemployed_percentage_to_labor double,\n      not_labor_count int,\n      footnotes text);\n\n```",
+      "text": "%md\n\n**To write data to Cassandra, you need to**:\n\u003cbr/\u003e\n\n1. import com.datastax.spark.connector._ (lot of Scala implicits inside)\n2. Create a SparkConfig and a SparkContext\n\n```scala\n\nval conf \u003d new SparkConf(true)\n    .setAppName(\"write_csv_to_cassandra\")\n    .setMaster(\"local\")\n    .set(\"spark.cassandra.connection.host\", \"localhost\") // Specify where is located your Cassandra cluster\n\nval sc \u003d new SparkContext(conf)\n```\n\nThe table structure is\n\n```sql\n    CREATE TABLE spark.us_unemploymen_stats (\n      year int PRIMARY KEY,\n      civil_non_institutional_count int,\n      civil_labor_count int,\n      labor_population_percentage double,\n      employed_count int,\n      employed_percentage double,\n      agriculture_part_count int,\n      non_agriculture_part_count int,\n      unemployed_count int,\n      unemployed_percentage_to_labor double,\n      not_labor_count int,\n      footnotes text);\n\n```",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -59,17 +59,17 @@
       "result": {
         "code": "SUCCESS",
         "type": "HTML",
-        "msg": "\u003cp\u003e\u003cstrong\u003eTo write data to Cassandra, you need to\u003c/strong\u003e:\n\u003cbr  /\u003e\u003cbr /\u003e\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eimport com.datastax.spark.connector._ (lot of Scala implicits inside)\u003c/li\u003e\n\u003cli\u003eCreate a SparkConfig and a SparkContext\u003c/li\u003e\n\u003c/ol\u003e\n\u003cpre\u003e\u003ccode class\u003d\"scala\"\u003eval conf \u003d new SparkConf(true)\n    .setAppName(\"write_csv_to_cassandra\")\n    .setMaster(\"local\")\n    .set(\"spark.cassandra.connection.host\", \"localhost\")\n\nval sc \u003d new SparkContext(conf)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eThe table structure is\u003c/p\u003e\n\u003cpre\u003e\u003ccode class\u003d\"sql\"\u003e    CREATE TABLE spark.us_unemploymen_stats (\n      year int PRIMARY KEY,\n      civil_non_institutional_count int,\n      civil_labor_count int,\n      labor_population_percentage double,\n      employed_count int,\n      employed_percentage double,\n      agriculture_part_count int,\n      non_agriculture_part_count int,\n      unemployed_count int,\n      unemployed_percentage_to_labor double,\n      not_labor_count int,\n      footnotes text);\n\u003c/code\u003e\u003c/pre\u003e\n"
+        "msg": "\u003cp\u003e\u003cstrong\u003eTo write data to Cassandra, you need to\u003c/strong\u003e:\n\u003cbr  /\u003e\u003cbr /\u003e\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eimport com.datastax.spark.connector._ (lot of Scala implicits inside)\u003c/li\u003e\n\u003cli\u003eCreate a SparkConfig and a SparkContext\u003c/li\u003e\n\u003c/ol\u003e\n\u003cpre\u003e\u003ccode class\u003d\"scala\"\u003eval conf \u003d new SparkConf(true)\n    .setAppName(\"write_csv_to_cassandra\")\n    .setMaster(\"local\")\n    .set(\"spark.cassandra.connection.host\", \"localhost\") // Specify where is located your Cassandra cluster\n\nval sc \u003d new SparkContext(conf)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eThe table structure is\u003c/p\u003e\n\u003cpre\u003e\u003ccode class\u003d\"sql\"\u003e    CREATE TABLE spark.us_unemploymen_stats (\n      year int PRIMARY KEY,\n      civil_non_institutional_count int,\n      civil_labor_count int,\n      labor_population_percentage double,\n      employed_count int,\n      employed_percentage double,\n      agriculture_part_count int,\n      non_agriculture_part_count int,\n      unemployed_count int,\n      unemployed_percentage_to_labor double,\n      not_labor_count int,\n      footnotes text);\n\u003c/code\u003e\u003c/pre\u003e\n"
       },
       "dateCreated": "May 20, 2015 1:31:22 PM",
-      "dateStarted": "May 20, 2015 1:41:40 PM",
-      "dateFinished": "May 20, 2015 1:41:40 PM",
+      "dateStarted": "Jun 1, 2015 9:55:42 PM",
+      "dateFinished": "Jun 1, 2015 9:55:42 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Reset Table",
-      "text": "import com.datastax.spark.connector.cql.CassandraConnector\nCassandraConnector(sc.getConf).withSessionDo { session \u003d\u003e session.execute(\"Truncate spark_demo.us_unemployment_stats\")}",
+      "text": "import com.datastax.spark.connector.cql.CassandraConnector\nimport com.datastax.spark.connector._\nCassandraConnector(sc.getConf).withSessionDo { session \u003d\u003e session.execute(\"Truncate spark_demo.us_unemployment_stats\")}",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -94,11 +94,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "import com.datastax.spark.connector.cql.CassandraConnector\nres137: com.datastax.driver.core.ResultSet \u003d ResultSet[ exhausted: true, Columns[]]\n"
+        "msg": "import com.datastax.spark.connector.cql.CassandraConnector\nimport com.datastax.spark.connector._\nres58: com.datastax.driver.core.ResultSet \u003d ResultSet[ exhausted: true, Columns[]]\n"
       },
       "dateCreated": "May 20, 2015 1:37:32 PM",
-      "dateStarted": "May 25, 2015 8:54:49 AM",
-      "dateFinished": "May 25, 2015 8:54:50 AM",
+      "dateStarted": "Jun 1, 2015 9:59:35 PM",
+      "dateFinished": "Jun 1, 2015 9:59:37 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -164,11 +164,57 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "import org.apache.spark.rdd.RDD\ndefined class UsUnemployment\nCSV: String \u003d /tmp/spark_cassandra_demo/us_unemployment.csv\ncaseClassRDD: org.apache.spark.rdd.RDD[UsUnemployment] \u003d MappedRDD[116] at map at \u003cconsole\u003e:103\n"
+        "msg": "import org.apache.spark.rdd.RDD\ndefined class UsUnemployment\nCSV: String \u003d /tmp/spark_cassandra_demo/us_unemployment.csv\ncaseClassRDD: org.apache.spark.rdd.RDD[UsUnemployment] \u003d MappedRDD[31] at map at \u003cconsole\u003e:65\n"
       },
       "dateCreated": "May 20, 2015 1:37:37 PM",
-      "dateStarted": "May 25, 2015 8:52:03 AM",
-      "dateFinished": "May 25, 2015 8:52:08 AM",
+      "dateStarted": "Jun 1, 2015 9:58:22 PM",
+      "dateFinished": "Jun 1, 2015 9:58:28 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "USA unemployment by year",
+      "text": "sc.cassandraTable(\"spark_demo\",\"us_unemployment_stats\").\n    select(\"year\",\"unemployed_percentage_to_labor\").\n    as((_:Int,_:Double)).\n    sortBy(tuple \u003d\u003e tuple._1,true,1).\n    displayAsTable(\"Year\",\"Unemployment %\")",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "Year",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "Year",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "editorHide": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432125066922_502404440",
+      "id": "20150520-143106_434871993",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "Year\n"
+      },
+      "dateCreated": "May 20, 2015 2:31:06 PM",
+      "dateStarted": "Jun 1, 2015 9:59:39 PM",
+      "dateFinished": "Jun 1, 2015 9:59:40 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -178,9 +224,9 @@
         "params": {},
         "forms": {}
       },
-      "jobName": "paragraph_1432125066922_502404440",
-      "id": "20150520-143106_434871993",
-      "dateCreated": "May 20, 2015 2:31:06 PM",
+      "jobName": "paragraph_1433188655759_-860533658",
+      "id": "20150601-215735_1939471274",
+      "dateCreated": "Jun 1, 2015 9:57:35 PM",
       "status": "READY",
       "progressUpdateIntervalMs": 500
     }

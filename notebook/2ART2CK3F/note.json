@@ -92,11 +92,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "data: org.apache.spark.rdd.RDD[(Int, Double)] \u003d ParallelCollectionRDD[143] at parallelize at \u003cconsole\u003e:105\n"
+        "msg": "data: org.apache.spark.rdd.RDD[(Int, Double)] \u003d ParallelCollectionRDD[59] at parallelize at \u003cconsole\u003e:61\n"
       },
       "dateCreated": "May 20, 2015 2:45:38 PM",
-      "dateStarted": "May 25, 2015 8:54:38 AM",
-      "dateFinished": "May 25, 2015 8:54:39 AM",
+      "dateStarted": "Jun 1, 2015 10:00:22 PM",
+      "dateFinished": "Jun 1, 2015 10:00:23 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -197,11 +197,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "import org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\ncc: org.apache.spark.sql.cassandra.CassandraSQLContext \u003d org.apache.spark.sql.cassandra.CassandraSQLContext@11905e1e\nrow: org.apache.spark.sql.SchemaRDD \u003d \nSchemaRDD[127] at RDD at SchemaRDD.scala:108\n\u003d\u003d Query Plan \u003d\u003d\n\u003d\u003d Physical Plan \u003d\u003d\nSort [year#24 DESC], true\n Exchange (RangePartitioning [year#24 DESC], 200)\n  Filter (unemployed_percentage_to_labor#35 \u003e 8.0)\n   CassandraTableScan [year#24,unemployed_percentage_to_labor#35], (CassandraRelation TableDef(spark_demo,us_unemployment_stats,ArrayBuffer(ColumnDef(year,PartitionKeyColumn,IntType,false)),ArrayBuffer(),ArrayBuffer(ColumnDef(agriculture_part_count,RegularColumn,IntType,false), ColumnDef(civil_labor_count,RegularColumn,IntType,false), ColumnDef(civil_non_institutional_count,RegularColumn,IntType,false), ColumnDef(employed_count,RegularColumn,IntType,false), ColumnDef(employed_percentage,RegularColumn,DoubleType,false), ColumnDef(footnotes,Regu...data: org.apache.spark.rdd.RDD[(Int, Double)] \u003d MappedRDD[142] at map at \u003cconsole\u003e:113\n"
+        "msg": "import org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\ncc: org.apache.spark.sql.cassandra.CassandraSQLContext \u003d org.apache.spark.sql.cassandra.CassandraSQLContext@1dd8fe7a\nrow: org.apache.spark.sql.SchemaRDD \u003d \nSchemaRDD[60] at RDD at SchemaRDD.scala:108\n\u003d\u003d Query Plan \u003d\u003d\n\u003d\u003d Physical Plan \u003d\u003d\nSort [year#12 DESC], true\n Exchange (RangePartitioning [year#12 DESC], 200)\n  Filter (unemployed_percentage_to_labor#23 \u003e 8.0)\n   CassandraTableScan [year#12,unemployed_percentage_to_labor#23], (CassandraRelation TableDef(spark_demo,us_unemployment_stats,ArrayBuffer(ColumnDef(year,PartitionKeyColumn,IntType,false)),ArrayBuffer(),ArrayBuffer(ColumnDef(agriculture_part_count,RegularColumn,IntType,false), ColumnDef(civil_labor_count,RegularColumn,IntType,false), ColumnDef(civil_non_institutional_count,RegularColumn,IntType,false), ColumnDef(employed_count,RegularColumn,IntType,false), ColumnDef(employed_percentage,RegularColumn,DoubleType,false), ColumnDef(footnotes,Regul...data: org.apache.spark.rdd.RDD[(Int, Double)] \u003d MappedRDD[73] at map at \u003cconsole\u003e:71\n"
       },
       "dateCreated": "May 20, 2015 2:51:20 PM",
-      "dateStarted": "May 25, 2015 8:54:16 AM",
-      "dateFinished": "May 25, 2015 8:54:21 AM",
+      "dateStarted": "Jun 1, 2015 10:00:28 PM",
+      "dateFinished": "Jun 1, 2015 10:00:33 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -220,13 +220,7 @@
               "aggr": "sum"
             }
           ],
-          "values": [
-            {
-              "name": "Unemployment Percentage",
-              "index": 1.0,
-              "aggr": "sum"
-            }
-          ],
+          "values": [],
           "groups": [],
           "scatter": {
             "xAxis": {
@@ -250,8 +244,8 @@
         "msg": "Year\n"
       },
       "dateCreated": "May 20, 2015 2:38:09 PM",
-      "dateStarted": "May 25, 2015 8:54:41 AM",
-      "dateFinished": "May 25, 2015 8:54:42 AM",
+      "dateStarted": "Jun 1, 2015 10:00:34 PM",
+      "dateFinished": "Jun 1, 2015 10:00:35 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
