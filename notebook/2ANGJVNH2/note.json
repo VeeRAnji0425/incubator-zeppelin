@@ -34,7 +34,7 @@
     },
     {
       "title": "Prepare data",
-      "text": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\nimport scala.collection.JavaConversions._\n\nvar data:RDD[(Int,String,String)] \u003d sc.parallelize(Nil)\nval cc \u003d new CassandraSQLContext(sc)\n\nvar musicStyles:List[(String,String)] \u003d Nil \nvar countries:List[(String,String)] \u003d Nil \n\nCassandraConnector(sc.getConf).withSessionDo { \n    session \u003d\u003e {\n        musicStyles \u003d session.execute(\"SELECT style FROM spark_demo.performers_distribution_by_style\").\n            all().\n            toList.\n            map(row \u003d\u003e row.getString(\"style\")).\n            toSet.\n            toList.\n            sorted.\n            map(style \u003d\u003e (style,style))\n            \n        countries \u003d session.execute(\"SELECT DISTINCT name FROM spark_demo.countries\").\n            all().\n            toList.\n            map(row \u003d\u003e row.getString(\"name\")).\n            toSet.\n            toList.\n            sorted.\n            map(country \u003d\u003e (country,country))    \n    }\n}\n",
+      "text": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\nimport scala.collection.JavaConversions._\n\nval cc \u003d new CassandraSQLContext(sc)\n\nvar musicStyles:List[(String,String)] \u003d Nil \nvar countries:List[(String,String)] \u003d Nil \n\nCassandraConnector(sc.getConf).withSessionDo { \n    session \u003d\u003e {\n        musicStyles \u003d session.execute(\"SELECT style FROM spark_demo.performers_distribution_by_style\").\n            all().\n            toList.\n            map(row \u003d\u003e row.getString(\"style\")).\n            toSet.\n            toList.\n            sorted.\n            map(style \u003d\u003e (style,style))\n            \n        countries \u003d session.execute(\"SELECT DISTINCT name FROM spark_demo.countries\").\n            all().\n            toList.\n            map(row \u003d\u003e row.getString(\"name\")).\n            toSet.\n            toList.\n            sorted.\n            map(country \u003d\u003e (country,country))    \n    }\n}\n",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -59,27 +59,45 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\nimport scala.collection.JavaConversions._\ndata: org.apache.spark.rdd.RDD[(Int, String, String)] \u003d ParallelCollectionRDD[76] at parallelize at \u003cconsole\u003e:63\ncc: org.apache.spark.sql.cassandra.CassandraSQLContext \u003d org.apache.spark.sql.cassandra.CassandraSQLContext@a642a60\nmusicStyles: List[(String, String)] \u003d List()\ncountries: List[(String, String)] \u003d List()\n"
+        "msg": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\nimport scala.collection.JavaConversions._\ncc: org.apache.spark.sql.cassandra.CassandraSQLContext \u003d org.apache.spark.sql.cassandra.CassandraSQLContext@7a191ab1\nmusicStyles: List[(String, String)] \u003d List()\ncountries: List[(String, String)] \u003d List()\n"
       },
       "dateCreated": "May 24, 2015 6:01:45 PM",
-      "dateStarted": "May 28, 2015 4:37:59 PM",
-      "dateFinished": "May 28, 2015 4:38:03 PM",
+      "dateStarted": "Jun 2, 2015 10:09:07 PM",
+      "dateFinished": "Jun 2, 2015 10:09:11 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "restrict with solr then aggregate with spark",
-      "text": "//List all albums release of American artists having style Rock after 2010\ndata \u003d cc.cassandraSql(\n     s\"\"\"\n        SELECT a.year,a.performer,a.title\n        FROM spark_demo.albums a\n        JOIN spark_demo.performers p\n        ON a.performer \u003d p.name\n        WHERE a.solr_query\u003d\u0027year:${z.input(\"Album Year\",\"[2010 TO *]\")}\u0027 \n        AND p.solr_query\u003d\u0027country:\"${z.select(\"Artist Country\",\"USA\",countries)}\" AND styles:*${z.select(\"Artist Style\",\"Rock\",musicStyles)}*\u0027\n      \"\"\".stripMargin).\n    map(row \u003d\u003e (row.getInt(0),row.getString(1),row.getString(2))).\n    sortBy(tuple \u003d\u003e (tuple._1,tuple._2,tuple._3))",
+      "text": "//List all albums release of American artists having style Rock after 2010\ncc.cassandraSql(s\"\"\"\n    SELECT a.year,a.performer,a.title\n    FROM spark_demo.albums a\n    JOIN spark_demo.performers p\n    ON a.performer \u003d p.name\n    WHERE a.solr_query\u003d\u0027year:${z.input(\"Album Year\",\"[2010 TO *]\")}\u0027 \n    AND p.solr_query\u003d\u0027country:\"${z.select(\"Artist Country\",\"USA\",countries)}\" AND styles:*${z.select(\"Artist Style\",\"Rock\",musicStyles)}*\u0027\n\"\"\".stripMargin).\nmap(row \u003d\u003e (row.getInt(0),row.getString(1),row.getString(2))).\nsortBy(tuple \u003d\u003e (tuple._1,tuple._2,tuple._3)).\ndisplayAsTable(\"Year\",\"Performer\",\"Title\")",
       "config": {
         "colWidth": 12.0,
         "graph": {
           "mode": "table",
           "height": 300.0,
           "optionOpen": false,
-          "keys": [],
-          "values": [],
+          "keys": [
+            {
+              "name": "Year",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "Performer",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
           "groups": [],
-          "scatter": {}
+          "scatter": {
+            "xAxis": {
+              "name": "Year",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          }
         },
         "title": true,
         "tableHide": false,
@@ -798,65 +816,12 @@
       "id": "20150520-175037_1545340445",
       "result": {
         "code": "SUCCESS",
-        "type": "TEXT",
-        "msg": "data: org.apache.spark.rdd.RDD[(Int, String, String)] \u003d MappedRDD[66] at sortBy at \u003cconsole\u003e:59\n"
+        "type": "TABLE",
+        "msg": "Year\n"
       },
       "dateCreated": "May 20, 2015 5:50:37 PM",
-      "dateStarted": "May 28, 2015 3:11:17 PM",
-      "dateFinished": "May 28, 2015 3:11:20 PM",
-      "status": "FINISHED",
-      "progressUpdateIntervalMs": 500
-    },
-    {
-      "title": "display results",
-      "text": "data.displayAsTable(\"Year\",\"Performer\",\"Title\")",
-      "config": {
-        "colWidth": 12.0,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [
-            {
-              "name": "Year",
-              "index": 0.0,
-              "aggr": "sum"
-            }
-          ],
-          "values": [
-            {
-              "name": "Performer",
-              "index": 1.0,
-              "aggr": "sum"
-            }
-          ],
-          "groups": [],
-          "scatter": {
-            "xAxis": {
-              "name": "Year",
-              "index": 0.0,
-              "aggr": "sum"
-            }
-          }
-        },
-        "title": true,
-        "editorHide": true,
-        "tableHide": false
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "jobName": "paragraph_1432137432270_1269908011",
-      "id": "20150520-175712_983682397",
-      "result": {
-        "code": "SUCCESS",
-        "type": "TABLE",
-        "msg": "Year\tPerformer\tTitle\n2010\tThe Dø\tDust It Off\n2011\tDJ Mehdi\tDJ Mehdi : Naissance d\u0027un prince\n2011\tThe Dø\tGonna Be Sick!\n2012\tEmily Loizeau\tMothers \u0026 Tygers\n2012\tWax Tailor\tDusty Rainbow From the Dark\n2013\tColleen\tThe Weighing of the Heart\n2014\tThe Dø\tKeep Your Lips Sealed\n2014\tThe Dø\tShake Shook Shaken\n2015\tSoKo\tMy Dreams Dictate My Reality\n2015\tSoKo\tWho Wears The Pants??\n"
-      },
-      "dateCreated": "May 20, 2015 5:57:12 PM",
-      "dateStarted": "May 28, 2015 3:11:24 PM",
-      "dateFinished": "May 28, 2015 3:11:26 PM",
+      "dateStarted": "Jun 2, 2015 10:09:57 PM",
+      "dateFinished": "Jun 2, 2015 10:10:00 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -890,8 +855,8 @@
         "msg": "\u003ch1\u003eThis Spark/Cassandra/Solr combo is so \u0026hellip;\u003c/h1\u003e\n\u003cp\u003e\u003cimg src\u003d\"http://www.reactiongifs.com/r/2013/10/tim-and-eric-mind-blown.gif\" alt\u003d\"Mind Blowing!\" title\u003d\"Mind Blowing\" /\u003e\u003c/p\u003e\n"
       },
       "dateCreated": "May 20, 2015 5:50:20 PM",
-      "dateStarted": "May 25, 2015 9:12:38 AM",
-      "dateFinished": "May 25, 2015 9:12:38 AM",
+      "dateStarted": "Jun 2, 2015 10:10:14 PM",
+      "dateFinished": "Jun 2, 2015 10:10:15 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },

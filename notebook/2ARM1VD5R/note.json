@@ -34,8 +34,8 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "title": "Reset data",
-      "text": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\n\nvar rows:RDD[(String,String,Long)] \u003d sc.parallelize(Nil)\n\nval cc \u003d new CassandraSQLContext(sc)\n\ndef computeDecade(year:Int):String \u003d {\n    s\"${(year/10)*10}-${((year/10)+1)*10}\"\n}\n\ncc.registerFunction(\"computeDecade\", computeDecade _)",
+      "title": "prepare data",
+      "text": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\n\nval cc \u003d new CassandraSQLContext(sc)\n\ndef computeDecade(year:Int):String \u003d {\n    s\"${(year/10)*10}-${((year/10)+1)*10}\"\n}\n\ncc.registerFunction(\"computeDecade\", computeDecade _)",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -48,7 +48,7 @@
           "scatter": {}
         },
         "title": true,
-        "editorHide": true,
+        "editorHide": false,
         "tableHide": true
       },
       "settings": {
@@ -60,27 +60,50 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\nrows: org.apache.spark.rdd.RDD[(String, String, Long)] \u003d ParallelCollectionRDD[85] at parallelize at \u003cconsole\u003e:85\ncc: org.apache.spark.sql.cassandra.CassandraSQLContext \u003d org.apache.spark.sql.cassandra.CassandraSQLContext@2c45f17c\ncomputeDecade: (year: Int)String\n"
+        "msg": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\ncc: org.apache.spark.sql.cassandra.CassandraSQLContext \u003d org.apache.spark.sql.cassandra.CassandraSQLContext@7601f5d5\ncomputeDecade: (year: Int)String\n"
       },
       "dateCreated": "May 24, 2015 5:40:39 PM",
-      "dateStarted": "Jun 1, 2015 10:06:20 PM",
-      "dateFinished": "Jun 1, 2015 10:06:24 PM",
+      "dateStarted": "Jun 2, 2015 10:21:17 PM",
+      "dateFinished": "Jun 2, 2015 10:21:19 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "title": "Compute Data",
-      "text": "rows \u003d cc.cassandraSql(s\"\"\"\n        SELECT computeDecade(a.year),p.country,count(a.title)\n        FROM spark_demo.performers p JOIN spark_demo.albums a\n        ON p.name \u003d a.performer\n        WHERE p.country is not null\n        AND p.country !\u003d \u0027Unknown\u0027\n        AND a.year \u003e\u003d 1900\n        GROUP BY computeDecade(a.year),p.country\n        HAVING count(a.title) \u003e ${z.input(\"Albums Count Threshold\",\"250\")}\n      \"\"\".stripMargin).\n    map(row \u003d\u003e (row.getString(0),row.getString(1),row.getLong(2))).\n    sortBy[String](tuple \u003d\u003e tuple._1,true,1)\n",
+      "title": "Albums Release By Decade",
+      "text": "cc.cassandraSql(s\"\"\"\n    SELECT computeDecade(a.year),p.country,count(a.title)\n    FROM spark_demo.performers p JOIN spark_demo.albums a\n    ON p.name \u003d a.performer\n    WHERE p.country is not null\n    AND p.country !\u003d \u0027Unknown\u0027\n    AND a.year \u003e\u003d 1900\n    GROUP BY computeDecade(a.year),p.country\n    HAVING count(a.title) \u003e ${z.input(\"Albums Count Threshold\",\"99999\")}\n\"\"\".stripMargin).\nmap(row \u003d\u003e (row.getString(0),row.getString(1),row.getLong(2))).\nsortBy[String](tuple \u003d\u003e tuple._1,true,1).\ndisplayAsTable(\"Decade\",\"Country\",\"Count\")\n",
       "config": {
         "colWidth": 12.0,
         "graph": {
           "mode": "table",
           "height": 300.0,
           "optionOpen": false,
-          "keys": [],
-          "values": [],
+          "keys": [
+            {
+              "name": "Decade",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "Country",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
           "groups": [],
-          "scatter": {}
+          "scatter": {
+            "xAxis": {
+              "name": "Decade",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "Country",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
         },
         "editorHide": false,
         "tableHide": false,
@@ -89,13 +112,13 @@
       "settings": {
         "params": {
           "countThreshold": "1000",
-          "Albums Count Threshold": "500"
+          "Albums Count Threshold": "99999"
         },
         "forms": {
           "Albums Count Threshold": {
             "name": "Albums Count Threshold",
             "displayName": "Albums Count Threshold",
-            "defaultValue": "250",
+            "defaultValue": "99999",
             "hidden": false
           }
         }
@@ -104,12 +127,12 @@
       "id": "20150518-220327_1132207280",
       "result": {
         "code": "SUCCESS",
-        "type": "TEXT",
-        "msg": "rows: org.apache.spark.rdd.RDD[(String, String, Long)] \u003d MappedRDD[50] at sortBy at \u003cconsole\u003e:63\n"
+        "type": "TABLE",
+        "msg": "Decade\n"
       },
       "dateCreated": "May 18, 2015 10:03:27 PM",
-      "dateStarted": "May 28, 2015 4:34:54 PM",
-      "dateFinished": "May 28, 2015 4:34:56 PM",
+      "dateStarted": "Jun 2, 2015 10:23:02 PM",
+      "dateFinished": "Jun 2, 2015 10:23:25 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -140,7 +163,7 @@
           }
         },
         "title": true,
-        "editorHide": true,
+        "editorHide": false,
         "tableHide": false
       },
       "settings": {

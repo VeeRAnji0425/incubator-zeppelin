@@ -33,8 +33,8 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "title": "Reset Search",
-      "text": "import com.datastax.spark.connector.cql.CassandraConnector\nimport com.datastax.driver.core.Row\nimport scala.collection.JavaConversions._\nimport org.apache.spark.rdd.RDD\n\ncase class Album(year:Int,performer: String, title: String)\n\nvar data:RDD[Album] \u003d sc.parallelize(Nil)\n",
+      "title": "scala Import",
+      "text": "import com.datastax.spark.connector.cql.CassandraConnector\nimport com.datastax.driver.core.Row\nimport scala.collection.JavaConversions._\nimport org.apache.spark.rdd.RDD",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -48,7 +48,7 @@
         },
         "title": true,
         "tableHide": true,
-        "editorHide": false
+        "editorHide": true
       },
       "settings": {
         "params": {
@@ -62,75 +62,17 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "import com.datastax.spark.connector.cql.CassandraConnector\nimport com.datastax.driver.core.Row\nimport scala.collection.JavaConversions._\nimport org.apache.spark.rdd.RDD\ndefined class Album\ndata: org.apache.spark.rdd.RDD[Album] \u003d ParallelCollectionRDD[86] at parallelize at \u003cconsole\u003e:93\n"
+        "msg": "import com.datastax.spark.connector.cql.CassandraConnector\nimport com.datastax.driver.core.Row\nimport scala.collection.JavaConversions._\nimport org.apache.spark.rdd.RDD\n"
       },
       "dateCreated": "May 24, 2015 5:23:34 PM",
-      "dateStarted": "Jun 1, 2015 10:07:10 PM",
-      "dateFinished": "Jun 1, 2015 10:07:14 PM",
+      "dateStarted": "Jun 2, 2015 10:05:36 PM",
+      "dateFinished": "Jun 2, 2015 10:05:38 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Solr in action",
-      "text": "\nCassandraConnector(sc.getConf).withSessionDo { \n    session \u003d\u003e {\n        data \u003d sc.parallelize(session.execute(s\"\"\"\n        SELECT year,performer,title \n        FROM spark_demo.albums \n        WHERE solr_query\u003d\u0027performer:\"*${z.input(\"Performer\",\"Jackson\")}*\" \n        AND title:\"*${z.input(\"Title\",\"\")}*\" \n        AND year:${z.input(\"Year\",\"\")}\u0027\n        \"\"\").\n        all().\n        toSeq.\n        map(row \u003d\u003e Album(row.getInt(\"year\"),row.getString(\"performer\"),row.getString(\"title\"))).\n        sortBy(bean \u003d\u003e (bean.year,bean.performer,bean.title)))\n    }\n}",
-      "config": {
-        "colWidth": 12.0,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {}
-        },
-        "tableHide": false,
-        "title": true,
-        "editorHide": false
-      },
-      "settings": {
-        "params": {
-          "Performer": "Jackson",
-          "Title": "Extra",
-          "Year": "[1980 TO 1991]"
-        },
-        "forms": {
-          "Performer": {
-            "name": "Performer",
-            "displayName": "Performer",
-            "defaultValue": "Jackson",
-            "hidden": false
-          },
-          "Title": {
-            "name": "Title",
-            "displayName": "Title",
-            "defaultValue": "",
-            "hidden": false
-          },
-          "Year": {
-            "name": "Year",
-            "displayName": "Year",
-            "defaultValue": "",
-            "hidden": false
-          }
-        }
-      },
-      "jobName": "paragraph_1432132071013_-936570723",
-      "id": "20150520-162751_335620342",
-      "result": {
-        "code": "SUCCESS",
-        "type": "TEXT",
-        "msg": ""
-      },
-      "dateCreated": "May 20, 2015 4:27:51 PM",
-      "dateStarted": "May 28, 2015 4:37:41 PM",
-      "dateFinished": "May 28, 2015 4:37:41 PM",
-      "status": "FINISHED",
-      "progressUpdateIntervalMs": 500
-    },
-    {
-      "title": "Search result",
-      "text": "data.displayAsTable(\"Performer\",\"Title\",\"Year\")",
+      "text": "CassandraConnector(sc.getConf).withSessionDo { \n    session \u003d\u003e {\n        session.execute(s\"\"\"\n        SELECT year,performer,title \n        FROM spark_demo.albums \n        WHERE solr_query\u003d\u0027performer:\"*${z.input(\"Performer\",\"Jackson\")}*\" \n        AND title:\"*${z.input(\"Title\",\"\")}*\" \n        AND year:${z.input(\"Year\",\"\")}\u0027\n        \"\"\").\n        all().\n        toSeq.\n        map(row \u003d\u003e (row.getInt(\"year\"),row.getString(\"performer\"),row.getString(\"title\"))).\n        sortBy{ case(year,performer,title)\u003d\u003e (year,performer,title)}.\n        displayAsTable(\"Performer\",\"Title\",\"Year\")\n    }\n}",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -160,24 +102,47 @@
             }
           }
         },
+        "tableHide": false,
         "title": true,
-        "editorHide": true,
-        "tableHide": false
+        "editorHide": false
       },
       "settings": {
-        "params": {},
-        "forms": {}
+        "params": {
+          "Performer": "Jackson",
+          "Title": "xxx",
+          "Year": "[1980 TO 1991]"
+        },
+        "forms": {
+          "Performer": {
+            "name": "Performer",
+            "displayName": "Performer",
+            "defaultValue": "Jackson",
+            "hidden": false
+          },
+          "Title": {
+            "name": "Title",
+            "displayName": "Title",
+            "defaultValue": "",
+            "hidden": false
+          },
+          "Year": {
+            "name": "Year",
+            "displayName": "Year",
+            "defaultValue": "",
+            "hidden": false
+          }
+        }
       },
-      "jobName": "paragraph_1432136451379_1389286687",
-      "id": "20150520-174051_670566005",
+      "jobName": "paragraph_1432132071013_-936570723",
+      "id": "20150520-162751_335620342",
       "result": {
         "code": "SUCCESS",
         "type": "TABLE",
         "msg": "Performer\n"
       },
-      "dateCreated": "May 20, 2015 5:40:51 PM",
-      "dateStarted": "Jun 1, 2015 10:07:15 PM",
-      "dateFinished": "Jun 1, 2015 10:07:16 PM",
+      "dateCreated": "May 20, 2015 4:27:51 PM",
+      "dateStarted": "Jun 2, 2015 10:07:49 PM",
+      "dateFinished": "Jun 2, 2015 10:07:49 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -210,18 +175,18 @@
         "msg": "{\"country:USA AND styles:*Rock*\":1321}\n"
       },
       "dateCreated": "May 20, 2015 5:45:32 PM",
-      "dateStarted": "Jun 1, 2015 10:21:42 PM",
-      "dateFinished": "Jun 1, 2015 10:21:43 PM",
+      "dateStarted": "Jun 2, 2015 10:06:04 PM",
+      "dateFinished": "Jun 2, 2015 10:06:05 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Solr Facetting via CQL",
-      "text": "CassandraConnector(sc.getConf).withSessionDo { \n    session \u003d\u003e {\n        sc.parallelize(session.execute(s\"\"\"\n            SELECT * \n            FROM spark_demo.performers \n            WHERE solr_query\u003d\u0027{\"q\":\"*\",\"facet\":{\"field\":\"country\"}}\u0027\n            \"\"\").\n            //Technical code for display, don\u0027t look\n            one().\n            getString(\"facet_fields\").\n            replaceAll(\"\"\"\\{\"country\":\\{\"\"\",\"\").\n            replaceAll(\"\"\"\\}\\}\"\"\",\"\").\n            split(\",\").\n            toSeq.\n            map(keyValue \u003d\u003e {\n                val pair \u003d keyValue.split(\":\").toSeq\n                (pair(0).replaceAll(\"\"\"\"\"\"\",\"\"),pair(1))\n                } \n            ).\n            filter{case(country,_) \u003d\u003e country!\u003d\"Unknown\"}.\n            filter{case(_,count) \u003d\u003e count.toInt \u003e\u003d z.input(\"Low Threshold\",\"100\").asInstanceOf[String].toInt}\n        ).\n        displayAsTable(\"Country\",\"Count\")\n    }\n}",
+      "text": "CassandraConnector(sc.getConf).withSessionDo { \n    session \u003d\u003e {\n        session.execute(s\"\"\"\n            SELECT * \n            FROM spark_demo.performers \n            WHERE solr_query\u003d\u0027{\"q\":\"*\",\"facet\":{\"field\":\"country\"}}\u0027\n            \"\"\").\n        //Technical code for display, don\u0027t look\n        one().\n        getString(\"facet_fields\").\n        replaceAll(\"\"\"\\{\"country\":\\{\"\"\",\"\").\n        replaceAll(\"\"\"\\}\\}\"\"\",\"\").\n        split(\",\").\n        toSeq.\n        map(keyValue \u003d\u003e {\n            val pair \u003d keyValue.split(\":\").toSeq\n            (pair(0).replaceAll(\"\"\"\"\"\"\",\"\"),pair(1))\n            } \n        ).\n        filter{case(country,_) \u003d\u003e country!\u003d\"Unknown\"}.\n        filter{case(_,count) \u003d\u003e count.toInt \u003e\u003d z.input(\"Low Threshold\",\"100\").asInstanceOf[String].toInt}.\n        displayAsTable(\"Country\",\"Count\")\n    }\n}",
       "config": {
         "colWidth": 12.0,
         "graph": {
-          "mode": "multiBarChart",
+          "mode": "table",
           "height": 300.0,
           "optionOpen": false,
           "keys": [
@@ -231,23 +196,12 @@
               "aggr": "sum"
             }
           ],
-          "values": [
-            {
-              "name": "Count",
-              "index": 1.0,
-              "aggr": "sum"
-            }
-          ],
+          "values": [],
           "groups": [],
           "scatter": {
             "xAxis": {
               "name": "Country",
               "index": 0.0,
-              "aggr": "sum"
-            },
-            "yAxis": {
-              "name": "Count",
-              "index": 1.0,
               "aggr": "sum"
             }
           }
@@ -256,7 +210,7 @@
       },
       "settings": {
         "params": {
-          "Low Threshold": "100"
+          "Low Threshold": "100000"
         },
         "forms": {
           "Low Threshold": {
@@ -272,11 +226,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TABLE",
-        "msg": "Country\tCount\nUSA\t5470\nUnited Kingdom\t2409\nGermany\t691\nSweden\t559\nCanada\t551\nJapan\t490\nFrance\t413\nFinland\t324\nItaly\t266\nNorway\t257\nJamaica\t253\nAustralia\t233\nPoland\t201\nSpain\t185\nBrazil\t160\nNetherlands\t153\nTurkey\t124\nBelgium\t115\n"
+        "msg": "Country\n"
       },
       "dateCreated": "Jun 1, 2015 10:21:42 PM",
-      "dateStarted": "Jun 1, 2015 10:45:54 PM",
-      "dateFinished": "Jun 1, 2015 10:45:55 PM",
+      "dateStarted": "Jun 2, 2015 10:23:46 PM",
+      "dateFinished": "Jun 2, 2015 10:23:47 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
