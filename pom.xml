@@ -87,7 +87,6 @@
     <module>zeppelin-interpreter</module>
     <module>zeppelin-zengine</module>
     <module>spark</module>
-    <module>spark-utils</module>
     <module>markdown</module>
     <module>angular</module>
     <module>shell</module>

@@ -34,7 +34,7 @@ class DisplayFunctions[T <: Product](val rdd: RDD[T]) {
       headers.append(columnLabels.take(maxColumnCount).mkString("\t")).append("\n")
     } else if (providedLabelCount < maxColumnCount) {
       val missingColumnHeaders = ((providedLabelCount+1) to maxColumnCount).foldLeft[String](""){
-        (stringAccumulator,index) => s"$stringAccumulator\tColumn$index"
+        (stringAccumulator,index) =>  if (index==1) s"Column$index" else s"$stringAccumulator\tColumn$index"
       }
 
       headers.append(columnLabels.mkString("\t")).append(missingColumnHeaders).append("\n")
@@ -46,6 +46,8 @@ class DisplayFunctions[T <: Product](val rdd: RDD[T]) {
 
     print(headers.toString)
   }
+
+
 
 
 }
