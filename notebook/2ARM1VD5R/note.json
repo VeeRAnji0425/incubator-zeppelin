@@ -48,7 +48,7 @@
           "scatter": {}
         },
         "title": true,
-        "editorHide": false,
+        "editorHide": true,
         "tableHide": true
       },
       "settings": {
@@ -60,11 +60,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\ncc: org.apache.spark.sql.cassandra.CassandraSQLContext \u003d org.apache.spark.sql.cassandra.CassandraSQLContext@7601f5d5\ncomputeDecade: (year: Int)String\n"
+        "msg": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\ncc: org.apache.spark.sql.cassandra.CassandraSQLContext \u003d org.apache.spark.sql.cassandra.CassandraSQLContext@69368420\ncomputeDecade: (year: Int)String\n"
       },
       "dateCreated": "May 24, 2015 5:40:39 PM",
-      "dateStarted": "Jun 2, 2015 10:21:17 PM",
-      "dateFinished": "Jun 2, 2015 10:21:19 PM",
+      "dateStarted": "Jun 17, 2015 11:32:56 AM",
+      "dateFinished": "Jun 17, 2015 11:32:58 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -74,7 +74,7 @@
       "config": {
         "colWidth": 12.0,
         "graph": {
-          "mode": "table",
+          "mode": "multiBarChart",
           "height": 300.0,
           "optionOpen": false,
           "keys": [
@@ -84,28 +84,17 @@
               "aggr": "sum"
             }
           ],
-          "values": [
-            {
-              "name": "Country",
-              "index": 1.0,
-              "aggr": "sum"
-            }
-          ],
+          "values": [],
           "groups": [],
           "scatter": {
             "xAxis": {
               "name": "Decade",
               "index": 0.0,
               "aggr": "sum"
-            },
-            "yAxis": {
-              "name": "Country",
-              "index": 1.0,
-              "aggr": "sum"
             }
           }
         },
-        "editorHide": false,
+        "editorHide": true,
         "tableHide": false,
         "title": true
       },
@@ -131,55 +120,8 @@
         "msg": "Decade\n"
       },
       "dateCreated": "May 18, 2015 10:03:27 PM",
-      "dateStarted": "Jun 2, 2015 10:23:02 PM",
-      "dateFinished": "Jun 2, 2015 10:23:25 PM",
-      "status": "FINISHED",
-      "progressUpdateIntervalMs": 500
-    },
-    {
-      "title": "Albums release by Decade",
-      "text": "rows.displayAsTable(\"Decade\",\"Country\",\"Count\")",
-      "config": {
-        "colWidth": 12.0,
-        "graph": {
-          "mode": "table",
-          "height": 375.0,
-          "optionOpen": false,
-          "keys": [
-            {
-              "name": "Decade",
-              "index": 0.0,
-              "aggr": "sum"
-            }
-          ],
-          "values": [],
-          "groups": [],
-          "scatter": {
-            "xAxis": {
-              "name": "Decade",
-              "index": 0.0,
-              "aggr": "sum"
-            }
-          }
-        },
-        "title": true,
-        "editorHide": false,
-        "tableHide": false
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "jobName": "paragraph_1431983137464_-2085505932",
-      "id": "20150518-230537_1766733826",
-      "result": {
-        "code": "SUCCESS",
-        "type": "TABLE",
-        "msg": "Decade\n"
-      },
-      "dateCreated": "May 18, 2015 11:05:37 PM",
-      "dateStarted": "Jun 1, 2015 10:06:26 PM",
-      "dateFinished": "Jun 1, 2015 10:06:27 PM",
+      "dateStarted": "Jun 17, 2015 11:33:50 AM",
+      "dateFinished": "Jun 17, 2015 11:34:07 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },

@@ -91,11 +91,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "import com.datastax.spark.connector.cql.CassandraConnector\nres36: com.datastax.driver.core.ResultSet \u003d ResultSet[ exhausted: true, Columns[]]\n"
+        "msg": "import com.datastax.spark.connector.cql.CassandraConnector\nres64: com.datastax.driver.core.ResultSet \u003d ResultSet[ exhausted: true, Columns[]]\n"
       },
       "dateCreated": "May 20, 2015 4:08:48 PM",
-      "dateStarted": "Jun 2, 2015 10:16:53 PM",
-      "dateFinished": "Jun 2, 2015 10:16:55 PM",
+      "dateStarted": "Jun 3, 2015 5:39:50 PM",
+      "dateFinished": "Jun 3, 2015 5:39:51 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -129,8 +129,8 @@
         "msg": "import scala.collection.JavaConversions._\nimport com.datastax.spark.connector._\nimport com.datastax.spark.connector.cql.CassandraConnector\nimport org.apache.spark.{SparkConf, SparkContext}\ndefined class Albums\n"
       },
       "dateCreated": "May 20, 2015 4:12:54 PM",
-      "dateStarted": "Jun 2, 2015 10:16:56 PM",
-      "dateFinished": "Jun 2, 2015 10:17:18 PM",
+      "dateStarted": "Jun 3, 2015 5:40:05 PM",
+      "dateFinished": "Jun 3, 2015 5:40:15 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -167,8 +167,8 @@
         "msg": "import org.apache.spark.rdd.RDD\ncountries: List[(String, String)] \u003d List()\nyears: List[(String, String)] \u003d List()\n"
       },
       "dateCreated": "May 20, 2015 4:14:51 PM",
-      "dateStarted": "Jun 2, 2015 10:17:35 PM",
-      "dateFinished": "Jun 2, 2015 10:17:36 PM",
+      "dateStarted": "Jun 3, 2015 5:40:23 PM",
+      "dateFinished": "Jun 3, 2015 5:40:24 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -205,12 +205,12 @@
           }
         },
         "title": true,
-        "editorHide": false
+        "editorHide": true
       },
       "settings": {
         "params": {
           "country": "USA",
-          "year": "1906"
+          "year": "1980"
         },
         "forms": {
           "country": {
@@ -345,6 +345,10 @@
               {
                 "value": "France",
                 "displayName": "France"
+              },
+              {
+                "value": "Gabon",
+                "displayName": "Gabon"
               },
               {
                 "value": "Germany",
@@ -1040,11 +1044,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TABLE",
-        "msg": "Country\tYear\tPerformer\tTitle\nUSA\t1906\tGiuseppe Verdi\tRigoletto: L\u0027Aria di Gilda - Carno nome\n"
+        "msg": "Country\tYear\tPerformer\tTitle\nUSA\t1980\tThe Sugarhill Gang\t8th Wonder / Sugar Hill Groove\nUSA\t1980\tGeorge Duke\tA Brazilian Love Affair\nUSA\t1980\tREO Speedwagon\tA Decade of Rock and Roll 1970 to 1980\nUSA\t1980\tItzhak Perlman\tA Different Kind of Blues\nUSA\t1980\tGladys Knight \u0026 The Pips\tAbout Love\nUSA\t1980\tMission of Burma\tAcademy Fight Song\nUSA\t1980\tThe Weirdos\tAction-Design E.P.\nUSA\t1980\tAerosmith\tAerosmith’s Greatest Hits\nUSA\t1980\tDub Specialist\tAfrican Rub \"A\" Dub\nUSA\t1980\tBob Seger \u0026 the Silver Bullet Band\tAgainst the Wind\nUSA\t1980\tAgent Orange\tAgent Orange\nUSA\t1980\tWhitesnake\tAin\u0027t No Love In The Heart Of The City\nUSA\t1980\tAmerica\tAlibi\nUSA\t1980\tWipers\tAlien Boy\nUSA\t1980\tSteeleye Span\tAll Around My Hat\nUSA\t1980\tGiorgio Moroder\tAmerican Gigolo\nUSA\t1980\tAnne Murray\tAnne Murray\u0027s Greatest Hits\nUSA\t1980\tThird World\tArise in Harmony\nUSA\t1980\tWitch\tAround the World on a Broom\nUSA\t1980\tKansas\tAudio-Visions\nUSA\t1980\tMerle Haggard\tBack to the Barrooms\nUSA\t1980\tTwisted Sister\tBad Boys/ Lady\u0027s Boy\nUSA\t1980\tJohn Scofield\tBar Talk\nUSA\t1980\tJames Horner\tBattle Beyond the Stars\nUSA\t1980\tHeart\tBebe Le Strange\nUSA\t1980\tMidnight Oil\tBird Noises\nUSA\t1980\tThe Cure\tBoys Don’t Cry\nUSA\t1980\tCameo\tCameosis\nUSA\t1980\tAlex North\tCarny\nUSA\t1980\tBobby Caldwell\tCat in the Hat\nUSA\t1980\tKool \u0026 The Gang\tCelebrate!\nUSA\t1980\tCelia Cruz\tCelia Johnny and Pete\nUSA\t1980\tCarly Simon\tCome Upstairs\nUSA\t1980\tThe Residents\tCommercial Album\nUSA\t1980\tGioachino Rossini\tComplete Overtures\nUSA\t1980\tPat Travers Band\tCrash and Burn\nUSA\t1980\tPat Benatar\tCrimes of Passion\nUSA\t1980\tCristina\tCristina\nUSA\t1980\tEcho \u0026 The Bunnymen\tCrocodiles\nUSA\t1980\tBlue Öyster Cult\tCultösaurus Erectus\nUSA\t1980\tDEVO\tDEV–O Live\nUSA\t1980\tPhilip Glass\tDance Nos. 1 \u0026 3\nUSA\t1980\tDee Dee Bridgewater\tDee Dee Bridgewater\nUSA\t1980\tThe Stranglers\tDo the European\nUSA\t1980\tDow Jones \u0026 The Industrials\tDow Jones and the Industrials\nUSA\t1980\tJourney\tDream After Dream\nUSA\t1980\tCristina\tDrive My Car\nUSA\t1980\tEagles\tEagles Live\nUSA\t1980\tGraham Nash\tEarth \u0026 Sky\nUSA\t1980\tKansas\tFinal Visions\nUSA\t1980\tClimax Blues Band\tFlying the Flag\nUSA\t1980\tThe Dead Milkmen\tFolk Songs for the 80\u0027s\nUSA\t1980\tStan Getz\tForest Eyes\nUSA\t1980\tCheap Trick\tFound All the Parts\nUSA\t1980\tBrian Eno\tFourth World Volume 1: Possible Musics\nUSA\t1980\tBig Boys\tFrat Cars\nUSA\t1980\tDEVO\tFreedom of Choice\nUSA\t1980\tAlbert Collins\tFrostbite\nUSA\t1980\tGang of Four\tGang of Four\nUSA\t1980\tCrime\tGangster Funk / Maserati\nUSA\t1980\tThe Gap Band\tGap Band III\nUSA\t1980\tRick James\tGarden of Love\nUSA\t1980\tSteely Dan\tGaucho\nUSA\t1980\tAhmad Jamal\tGenetic Walk\nUSA\t1980\tDavid Ruffin\tGentleman Ruffin\nUSA\t1980\tElvis Costello \u0026 The Attractions\tGet Happy!!\nUSA\t1980\tThe Spencer Davis Group\tGimme Some Lovin’\nUSA\t1980\tBilly Joel\tGlass Houses\nUSA\t1980\tThe Isley Brothers\tGo All the Way\nUSA\t1980\tHeart\tGreatest Hits / Live\nUSA\t1980\tHank Williams Jr.\tHabits Old and New\nUSA\t1980\tTuxedomoon\tHalf-Mute\nUSA\t1980\tLucinda Williams\tHappy Woman Blues\nUSA\t1980\tNeil Young\tHawks \u0026 Doves\nUSA\t1980\tTom Waits\tHeartattack and Vine\nUSA\t1980\tScientist\tHeavyweight Dub Champion\nUSA\t1980\tCommodores\tHeroes\nUSA\t1980\tSteely Dan\tHey Nineteen\nUSA\t1980\tREO Speedwagon\tHi Infidelity\nUSA\t1980\tPino Donaggio\tHome Movies\nUSA\t1980\tDow Jones \u0026 The Industrials\tHoosier Hysteria\nUSA\t1980\tHuey Lewis and the News\tHuey Lewis and The News\nUSA\t1980\tThe Undertones\tHypnotised\nUSA\t1980\tDon Williams\tI Believe in You\nUSA\t1980\tRay Charles\tIn Person\nUSA\t1980\tIsrael Vibration\tIsrael Dub\nUSA\t1980\tThe Whispers\tIt\u0027s a Love Thing / Girl I Need You\nUSA\t1980\tBlack Flag\tJealous Again\nUSA\t1980\tJohn Anderson\tJohn Anderson\nUSA\t1980\tSiouxsie and the Banshees\tKaleidoscope\nUSA\t1980\tKenny Loggins\tKenny Loggins Alive\nUSA\t1980\tThe Teardrop Explodes\tKilimanjaro\nUSA\t1980\tDead Kennedys\tKill the Poor\nUSA\t1980\tKilling Joke\tKilling Joke\nUSA\t1980\tHall \u0026 Oates\tKiss on My List\nUSA\t1980\tKenny Rogers\tLady / Sweet Music Man\nUSA\t1980\tDexter Gordon\tLandslide\nUSA\t1980\tMink DeVille\tLe Chat Bleu\nUSA\t1980\tThe Brothers Johnson\tLight Up the Night\nUSA\t1980\tThe Yardbirds\tLive in London!\nUSA\t1980\tLeo Sayer\tLiving in a Fantasy\nUSA\t1980\tAir Supply\tLost in Love\nUSA\t1980\tSammy Hagar\tLoud and Clear\nUSA\t1980\tMinnie Riperton\tLove Lives Forever\nUSA\t1980\tThe J. Geils Band\tLove Stinks\nUSA\t1980\tOneness of Juju\tMake a Change\nUSA\t1980\tDire Straits\tMaking Movies\nUSA\t1980\tDavid Axelrod\tMarchin\u0027\nUSA\t1980\tJohn Cale\tMercenaries\nUSA\t1980\tRonnie Milsap\tMilsap Magic\nUSA\t1980\tJacob Miller\tMixed Up Moods\nUSA\t1980\tMonty Python\tMonty Python’s Contractual Obligation Album\nUSA\t1980\tThe Band\tMoondog Matinee\nUSA\t1980\tChaka Khan\tNaughty\nUSA\t1980\tEumir Deodato\tNight Cruiser\nUSA\t1980\tWeather Report\tNight Passage\nUSA\t1980\tDionne Warwick\tNo Night So Long\nUSA\t1980\tUFO\tNo Place to Run\nUSA\t1980\tBernard Herrmann\tNorth by Northwest\nUSA\t1980\tSteve Reich\tOctet / Music for a Large Ensemble / Violin Phase\nUSA\t1980\tSun Ra\tOf Mythic Worlds\nUSA\t1980\tOingo Boingo\tOingo Boingo EP\nUSA\t1980\tPaul Simon\tOne-Trick Pony\nUSA\t1980\tThe Ozark Mountain Daredevils\tOzark Mountain Daredevils\nUSA\t1980\tThe Cars\tPanorama\nUSA\t1980\tBad Brains\tPay to Cum!\nUSA\t1980\tCarole King\tPearls: Songs Of Goffin And King\nUSA\t1980\tEddie Money\tPlaying For Keeeps\nUSA\t1980\tPretenders\tPretenders\nUSA\t1980\tThird World\tPrisoner in the Street\nUSA\t1980\tThe B‐52s\tPrivate Idaho\nUSA\t1980\tTriumph\tProgressions of Power\nUSA\t1980\tGil Scott-Heron\tReal Eyes\nUSA\t1980\tTony Joe White\tReal Thang\nUSA\t1980\tTalking Heads\tRemain in Light\nUSA\t1980\tStanley Clarke\tRocks Pebbles and Sand\nUSA\t1980\tKim Carnes\tRomance Dance\nUSA\t1980\tEmmylou Harris\tRoses in the Snow\nUSA\t1980\tRamsey Lewis\tRoutes\nUSA\t1980\tLee Morgan\tSee Autumn\nUSA\t1980\tSylvester\tSell My Soul\nUSA\t1980\tJoy Division\tShe’s Lost Control / Atmosphere\nUSA\t1980\tSkyy\tSkyyzoo / High\nUSA\t1980\tThe Dead Milkmen\tSo Long Seventies\nUSA\t1980\tAnne Murray\tSomebody\u0027s Waiting\nUSA\t1980\tDaniel Johnston\tSongs of Pain\nUSA\t1980\tThe Dead Milkmen\tSour Milk\nUSA\t1980\tThe Pointer Sisters\tSpecial Things\nUSA\t1980\tAl Di Meola\tSplendido Hotel\nUSA\t1980\tThe Brothers Johnson\tStomp!\nUSA\t1980\tGloria Gaynor\tStories\nUSA\t1980\tWendy Carlos\tSwitched-On Brandenburgs: The Complete Concertos\nUSA\t1980\tElvis Costello\tTaking Liberties\nUSA\t1980\tПётр Ильич Чайковский\tTchaikovsky: Piano Concerto no. 1 / Bach: Prelude no. 10\nUSA\t1980\tThe Shivvers\tTeen Line / When I Was Younger\nUSA\t1980\tThe Marshall Tucker Band\tTenth\nUSA\t1980\tBernard Herrmann\tThe 7th Voyage of Sinbad\nUSA\t1980\tSteely Dan\tThe Gaucho Outtakes\nUSA\t1980\tStyx\tThe Grand Illusion\nUSA\t1980\tAl Green\tThe Lord Will Make a Way\nUSA\t1980\tThe Psychedelic Furs\tThe Psychedelic Furs\nUSA\t1980\tCurtis Mayfield\tThe Right Combination\nUSA\t1980\tThe Specials\tThe Specials\nUSA\t1980\tRonnie Milsap\tThere\u0027s No Gettin\u0027 Over Me\nUSA\t1980\tCharley Pride\tThere\u0027s a Little Bit of Hank in Me\nUSA\t1980\tShalamar\tThree for Love\nUSA\t1980\tTom Lehrer\tTom Foolery\nUSA\t1980\tJohn Hiatt\tTwo Bit Monsters\nUSA\t1980\tJoy Division\tUnknown Pleasures\nUSA\t1980\tPrince\tUptown\nUSA\t1980\tItzhak Perlman\tVirtuoso Violin\nUSA\t1980\tBrick\tWaiting on You\nUSA\t1980\tThe Fabulous Thunderbirds\tWhat\u0027s the Word?\nUSA\t1980\tDEVO\tWhip It\nUSA\t1980\tX\tWhite Girl\nUSA\t1980\tThe B‐52s\tWild Planet\nUSA\t1980\tZapp\tZapp\nUSA\t1980\tThe Police\tZenyattà Mondatta\nUSA\t1980\tYellow Magic Orchestra\t×∞Multiplies\n"
       },
       "dateCreated": "May 20, 2015 4:19:48 PM",
-      "dateStarted": "Jun 2, 2015 10:18:33 PM",
-      "dateFinished": "Jun 2, 2015 10:18:34 PM",
+      "dateStarted": "Jun 3, 2015 5:40:43 PM",
+      "dateFinished": "Jun 3, 2015 5:40:43 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },

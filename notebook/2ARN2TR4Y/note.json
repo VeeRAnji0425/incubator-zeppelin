@@ -34,7 +34,7 @@
     },
     {
       "title": "Counting users by their age",
-      "text": "import org.apache.spark.rdd.RDD\nimport org.apache.spark.SparkContext._\n\nval users \u003d List((\"jdoe\",\"John DOE\",32),(\"hsue\",\"Helen SUE\",27),(\"rsmith\",\"Richard SMITH\",45))\n\nval people:RDD[(String,String,Int)] \u003d sc.parallelize(users)\n\nval extractAge:RDD[(Int, String)] \u003d people.map{ case(login,name,age) \u003d\u003e (age,login) }\n\nval groupByAge:RDD[(Int, Iterable[String])] \u003d extractAge.groupByKey()\n\nval countByAge:scala.collection.Map[Int, Long] \u003d groupByAge.countByKey()",
+      "text": "import org.apache.spark.rdd.RDD\nimport org.apache.spark.SparkContext._\n\nval users \u003d List((\"jdoe\",\"John DOE\",32),(\"hsue\",\"Helen SUE\",27),(\"rsmith\",\"Richard SMITH\",45),(\"bob\",\"Bob\",32),(\"alice\",\"Alice\",27),(\"toto\",\"tête à Toto\",32))\n\nval people:RDD[(String,String,Int)] \u003d sc.parallelize(users)\n\nval extractAge:RDD[(Int, String)] \u003d people.map{ case(login,name,age) \u003d\u003e (age,login) }\n\nval countByAge:scala.collection.Map[Int, Long] \u003d extractAge.countByKey()",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -48,7 +48,7 @@
         },
         "title": true,
         "editorHide": false,
-        "tableHide": true
+        "tableHide": false
       },
       "settings": {
         "params": {},
@@ -59,11 +59,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "import org.apache.spark.rdd.RDD\nimport org.apache.spark.SparkContext._\nusers: List[(String, String, Int)] \u003d List((jdoe,John DOE,32), (hsue,Helen SUE,27), (rsmith,Richard SMITH,45))\npeople: org.apache.spark.rdd.RDD[(String, String, Int)] \u003d ParallelCollectionRDD[18] at parallelize at \u003cconsole\u003e:53\nextractAge: org.apache.spark.rdd.RDD[(Int, String)] \u003d MappedRDD[19] at map at \u003cconsole\u003e:55\ngroupByAge: org.apache.spark.rdd.RDD[(Int, Iterable[String])] \u003d ShuffledRDD[20] at groupByKey at \u003cconsole\u003e:57\ncountByAge: scala.collection.Map[Int,Long] \u003d Map(32 -\u003e 1, 45 -\u003e 1, 27 -\u003e 1)\n"
+        "msg": "import org.apache.spark.rdd.RDD\nimport org.apache.spark.SparkContext._\nusers: List[(String, String, Int)] \u003d List((jdoe,John DOE,32), (hsue,Helen SUE,27), (rsmith,Richard SMITH,45), (bob,Bob,32), (alice,Alice,27), (toto,tête à Toto,32))\npeople: org.apache.spark.rdd.RDD[(String, String, Int)] \u003d ParallelCollectionRDD[96] at parallelize at \u003cconsole\u003e:65\nextractAge: org.apache.spark.rdd.RDD[(Int, String)] \u003d MappedRDD[97] at map at \u003cconsole\u003e:71\ncountByAge: scala.collection.Map[Int,Long] \u003d Map(32 -\u003e 3, 45 -\u003e 1, 27 -\u003e 2)\n"
       },
       "dateCreated": "May 31, 2015 10:37:07 AM",
-      "dateStarted": "Jun 1, 2015 9:47:01 PM",
-      "dateFinished": "Jun 1, 2015 9:47:05 PM",
+      "dateStarted": "Jun 15, 2015 8:19:16 PM",
+      "dateFinished": "Jun 15, 2015 8:19:19 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -114,11 +114,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TABLE",
-        "msg": "Age\tUsers Count\n32\t1\n45\t1\n27\t1\n"
+        "msg": "Age\tUsers Count\n32\t3\n45\t1\n27\t2\n"
       },
       "dateCreated": "May 31, 2015 10:37:57 AM",
-      "dateStarted": "Jun 1, 2015 9:48:03 PM",
-      "dateFinished": "Jun 1, 2015 9:48:03 PM",
+      "dateStarted": "Jun 15, 2015 8:19:27 PM",
+      "dateFinished": "Jun 15, 2015 8:19:27 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },

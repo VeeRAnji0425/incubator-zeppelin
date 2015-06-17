@@ -94,11 +94,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "import com.datastax.spark.connector.cql.CassandraConnector\nimport com.datastax.spark.connector._\nres58: com.datastax.driver.core.ResultSet \u003d ResultSet[ exhausted: true, Columns[]]\n"
+        "msg": "import com.datastax.spark.connector.cql.CassandraConnector\nimport com.datastax.spark.connector._\nres181: com.datastax.driver.core.ResultSet \u003d ResultSet[ exhausted: true, Columns[]]\n"
       },
       "dateCreated": "May 20, 2015 1:37:32 PM",
-      "dateStarted": "Jun 1, 2015 9:59:35 PM",
-      "dateFinished": "Jun 1, 2015 9:59:37 PM",
+      "dateStarted": "Jun 17, 2015 11:29:32 AM",
+      "dateFinished": "Jun 17, 2015 11:29:33 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -164,11 +164,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "import org.apache.spark.rdd.RDD\ndefined class UsUnemployment\nCSV: String \u003d /tmp/spark_cassandra_demo/us_unemployment.csv\ncaseClassRDD: org.apache.spark.rdd.RDD[UsUnemployment] \u003d MappedRDD[31] at map at \u003cconsole\u003e:65\n"
+        "msg": "import org.apache.spark.rdd.RDD\ndefined class UsUnemployment\nCSV: String \u003d /tmp/spark_cassandra_demo/us_unemployment.csv\ncaseClassRDD: org.apache.spark.rdd.RDD[UsUnemployment] \u003d MappedRDD[111] at map at \u003cconsole\u003e:75\n"
       },
       "dateCreated": "May 20, 2015 1:37:37 PM",
-      "dateStarted": "Jun 1, 2015 9:58:22 PM",
-      "dateFinished": "Jun 1, 2015 9:58:28 PM",
+      "dateStarted": "Jun 15, 2015 8:28:07 PM",
+      "dateFinished": "Jun 15, 2015 8:28:09 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -213,8 +213,8 @@
         "msg": "Year\n"
       },
       "dateCreated": "May 20, 2015 2:31:06 PM",
-      "dateStarted": "Jun 1, 2015 9:59:39 PM",
-      "dateFinished": "Jun 1, 2015 9:59:40 PM",
+      "dateStarted": "Jun 17, 2015 11:29:35 AM",
+      "dateFinished": "Jun 17, 2015 11:29:35 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },

@@ -65,23 +65,23 @@
         "msg": "import com.datastax.spark.connector.cql.CassandraConnector\nimport com.datastax.driver.core.Row\nimport scala.collection.JavaConversions._\nimport org.apache.spark.rdd.RDD\n"
       },
       "dateCreated": "May 24, 2015 5:23:34 PM",
-      "dateStarted": "Jun 2, 2015 10:05:36 PM",
-      "dateFinished": "Jun 2, 2015 10:05:38 PM",
+      "dateStarted": "Jun 17, 2015 11:34:34 AM",
+      "dateFinished": "Jun 17, 2015 11:34:36 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Solr in action",
-      "text": "CassandraConnector(sc.getConf).withSessionDo { \n    session \u003d\u003e {\n        session.execute(s\"\"\"\n        SELECT year,performer,title \n        FROM spark_demo.albums \n        WHERE solr_query\u003d\u0027performer:\"*${z.input(\"Performer\",\"Jackson\")}*\" \n        AND title:\"*${z.input(\"Title\",\"\")}*\" \n        AND year:${z.input(\"Year\",\"\")}\u0027\n        \"\"\").\n        all().\n        toSeq.\n        map(row \u003d\u003e (row.getInt(\"year\"),row.getString(\"performer\"),row.getString(\"title\"))).\n        sortBy{ case(year,performer,title)\u003d\u003e (year,performer,title)}.\n        displayAsTable(\"Performer\",\"Title\",\"Year\")\n    }\n}",
+      "text": "CassandraConnector(sc.getConf).withSessionDo { \n    session \u003d\u003e {\n        session.execute(s\"\"\"\n        SELECT year,performer,title \n        FROM spark_demo.albums \n        WHERE solr_query\u003d\u0027performer:\"*${z.input(\"Artist Name\",\"Jackson\")}*\" \n        AND title:\"*${z.input(\"Song Title\",\"\")}*\" \n        AND year:${z.input(\"Song Release Year\",\"[1980 TO 1991]\")}\u0027\n        \"\"\").\n        all().\n        toSeq.\n        map(row \u003d\u003e (row.getInt(\"year\"),row.getString(\"performer\"),row.getString(\"title\"))).\n        sortBy{ case(year,performer,title)\u003d\u003e (year,performer,title)}.\n        displayAsTable(\"Year\",\"Title\",\"Performer\")\n    }\n}",
       "config": {
         "colWidth": 12.0,
         "graph": {
           "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
+          "height": 294.0,
+          "optionOpen": true,
           "keys": [
             {
-              "name": "Performer",
+              "name": "Year",
               "index": 0.0,
               "aggr": "sum"
             }
@@ -96,39 +96,47 @@
           "groups": [],
           "scatter": {
             "xAxis": {
-              "name": "Performer",
+              "name": "Year",
               "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "Title",
+              "index": 1.0,
               "aggr": "sum"
             }
           }
         },
         "tableHide": false,
         "title": true,
-        "editorHide": false
+        "editorHide": true
       },
       "settings": {
         "params": {
           "Performer": "Jackson",
-          "Title": "xxx",
-          "Year": "[1980 TO 1991]"
+          "Title": "Extra",
+          "Year": "[1980 TO 1991]",
+          "Artist Name": "Jackson",
+          "Song Release Year": "[2018 TO *]",
+          "Song Title": ""
         },
         "forms": {
-          "Performer": {
-            "name": "Performer",
-            "displayName": "Performer",
+          "Artist Name": {
+            "name": "Artist Name",
+            "displayName": "Artist Name",
             "defaultValue": "Jackson",
             "hidden": false
           },
-          "Title": {
-            "name": "Title",
-            "displayName": "Title",
+          "Song Title": {
+            "name": "Song Title",
+            "displayName": "Song Title",
             "defaultValue": "",
             "hidden": false
           },
-          "Year": {
-            "name": "Year",
-            "displayName": "Year",
-            "defaultValue": "",
+          "Song Release Year": {
+            "name": "Song Release Year",
+            "displayName": "Song Release Year",
+            "defaultValue": "[1980 TO 1991]",
             "hidden": false
           }
         }
@@ -138,11 +146,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TABLE",
-        "msg": "Performer\n"
+        "msg": "Year\n"
       },
       "dateCreated": "May 20, 2015 4:27:51 PM",
-      "dateStarted": "Jun 2, 2015 10:07:49 PM",
-      "dateFinished": "Jun 2, 2015 10:07:49 PM",
+      "dateStarted": "Jun 17, 2015 11:12:51 AM",
+      "dateFinished": "Jun 17, 2015 11:12:52 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -172,11 +180,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "{\"country:USA AND styles:*Rock*\":1321}\n"
+        "msg": "{\"country:USA AND styles:*Rock*\":1126}\n"
       },
       "dateCreated": "May 20, 2015 5:45:32 PM",
-      "dateStarted": "Jun 2, 2015 10:06:04 PM",
-      "dateFinished": "Jun 2, 2015 10:06:05 PM",
+      "dateStarted": "Jun 17, 2015 11:12:55 AM",
+      "dateFinished": "Jun 17, 2015 11:12:56 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -186,7 +194,7 @@
       "config": {
         "colWidth": 12.0,
         "graph": {
-          "mode": "table",
+          "mode": "multiBarChart",
           "height": 300.0,
           "optionOpen": false,
           "keys": [
@@ -196,7 +204,13 @@
               "aggr": "sum"
             }
           ],
-          "values": [],
+          "values": [
+            {
+              "name": "Count",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
           "groups": [],
           "scatter": {
             "xAxis": {
@@ -206,11 +220,12 @@
             }
           }
         },
-        "title": true
+        "title": true,
+        "editorHide": true
       },
       "settings": {
         "params": {
-          "Low Threshold": "100000"
+          "Low Threshold": "100"
         },
         "forms": {
           "Low Threshold": {
@@ -226,11 +241,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TABLE",
-        "msg": "Country\n"
+        "msg": "Country\tCount\nUSA\t4386\nUnited Kingdom\t2020\nGermany\t575\nSweden\t473\nCanada\t462\nJapan\t375\nFrance\t311\nFinland\t285\nItaly\t211\nAustralia\t201\nNorway\t199\nPoland\t168\nJamaica\t167\nSpain\t158\nNetherlands\t123\nBrazil\t120\n"
       },
       "dateCreated": "Jun 1, 2015 10:21:42 PM",
-      "dateStarted": "Jun 2, 2015 10:23:46 PM",
-      "dateFinished": "Jun 2, 2015 10:23:47 PM",
+      "dateStarted": "Jun 17, 2015 11:34:38 AM",
+      "dateFinished": "Jun 17, 2015 11:34:39 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },

@@ -67,7 +67,7 @@
     },
     {
       "title": "Reset table display",
-      "text": "var data:RDD[(Int,Double)] \u003d sc.parallelize(Nil)",
+      "text": "import org.apache.spark.rdd.RDD\n\nvar data:RDD[(Int,Double)] \u003d sc.parallelize(Nil)",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -92,11 +92,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "data: org.apache.spark.rdd.RDD[(Int, Double)] \u003d ParallelCollectionRDD[59] at parallelize at \u003cconsole\u003e:61\n"
+        "msg": "import org.apache.spark.rdd.RDD\ndata: org.apache.spark.rdd.RDD[(Int, Double)] \u003d ParallelCollectionRDD[925] at parallelize at \u003cconsole\u003e:56\n"
       },
       "dateCreated": "May 20, 2015 2:45:38 PM",
-      "dateStarted": "Jun 1, 2015 10:00:22 PM",
-      "dateFinished": "Jun 1, 2015 10:00:23 PM",
+      "dateStarted": "Jun 17, 2015 11:29:50 AM",
+      "dateFinished": "Jun 17, 2015 11:29:50 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -127,11 +127,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "import org.apache.spark.SparkContext._\nimport com.datastax.spark.connector._\nimport com.datastax.spark.connector.rdd.CassandraRDD\nimport org.apache.spark.{SparkConf, SparkContext}\ndata: org.apache.spark.rdd.RDD[(Int, Double)] \u003d MappedRDD[119] at map at \u003cconsole\u003e:108\n"
+        "msg": "import org.apache.spark.SparkContext._\nimport com.datastax.spark.connector._\nimport com.datastax.spark.connector.rdd.CassandraRDD\nimport org.apache.spark.{SparkConf, SparkContext}\ndata: org.apache.spark.rdd.RDD[(Int, Double)] \u003d MappedRDD[2] at map at \u003cconsole\u003e:36\n"
       },
       "dateCreated": "May 20, 2015 2:35:15 PM",
-      "dateStarted": "May 25, 2015 8:52:40 AM",
-      "dateFinished": "May 25, 2015 8:52:46 AM",
+      "dateStarted": "Jun 17, 2015 10:29:10 AM",
+      "dateFinished": "Jun 17, 2015 10:29:12 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -162,11 +162,45 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "data: org.apache.spark.rdd.RDD[(Int, Double)] \u003d ShuffledRDD[124] at sortByKey at \u003cconsole\u003e:108\n"
+        "msg": "data: org.apache.spark.rdd.RDD[(Int, Double)] \u003d ShuffledRDD[26] at sortByKey at \u003cconsole\u003e:52\n"
       },
       "dateCreated": "May 20, 2015 2:46:54 PM",
-      "dateStarted": "May 25, 2015 8:53:09 AM",
-      "dateFinished": "May 25, 2015 8:53:11 AM",
+      "dateStarted": "Jun 15, 2015 1:40:37 PM",
+      "dateFinished": "Jun 15, 2015 1:40:38 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Read data using scala case class",
+      "text": "case class UsUnemploymentRate(year: Int, unemployedPercentageToLabor: Double)\n\ndata \u003d sc.cassandraTable[UsUnemploymentRate](\"spark_demo\", \"us_unemployment_stats\").\n    sortBy(bean \u003d\u003e bean.year,true,1).\n    map(bean \u003d\u003e (bean.year,bean.unemployedPercentageToLabor))",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "title": true,
+        "tableHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1433842506554_-1567680288",
+      "id": "20150609-113506_374130940",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "defined class UsUnemploymentRate\ndata: org.apache.spark.rdd.RDD[(Int, Double)] \u003d MappedRDD[23] at map at \u003cconsole\u003e:40\n"
+      },
+      "dateCreated": "Jun 9, 2015 11:35:06 AM",
+      "dateStarted": "Jun 17, 2015 10:31:25 AM",
+      "dateFinished": "Jun 17, 2015 10:31:27 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -197,11 +231,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "import org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\ncc: org.apache.spark.sql.cassandra.CassandraSQLContext \u003d org.apache.spark.sql.cassandra.CassandraSQLContext@1dd8fe7a\nrow: org.apache.spark.sql.SchemaRDD \u003d \nSchemaRDD[60] at RDD at SchemaRDD.scala:108\n\u003d\u003d Query Plan \u003d\u003d\n\u003d\u003d Physical Plan \u003d\u003d\nSort [year#12 DESC], true\n Exchange (RangePartitioning [year#12 DESC], 200)\n  Filter (unemployed_percentage_to_labor#23 \u003e 8.0)\n   CassandraTableScan [year#12,unemployed_percentage_to_labor#23], (CassandraRelation TableDef(spark_demo,us_unemployment_stats,ArrayBuffer(ColumnDef(year,PartitionKeyColumn,IntType,false)),ArrayBuffer(),ArrayBuffer(ColumnDef(agriculture_part_count,RegularColumn,IntType,false), ColumnDef(civil_labor_count,RegularColumn,IntType,false), ColumnDef(civil_non_institutional_count,RegularColumn,IntType,false), ColumnDef(employed_count,RegularColumn,IntType,false), ColumnDef(employed_percentage,RegularColumn,DoubleType,false), ColumnDef(footnotes,Regul...data: org.apache.spark.rdd.RDD[(Int, Double)] \u003d MappedRDD[73] at map at \u003cconsole\u003e:71\n"
+        "msg": "import org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\ncc: org.apache.spark.sql.cassandra.CassandraSQLContext \u003d org.apache.spark.sql.cassandra.CassandraSQLContext@2786dd24\nrow: org.apache.spark.sql.SchemaRDD \u003d \nSchemaRDD[3] at RDD at SchemaRDD.scala:108\n\u003d\u003d Query Plan \u003d\u003d\n\u003d\u003d Physical Plan \u003d\u003d\nSort [year#12 DESC], true\n Exchange (RangePartitioning [year#12 DESC], 200)\n  Filter (unemployed_percentage_to_labor#23 \u003e 8.0)\n   CassandraTableScan [year#12,unemployed_percentage_to_labor#23], (CassandraRelation TableDef(spark_demo,us_unemployment_stats,ArrayBuffer(ColumnDef(year,PartitionKeyColumn,IntType,false)),ArrayBuffer(),ArrayBuffer(ColumnDef(agriculture_part_count,RegularColumn,IntType,false), ColumnDef(civil_labor_count,RegularColumn,IntType,false), ColumnDef(civil_non_institutional_count,RegularColumn,IntType,false), ColumnDef(employed_count,RegularColumn,IntType,false), ColumnDef(employed_percentage,RegularColumn,DoubleType,false), ColumnDef(footnotes,Regula...data: org.apache.spark.rdd.RDD[(Int, Double)] \u003d MappedRDD[18] at map at \u003cconsole\u003e:41\n"
       },
       "dateCreated": "May 20, 2015 2:51:20 PM",
-      "dateStarted": "Jun 1, 2015 10:00:28 PM",
-      "dateFinished": "Jun 1, 2015 10:00:33 PM",
+      "dateStarted": "Jun 17, 2015 10:30:28 AM",
+      "dateFinished": "Jun 17, 2015 10:30:31 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -244,8 +278,8 @@
         "msg": "Year\n"
       },
       "dateCreated": "May 20, 2015 2:38:09 PM",
-      "dateStarted": "Jun 1, 2015 10:00:34 PM",
-      "dateFinished": "Jun 1, 2015 10:00:35 PM",
+      "dateStarted": "Jun 17, 2015 11:29:53 AM",
+      "dateFinished": "Jun 17, 2015 11:29:53 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },

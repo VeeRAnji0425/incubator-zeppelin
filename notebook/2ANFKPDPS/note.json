@@ -28,8 +28,8 @@
         "msg": "\u003ch1\u003eHow to use Spark to perform simple analytics\u003c/h1\u003e\n"
       },
       "dateCreated": "May 18, 2015 9:17:41 PM",
-      "dateStarted": "May 28, 2015 4:32:46 PM",
-      "dateFinished": "May 28, 2015 4:32:47 PM",
+      "dateStarted": "Jun 17, 2015 11:31:51 AM",
+      "dateFinished": "Jun 17, 2015 11:31:51 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -60,11 +60,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "import org.apache.spark.rdd.RDD\ngroupDistributionByStyles: org.apache.spark.rdd.RDD[(String, Int)] \u003d ParallelCollectionRDD[81] at parallelize at \u003cconsole\u003e:78\nsoloArtistsDistributionByStyles: org.apache.spark.rdd.RDD[(String, Int)] \u003d ParallelCollectionRDD[82] at parallelize at \u003cconsole\u003e:77\ngroups: org.apache.spark.rdd.RDD[(String, Int)] \u003d ParallelCollectionRDD[83] at parallelize at \u003cconsole\u003e:77\nsoloArtists: org.apache.spark.rdd.RDD[(String, Int)] \u003d ParallelCollectionRDD[84] at parallelize at \u003cconsole\u003e:77\n"
+        "msg": "import org.apache.spark.rdd.RDD\ngroupDistributionByStyles: org.apache.spark.rdd.RDD[(String, Int)] \u003d ParallelCollectionRDD[1014] at parallelize at \u003cconsole\u003e:96\nsoloArtistsDistributionByStyles: org.apache.spark.rdd.RDD[(String, Int)] \u003d ParallelCollectionRDD[1015] at parallelize at \u003cconsole\u003e:95\ngroups: org.apache.spark.rdd.RDD[(String, Int)] \u003d ParallelCollectionRDD[1016] at parallelize at \u003cconsole\u003e:95\nsoloArtists: org.apache.spark.rdd.RDD[(String, Int)] \u003d ParallelCollectionRDD[1017] at parallelize at \u003cconsole\u003e:95\n"
       },
       "dateCreated": "May 19, 2015 7:20:14 PM",
-      "dateStarted": "Jun 1, 2015 10:04:54 PM",
-      "dateFinished": "Jun 1, 2015 10:04:56 PM",
+      "dateStarted": "Jun 17, 2015 11:32:14 AM",
+      "dateFinished": "Jun 17, 2015 11:32:15 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -95,11 +95,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "import com.datastax.spark.connector._\nimport org.apache.spark.SparkContext._\nimport org.apache.spark.rdd.RDD\nPERFORMERS_TYPES: scala.collection.immutable.Map[String,String] \u003d Map(Person -\u003e artist, Group -\u003e group)\nrdd: org.apache.spark.rdd.RDD[(String, List[String])] \u003d FilteredRDD[8] at filter at \u003cconsole\u003e:37\npairs: org.apache.spark.rdd.RDD[((String, String), Int)] \u003d FlatMappedRDD[9] at flatMap at \u003cconsole\u003e:35\nreduced: org.apache.spark.rdd.RDD[((String, String), Int)] \u003d ShuffledRDD[10] at reduceByKey at \u003cconsole\u003e:37\nflattened: org.apache.spark.rdd.RDD[(String, String, Int)] \u003d MappedRDD[11] at map at \u003cconsole\u003e:39\ngroupDistributionByStyles: org.apache.spark.rdd.RDD[(String, Int)] \u003d CassandraTableScanRDD[15] at RDD at CassandraRDD.scala:15\nsoloArtistsDistributionByStyles: org.apache.spark.rdd.RDD[(String, Int)] \u003d CassandraTableScanRDD[19] at RDD at CassandraRDD.scala:15\n"
+        "msg": "import com.datastax.spark.connector._\nimport org.apache.spark.SparkContext._\nimport org.apache.spark.rdd.RDD\nPERFORMERS_TYPES: scala.collection.immutable.Map[String,String] \u003d Map(Person -\u003e artist, Group -\u003e group)\nrdd: org.apache.spark.rdd.RDD[(String, List[String])] \u003d FilteredRDD[982] at filter at \u003cconsole\u003e:92\npairs: org.apache.spark.rdd.RDD[((String, String), Int)] \u003d FlatMappedRDD[983] at flatMap at \u003cconsole\u003e:90\nreduced: org.apache.spark.rdd.RDD[((String, String), Int)] \u003d ShuffledRDD[984] at reduceByKey at \u003cconsole\u003e:92\nflattened: org.apache.spark.rdd.RDD[(String, String, Int)] \u003d MappedRDD[985] at map at \u003cconsole\u003e:94\ngroupDistributionByStyles: org.apache.spark.rdd.RDD[(String, Int)] \u003d CassandraTableScanRDD[989] at RDD at CassandraRDD.scala:15\nsoloArtistsDistributionByStyles: org.apache.spark.rdd.RDD[(String, Int)] \u003d CassandraTableScanRDD[993] at RDD at CassandraRDD.scala:15\n"
       },
       "dateCreated": "May 24, 2015 10:06:13 PM",
-      "dateStarted": "May 28, 2015 3:27:50 PM",
-      "dateFinished": "May 28, 2015 3:28:02 PM",
+      "dateStarted": "Jun 17, 2015 11:31:52 AM",
+      "dateFinished": "Jun 17, 2015 11:31:56 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -109,7 +109,7 @@
       "config": {
         "colWidth": 6.0,
         "graph": {
-          "mode": "table",
+          "mode": "multiBarChart",
           "height": 337.0,
           "optionOpen": false,
           "keys": [
@@ -144,8 +144,8 @@
         "msg": "Style\n"
       },
       "dateCreated": "May 24, 2015 10:23:48 PM",
-      "dateStarted": "Jun 1, 2015 10:05:02 PM",
-      "dateFinished": "Jun 1, 2015 10:05:02 PM",
+      "dateStarted": "Jun 17, 2015 11:32:32 AM",
+      "dateFinished": "Jun 17, 2015 11:32:33 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -155,7 +155,7 @@
       "config": {
         "colWidth": 6.0,
         "graph": {
-          "mode": "table",
+          "mode": "multiBarChart",
           "height": 334.0,
           "optionOpen": false,
           "keys": [
@@ -165,13 +165,7 @@
               "aggr": "sum"
             }
           ],
-          "values": [
-            {
-              "name": "Count",
-              "index": 1.0,
-              "aggr": "sum"
-            }
-          ],
+          "values": [],
           "groups": [],
           "scatter": {
             "xAxis": {
@@ -196,8 +190,8 @@
         "msg": "Style\n"
       },
       "dateCreated": "May 24, 2015 10:23:56 PM",
-      "dateStarted": "Jun 1, 2015 10:05:06 PM",
-      "dateFinished": "Jun 1, 2015 10:05:07 PM",
+      "dateStarted": "Jun 17, 2015 11:32:36 AM",
+      "dateFinished": "Jun 17, 2015 11:32:37 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -228,11 +222,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "import com.datastax.spark.connector._\nimport com.datastax.spark.connector\nimport org.apache.spark.SparkContext\nimport org.apache.spark.SparkContext._\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\ncc: org.apache.spark.sql.cassandra.CassandraSQLContext \u003d org.apache.spark.sql.cassandra.CassandraSQLContext@43ef5c02\ngroupRDD: org.apache.spark.rdd.RDD[(String, Int)] \u003d MappedRDD[24] at sortBy at \u003cconsole\u003e:48\nres23: groupRDD.type \u003d MappedRDD[24] at sortBy at \u003cconsole\u003e:48\nsoloArtistRDD: org.apache.spark.rdd.RDD[(String, Int)] \u003d MappedRDD[29] at sortBy at \u003cconsole\u003e:48\nres26: soloArtistRDD.type \u003d MappedRDD[29] at sortBy at \u003cconsole\u003e:48\notherStylesCountForGroup: Int \u003d 1753\notherStylesCountForArtist: Int \u003d 1375\ngroups: org.apache.spark.rdd.RDD[(String, Int)] \u003d ParallelCollectionRDD[38] at parallelize at \u003cconsole\u003e:48\nsoloArtists: org.apache.spark.rdd.RDD[(String, Int)] \u003d ParallelCollectionRDD[39] at parallelize at \u003cconsole\u003e:47\n"
+        "msg": "import com.datastax.spark.connector._\nimport com.datastax.spark.connector\nimport org.apache.spark.SparkContext\nimport org.apache.spark.SparkContext._\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\ncc: org.apache.spark.sql.cassandra.CassandraSQLContext \u003d org.apache.spark.sql.cassandra.CassandraSQLContext@75d21618\ngroupRDD: org.apache.spark.rdd.RDD[(String, Int)] \u003d MappedRDD[998] at sortBy at \u003cconsole\u003e:103\nres261: groupRDD.type \u003d MappedRDD[998] at sortBy at \u003cconsole\u003e:103\nsoloArtistRDD: org.apache.spark.rdd.RDD[(String, Int)] \u003d MappedRDD[1003] at sortBy at \u003cconsole\u003e:103\nres264: soloArtistRDD.type \u003d MappedRDD[1003] at sortBy at \u003cconsole\u003e:103\notherStylesCountForGroup: Int \u003d 1749\notherStylesCountForArtist: Int \u003d 1374\ngroups: org.apache.spark.rdd.RDD[(String, Int)] \u003d ParallelCollectionRDD[1012] at parallelize at \u003cconsole\u003e:103\nsoloArtists: org.apache.spark.rdd.RDD[(String, Int)] \u003d ParallelCollectionRDD[1013] at parallelize at \u003cconsole\u003e:102\n"
       },
       "dateCreated": "May 18, 2015 9:18:40 PM",
-      "dateStarted": "May 28, 2015 3:28:46 PM",
-      "dateFinished": "May 28, 2015 3:28:54 PM",
+      "dateStarted": "Jun 17, 2015 11:31:57 AM",
+      "dateFinished": "Jun 17, 2015 11:32:00 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -242,7 +236,7 @@
       "config": {
         "colWidth": 6.0,
         "graph": {
-          "mode": "table",
+          "mode": "pieChart",
           "height": 376.0,
           "optionOpen": false,
           "keys": [
@@ -278,8 +272,8 @@
         "msg": "Music Style\n"
       },
       "dateCreated": "May 18, 2015 9:46:01 PM",
-      "dateStarted": "Jun 1, 2015 10:05:19 PM",
-      "dateFinished": "Jun 1, 2015 10:05:19 PM",
+      "dateStarted": "Jun 17, 2015 11:32:43 AM",
+      "dateFinished": "Jun 17, 2015 11:32:43 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -289,7 +283,7 @@
       "config": {
         "colWidth": 6.0,
         "graph": {
-          "mode": "table",
+          "mode": "pieChart",
           "height": 374.0,
           "optionOpen": false,
           "keys": [
@@ -299,13 +293,7 @@
               "aggr": "sum"
             }
           ],
-          "values": [
-            {
-              "name": "Count",
-              "index": 1.0,
-              "aggr": "sum"
-            }
-          ],
+          "values": [],
           "groups": [],
           "scatter": {
             "xAxis": {
@@ -331,8 +319,8 @@
         "msg": "Music Style\n"
       },
       "dateCreated": "May 18, 2015 10:25:37 PM",
-      "dateStarted": "Jun 1, 2015 10:05:25 PM",
-      "dateFinished": "Jun 1, 2015 10:05:25 PM",
+      "dateStarted": "Jun 17, 2015 11:32:47 AM",
+      "dateFinished": "Jun 17, 2015 11:32:48 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -363,8 +351,8 @@
         "type": "TEXT"
       },
       "dateCreated": "May 18, 2015 10:34:20 PM",
-      "dateStarted": "May 20, 2015 1:10:08 PM",
-      "dateFinished": "May 20, 2015 1:10:08 PM",
+      "dateStarted": "Jun 17, 2015 11:32:01 AM",
+      "dateFinished": "Jun 17, 2015 11:32:01 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     }
