@@ -19,7 +19,7 @@ For the demos to work, you'll need:
     </property>
     ```
     
-5. You **should** add the parameter `spark.cassandra.connection.hosts` to the **Spark Interpreter** config. I set the value to `127.0.0.1` for Cassandra host name but you can adapt it to fit your own Cassandra deployment.
+5. You **should** add the parameter `spark.cassandra.connection.host` to the **Spark Interpreter** config. I set the value to `127.0.0.1` for Cassandra host name but you can adapt it to fit your own Cassandra deployment.
     <center>![Zeppelin Interpreter](https://raw.githubusercontent.com/doanduyhai/incubator-zeppelin/Spark_Cassandra_Demo/assets/Zeppelin_Interpreter.png "Zeppelin Interpreter Parameters")</center>
 6. The notebooks **07-DSE Search in action** and **08-SearchAnalytics Mode** require **Datastax Enterprise 4.7.x**. Do not run them if you're using an open-source **Cassandra**
 7. The notebook **09-Demos Cleanup** will clean up all data downloaded and created for those demos
