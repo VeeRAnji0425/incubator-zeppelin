@@ -155,7 +155,7 @@ public class CassandraInterpreterTest {
                 "Fanfarlo\t2006-01-01\tUnited Kingdom\tnull\tnull\t[Rock, Indie, Pop, Classic]\tGroup\n" +
                 "Jeff Beck\t1944-06-24\tUnited Kingdom\tnull\tMale\t[Rock, Pop, Classic]\tPerson\n" +
                 "Los Paranoias\tnull\tUnknown\tnull\tnull\t[Unknown]\tnull\n" +
-                "â€¦And You Will Know Us by the Trail of Dead\t1994-01-01\tUSA\tnull\tnull\t[Rock, Pop, Classic]\tGroup\n");
+                "ÉAnd You Will Know Us by the Trail of Dead\t1994-01-01\tUSA\tnull\tnull\t[Rock, Pop, Classic]\tGroup\n");
 
     }
 
