@@ -1,0 +1,432 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n\nSpark-Cassandra-Solr combo\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\n\u003eWarning: to use this demo, you\u0027ll need to have **Datastax Enterprise 4.7.0**",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432136878086_787836253",
+      "id": "20150520-174758_534900824",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch1\u003eSpark-Cassandra-Solr combo\u003c/h1\u003e\n\u003cblockquote\u003e\u003cp\u003eWarning: to use this demo, you\u0027ll need to have \u003cstrong\u003eDatastax Enterprise 4.7.0\u003c/strong\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n"
+      },
+      "dateCreated": "May 20, 2015 5:47:58 PM",
+      "dateStarted": "Jun 17, 2015 11:10:39 AM",
+      "dateFinished": "Jun 17, 2015 11:10:40 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Prepare data",
+      "text": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\nimport com.datastax.spark.connector.cql.CassandraConnector\nimport scala.collection.JavaConversions._\nimport scala.collection.JavaConverters._\nval cc \u003d new CassandraSQLContext(sc)\n\nvar musicStyles:List[String] \u003d Nil \nvar countries:List[String] \u003d Nil \n\nCassandraConnector(sc.getConf).withSessionDo { \n    session \u003d\u003e {\n        musicStyles \u003d session.execute(\"SELECT style FROM spark_demo.performers_distribution_by_style\").\n            all().\n            toList.\n            map(row \u003d\u003e row.getString(\"style\")).\n            toSet.\n            toList.\n            sorted\n            \n        countries \u003d session.execute(\"SELECT DISTINCT name FROM spark_demo.countries\").\n            all().\n            toList.\n            map(row \u003d\u003e row.getString(\"name\")).\n            toSet.\n            toList.\n            sorted   \n    }\n}\n\nval context \u003d z.getInterpreterContext()\ndef search(before:Object, after:Object):Unit \u003d {\n    z.run(3,context)\n}\nz.angularUnbind(\"countries\")\nz.angularUnbind(\"styles\")\nz.angularUnbind(\"album_year\")\nz.angularUnbind(\"artist_country\")\nz.angularUnbind(\"artist_style\")\nz.angularUnbind(\"updateDisplay\")\n\nz.angularUnwatch(\"updateDisplay\")\n\nz.angularBind(\"countries\", countries.asJava)\nz.angularBind(\"styles\", musicStyles.asJava)\nz.angularBind(\"album_year\",\"[2010 TO *]\")\nz.angularBind(\"artist_country\",\"USA\")\nz.angularBind(\"artist_style\",\"Rock\")\nz.angularBind(\"updateDisplay\",true)\nz.angularWatch(\"updateDisplay\",search _)",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "tableHide": true,
+        "title": true,
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432483305349_2122532186",
+      "id": "20150524-180145_111739812",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\nimport com.datastax.spark.connector.cql.CassandraConnector\nimport scala.collection.JavaConversions._\nimport scala.collection.JavaConverters._\ncc: org.apache.spark.sql.cassandra.CassandraSQLContext \u003d org.apache.spark.sql.cassandra.CassandraSQLContext@5e5519e2\nmusicStyles: List[String] \u003d List()\ncountries: List[String] \u003d List()\ncontext: org.apache.zeppelin.interpreter.InterpreterContext \u003d org.apache.zeppelin.interpreter.InterpreterContext@7c77094c\nsearch: (before: Object, after: Object)Unit\n"
+      },
+      "dateCreated": "May 24, 2015 6:01:45 PM",
+      "dateStarted": "Jul 21, 2015 8:37:41 PM",
+      "dateFinished": "Jul 21, 2015 8:37:53 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Search Form",
+      "text": "%angular\n\u003cdiv class\u003d\"row\"\u003e\n    \u003cdiv class\u003d\"panel panel-primary col-md-12\"\u003e\n        \u003cdiv class\u003d\"panel-heading\"\u003e\n            \u003ch3 class\u003d\"panel-title\"\u003eSearch Analytics\u003c/h3\u003e\n        \u003c/div\u003e\n        \u003cdiv class\u003d\"panel-body text-center\"\u003e\n            \u003ch4\u003eList all albums release \u003cbr/\u003e\n            after \u003cstrong\u003eAlbum Year\u003c/strong\u003e \u003cbr/\u003e\n            of \u003cstrong\u003eArtist Country\u003c/strong\u003e artists\u003cbr/\u003e\n            having style \u003cstrong\u003eArtist Style\u003c/strong\u003e\n            \u003c/h4\u003e\n        \u003c/div\u003e\n    \u003c/div\u003e\n\u003c/div\u003e    \n\u003cbr/\u003e\n\u003cdiv class\u003d\"row\"\u003e\n    \u003cdiv class\u003d\"panel panel-default col-md-12\"\u003e\n        \u003cdiv class\u003d\"panel-heading\"\u003e\n            \u003ch4 class\u003d\"panel-title\"\u003eSearch Form\u003c/h4\u003e\n        \u003c/div\u003e\n        \u003cdiv class\u003d\"panel-body\"\u003e\n            \u003cform class\u003d\"form-horizontal\"\u003e\n                \u003cdiv class\u003d\"form-group\"\u003e\n                    \u003clabel for\u003d\"year_id\" class\u003d\"col-md-4 control-label\"\u003eAlbum Year\u003c/label\u003e\n                    \u003cdiv class\u003d\"col-md-8\"\u003e\n                        \u003cinput type\u003d\"text\" class\u003d\"form-control\" id\u003d\"year_id\" \n                            ng-model\u003d\"album_year\"\n                            placeholder\u003d\"Album release year. Format \u003d yyyy or [yyyy TO yyyy], wildcard * possible\"\u003e\n                    \u003c/div\u003e    \n                \u003c/div\u003e\n                \u003cdiv class\u003d\"form-group\"\u003e\n                    \u003clabel for\u003d\"country_id\" class\u003d\"col-md-4 control-label\"\u003eArtist Country\u003c/label\u003e\n                    \u003cdiv class\u003d\"col-md-8\"\u003e                \n                        \u003cselect class\u003d\"form-control\" id\u003d\"country_id\" ng-options\u003d\"country for country in countries\" ng-model\u003d\"artist_country\"/\u003e\n                    \u003c/div\u003e    \n                \u003c/div\u003e\n                \u003cdiv class\u003d\"form-group\"\u003e\n                    \u003clabel for\u003d\"style_id\" class\u003d\"col-md-4 control-label\"\u003eArtist Style\u003c/label\u003e\n                    \u003cdiv class\u003d\"col-md-8\"\u003e                \n                        \u003cselect  class\u003d\"form-control\" id\u003d\"style_id\" ng-options\u003d\"style for style in styles\" ng-model\u003d\"artist_style\"/\u003e\n                    \u003c/div\u003e    \n                \u003c/div\u003e                \n                \u003cdiv class\u003d\"form-group\"\u003e\n                    \u003cdiv class\u003d\"col-md-offset-4 col-md-8\"\u003e\n                        \u003cbutton type\u003d\"submit\" class\u003d\"btn btn-primary\" ng-click\u003d\"updateDisplay\u003d!updateDisplay\"\u003eSearch\u003c/button\u003e\n                    \u003c/div\u003e\n                \u003c/div\u003e\n            \u003c/form\u003e\n        \u003c/div\u003e\n    \u003c/div\u003e\n",
+      "config": {
+        "colWidth": 4.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorHide": true,
+        "tableHide": false,
+        "title": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1434015360489_-428903733",
+      "id": "20150611-113600_761626137",
+      "result": {
+        "code": "SUCCESS",
+        "type": "ANGULAR",
+        "msg": "\u003cdiv class\u003d\"row\"\u003e\n    \u003cdiv class\u003d\"panel panel-primary col-md-12\"\u003e\n        \u003cdiv class\u003d\"panel-heading\"\u003e\n            \u003ch3 class\u003d\"panel-title\"\u003eSearch Analytics\u003c/h3\u003e\n        \u003c/div\u003e\n        \u003cdiv class\u003d\"panel-body text-center\"\u003e\n            \u003ch4\u003eList all albums release \u003cbr/\u003e\n            after \u003cstrong\u003eAlbum Year\u003c/strong\u003e \u003cbr/\u003e\n            of \u003cstrong\u003eArtist Country\u003c/strong\u003e artists\u003cbr/\u003e\n            having style \u003cstrong\u003eArtist Style\u003c/strong\u003e\n            \u003c/h4\u003e\n        \u003c/div\u003e\n    \u003c/div\u003e\n\u003c/div\u003e    \n\u003cbr/\u003e\n\u003cdiv class\u003d\"row\"\u003e\n    \u003cdiv class\u003d\"panel panel-default col-md-12\"\u003e\n        \u003cdiv class\u003d\"panel-heading\"\u003e\n            \u003ch4 class\u003d\"panel-title\"\u003eSearch Form\u003c/h4\u003e\n        \u003c/div\u003e\n        \u003cdiv class\u003d\"panel-body\"\u003e\n            \u003cform class\u003d\"form-horizontal\"\u003e\n                \u003cdiv class\u003d\"form-group\"\u003e\n                    \u003clabel for\u003d\"year_id\" class\u003d\"col-md-4 control-label\"\u003eAlbum Year\u003c/label\u003e\n                    \u003cdiv class\u003d\"col-md-8\"\u003e\n                        \u003cinput type\u003d\"text\" class\u003d\"form-control\" id\u003d\"year_id\" \n                            ng-model\u003d\"album_year\"\n                            placeholder\u003d\"Album release year. Format \u003d yyyy or [yyyy TO yyyy], wildcard * possible\"\u003e\n                    \u003c/div\u003e    \n                \u003c/div\u003e\n                \u003cdiv class\u003d\"form-group\"\u003e\n                    \u003clabel for\u003d\"country_id\" class\u003d\"col-md-4 control-label\"\u003eArtist Country\u003c/label\u003e\n                    \u003cdiv class\u003d\"col-md-8\"\u003e                \n                        \u003cselect class\u003d\"form-control\" id\u003d\"country_id\" ng-options\u003d\"country for country in countries\" ng-model\u003d\"artist_country\"/\u003e\n                    \u003c/div\u003e    \n                \u003c/div\u003e\n                \u003cdiv class\u003d\"form-group\"\u003e\n                    \u003clabel for\u003d\"style_id\" class\u003d\"col-md-4 control-label\"\u003eArtist Style\u003c/label\u003e\n                    \u003cdiv class\u003d\"col-md-8\"\u003e                \n                        \u003cselect  class\u003d\"form-control\" id\u003d\"style_id\" ng-options\u003d\"style for style in styles\" ng-model\u003d\"artist_style\"/\u003e\n                    \u003c/div\u003e    \n                \u003c/div\u003e                \n                \u003cdiv class\u003d\"form-group\"\u003e\n                    \u003cdiv class\u003d\"col-md-offset-4 col-md-8\"\u003e\n                        \u003cbutton type\u003d\"submit\" class\u003d\"btn btn-primary\" ng-click\u003d\"updateDisplay\u003d!updateDisplay\"\u003eSearch\u003c/button\u003e\n                    \u003c/div\u003e\n                \u003c/div\u003e\n            \u003c/form\u003e\n        \u003c/div\u003e\n    \u003c/div\u003e\n"
+      },
+      "dateCreated": "Jun 11, 2015 11:36:00 AM",
+      "dateStarted": "Jul 21, 2015 8:37:57 PM",
+      "dateFinished": "Jul 21, 2015 8:37:57 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "restrict with solr then aggregate with spark",
+      "text": "//List all albums  of American artists having style Rock released after 2010\ncc.cassandraSql(s\"\"\"\n    SELECT a.year,a.performer,a.title,p.country\n    FROM spark_demo.albums a\n    JOIN spark_demo.performers p\n    ON a.performer \u003d p.name\n    WHERE a.solr_query\u003d\u0027year:${z.angular(\"album_year\")}\u0027 \n    AND p.solr_query\u003d\u0027country:\"${z.angular(\"artist_country\")}\" AND styles:*${z.angular(\"artist_style\")}*\u0027\n\"\"\".stripMargin).\nmap(row \u003d\u003e (row.getInt(0),row.getString(1),row.getString(2),row.getString(3))).\nsortBy(tuple \u003d\u003e (tuple._1,tuple._2,tuple._3)).\ndisplay(\"Year\",\"Performer\",\"Title\",\"Country\")",
+      "config": {
+        "colWidth": 8.0,
+        "graph": {
+          "mode": "table",
+          "height": 434.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "Year",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "Performer",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "Year",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "title": true,
+        "tableHide": false,
+        "editorHide": true
+      },
+      "settings": {
+        "params": {
+          "Album Release Country": "USA",
+          "Album Release Year": "[2010 TO *]",
+          "Album Year": "[2014 TO *]",
+          "Artist Country": "USA",
+          "Artist Style": "Pop"
+        },
+        "forms": {}
+      },
+      "jobName": "paragraph_1432137037555_-826772635",
+      "id": "20150520-175037_1545340445",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "Year\tPerformer\tTitle\tCountry\n1980\tBarry Manilow\tBarry\tUSA\n1980\tBarry Manilow\tThe Very Best of Barry Manilow\tUSA\n1981\tBarry Manilow\tIf I Should Love Again\tUSA\n1981\tBarry Manilow\tLet\u0027s Hang On\tUSA\n1981\tElmer Bernstein\tStripes!\tUSA\n1981\tJohn Williams\tEchoes of Spain\tUSA\n1982\tPhilip Glass\tGlassworks\tUSA\n1983\tJames Horner\tBrainstorm\tUSA\n1983\tJames Horner\tGorky Park\tUSA\n1983\tJames Horner\tKrull\tUSA\n1983\tPhilip Glass\tThe Photographer\tUSA\n1984\tJohn Williams\tBach Handel Marcello\tUSA\n1985\tAlan Silvestri\tCat\u0027s Eye\tUSA\n1985\tBarry Manilow\tManilow\tUSA\n1985\tBernard Herrmann\tThe Ghost and Mrs. Muir\tUSA\n1985\tPhilip Glass\tSatyagraha\tUSA\n1986\tAlan Menken\tLittle Shop of Horrors\tUSA\n1986\tAlan Silvestri\tThe Clan of the Cave Bear\tUSA\n1986\tAlan Silvestri\tThe Delta Force\tUSA\n1986\tBernard Herrmann\tAlfred Hitchcock\u0027s Film Music\tUSA\n1986\tJames Horner\tAn American Tail\tUSA\n1986\tJames Horner\tDer Name der Rose\tUSA\n1986\tJames Horner\tLe nom de la rose\tUSA\n1986\tJames Horner\tWhere the River Runs Black\tUSA\n1986\tJohn Williams\tLes quatre suites pour luth\tUSA\n1986\tJohn Williams\tThe Four Lute Suites\tUSA\n1986\tPhilip Glass\tMishima\tUSA\n1986\tThe Platters\tThe Vocal Group Collection\tUSA\n1987\tAlan Silvestri\tPredator\tUSA\n1987\tBarry Manilow\tSwing Street\tUSA\n1987\tDexter Gordon\tDexter Blows Hot and Cool\tUSA\n1987\tDexter Gordon\tDexter Gordon at Montreaux\tUSA\n1987\tJames Horner\t*batteries not included\tUSA\n1987\tJohn Williams\tDuos\tUSA\n1987\tJohn Williams\tFragments of a Dream\tUSA\n1987\tPhilip Glass\tDancepieces\tUSA\n1987\tThe Platters\tOnly You\tUSA\n1988\tAlan Silvestri\tWho Framed Roger Rabbit\tUSA\n1988\tJames Horner\tRed Heat\tUSA\n1988\tJohn Williams\tThe Baroque Album\tUSA\n1988\tThe Platters\tThe Platters\tUSA\n1989\tAlan Silvestri\tBack to the Future II\tUSA\n1989\tAlan Silvestri\tThe Abyss\tUSA\n1989\tBernard Herrmann\tPsycho\tUSA\n1989\tCliff Martinez\tsex lies and videotape\tUSA\n1989\tCliff Martinez\tsex mensonges \u0026 vidéo\tUSA\n1989\tElmer Bernstein\tMy Left Foot / Da\tUSA\n1989\tElmer Bernstein\tZulu Dawn\tUSA\n1989\tJohn Williams\tGuitar Concertos\tUSA\n1989\tJohn Williams\tSpirit of the Guitar: Music of the Americas\tUSA\n1989\tLiza Minnelli\tDon\u0027t Drop Bombs\tUSA\n1989\tLiza Minnelli\tResults\tUSA\n1990\tAlan Menken\tArielle die Meerjungfrau\tUSA\n1990\tAlan Silvestri\tPredator 2\tUSA\n1990\tAndy Williams\tThe Best of Andy Williams\tUSA\n1990\tBernard Herrmann\tThe Egyptian\tUSA\n1990\tDoris Day\tHooray for Hollywood\tUSA\n1990\tElmer Bernstein\tThe Field\tUSA\n1990\tElmer Bernstein\tThe Grifters\tUSA\n1990\tJohn Williams\tGuitar Transcriptions\tUSA\n1990\tJohn Williams\tLeyenda\tUSA\n1990\tJohn Williams\tSpanish Guitar Music\tUSA\n1991\tAlan Menken\tBelle en het Beest\tUSA\n1991\tAlan Silvestri\tFather of the Bride\tUSA\n1991\tBernard Herrmann\tCitizen Kane\tUSA\n1991\tElmer Bernstein\tThe Buccaneer\tUSA\n1991\tElmer Bernstein\tWalk on the Wide Side\tUSA\n1992\tAlan Menken\tAladdin\tUSA\n1992\tAlan Menken\tDer kleine Horror-Laden\tUSA\n1992\tAlan Menken\tNewsies\tUSA\n1992\tAlan Menken\tThe Little Mermaid\tUSA\n1992\tAlan Silvestri\tDeath Becomes Her\tUSA\n1992\tAlan Silvestri\tFerngully - The Last Rainforest\tUSA\n1992\tCliff Martinez\tKafka\tUSA\n1992\tDoris Day\t16 Most Requested Songs\tUSA\n1992\tLoudon Wainwright III\tHistory\tUSA\n1992\tThe Platters\tThe Great Pretender\tUSA\n1993\tCliff Martinez\tKing of the Hill\tUSA\n1993\tDoris Day\tIt\u0027s Magic\tUSA\n1993\tLiza Minnelli\tThe Day After That\tUSA\n1994\tAlan Silvestri\tSelected Themes\tUSA\n1994\tDoris Day\tCuttin\u0027 Capers / Bright \u0026 Shiny\tUSA\n1994\tDoris Day\tDay by Day / Day by Night\tUSA\n1995\tAlan Silvestri\tRichie Rich\tUSA\n1995\tJohn Ottman\tThe Usual Suspects\tUSA\n1995\tLiza Minnelli\tCabaret\tUSA\n1995\tLoudon Wainwright III\tGrown Man\tUSA\n1995\tLoudon Wainwright III\tGrown man\tUSA\n1996\tJohn Barrowman\tSongs from Grease\tUSA\n1996\tLiza Minnelli\tGently\tUSA\n1997\tLoudon Wainwright III\tLittle Ship\tUSA\n1998\tJohn Ottman\tApt Pupil\tUSA\n1999\tCliff Martinez\tThe Limey\tUSA\n1999\tJohn Ottman\tLake Placid\tUSA\n1999\tLoudon Wainwright III\tSocial Studies\tUSA\n1999\tPink Martini\tSympathique\tUSA\n2000\tLoudon Wainwright III\tThe Atlantic Recordings\tUSA\n2001\tJosh Groban\tJosh Groban\tUSA\n2002\tBrian Tyler\tFrailty\tUSA\n2002\tJohn Ottman\tArac Attack\tUSA\n"
+      },
+      "dateCreated": "May 20, 2015 5:50:37 PM",
+      "dateStarted": "Jul 21, 2015 8:43:18 PM",
+      "dateFinished": "Jul 21, 2015 8:43:34 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\n    WHERE a.solr_query\u003d\u0027year:${z.angular(\"album_year\")}\u0027 \n    AND p.solr_query\u003d\u0027country:\"${z.angular(\"artist_country\")}\" AND styles:*${z.angular(\"artist_style\")}*\u0027",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {
+          "z.angular": {
+            "name": "z.angular",
+            "displayName": "\"artist_style\"",
+            "defaultValue": "",
+            "hidden": false
+          }
+        }
+      },
+      "jobName": "paragraph_1437323703143_347436212",
+      "id": "20150719-183503_371320771",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cpre\u003e\u003ccode\u003eWHERE a.solr_query\u003d\u0027year:${z.angular(\"album_year\")}\u0027 \nAND p.solr_query\u003d\u0027country:\"${z.angular(\"artist_country\")}\" AND styles:*${z.angular(\"artist_style\")}*\u0027\n\u003c/code\u003e\u003c/pre\u003e\n"
+      },
+      "dateCreated": "Jul 19, 2015 6:35:03 PM",
+      "dateStarted": "Jul 20, 2015 6:45:23 PM",
+      "dateFinished": "Jul 20, 2015 6:45:23 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1437421792758_-1111540199",
+      "id": "20150720-214952_171478409",
+      "dateCreated": "Jul 20, 2015 9:49:52 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "08-SearchAnalytics Mode",
+  "id": "2ANGJVNH2",
+  "angularObjects": {
+    "2ARKVF46K": [],
+    "2ANYRH787": [],
+    "2AQBHNCAB": [],
+    "2ANRWDJG1": [],
+    "2ANNAMCUB": [],
+    "2ARR8D6R9": [],
+    "2AQAS485Z": [
+      {
+        "name": "updateDisplay",
+        "object": false,
+        "noteId": "2ANGJVNH2"
+      },
+      {
+        "name": "artist_style",
+        "object": "Easy listening",
+        "noteId": "2ANGJVNH2"
+      },
+      {
+        "name": "styles",
+        "object": [
+          "Acoustic",
+          "African",
+          "Afrobeat",
+          "Alternative",
+          "Ambient",
+          "Baroque",
+          "Bass",
+          "Beat",
+          "Blues",
+          "Boca",
+          "Bossa",
+          "Cappella",
+          "Celtique",
+          "Chamber",
+          "Chillout",
+          "Chip",
+          "Classic",
+          "Comedy",
+          "Contemporary",
+          "Country",
+          "Crossover",
+          "Dance",
+          "Disco",
+          "Downtempo",
+          "Drum",
+          "Easy listening",
+          "Electro",
+          "Ethereal",
+          "Ethnic",
+          "Experimental",
+          "Flamenco",
+          "Folk",
+          "Funk",
+          "Fusion",
+          "Gangsta",
+          "Garage",
+          "Glam",
+          "Gospel",
+          "Gothic",
+          "Hip hop",
+          "House",
+          "Indie",
+          "Industrial",
+          "Instrumental",
+          "J-pop",
+          "Jam",
+          "Jazz",
+          "Medieval",
+          "Melodic",
+          "Metal",
+          "Opera",
+          "Orchestral",
+          "Pop",
+          "Progressive",
+          "Psychedelic",
+          "Punk",
+          "Rap",
+          "Reggae",
+          "Rhythm",
+          "Rnb",
+          "Rock",
+          "Romantic",
+          "Samba",
+          "Ska",
+          "Soft",
+          "Soprano",
+          "Soul",
+          "Swing",
+          "Symphonic",
+          "Synth",
+          "Tango",
+          "Techno",
+          "Trance",
+          "Underground",
+          "Unknown",
+          "Unplugged",
+          "Uplifting",
+          "Urban",
+          "Vocal",
+          "World"
+        ],
+        "noteId": "2ANGJVNH2"
+      },
+      {
+        "name": "countries",
+        "object": [
+          "Algeria",
+          "Argentina",
+          "Armenia",
+          "Australia",
+          "Austria",
+          "Belgium",
+          "Belize",
+          "Bermuda",
+          "Bolivia",
+          "Bosnia and Herzegovina",
+          "Brazil",
+          "Bulgaria",
+          "Cameroon",
+          "Canada",
+          "Cape Verde",
+          "Chile",
+          "China",
+          "Colombia",
+          "Croatia",
+          "Cuba",
+          "Cyprus",
+          "Czech Republic",
+          "Democratic Republic of the Congo",
+          "Denmark",
+          "Dominica",
+          "Egypt",
+          "Estonia",
+          "Ethiopia",
+          "Faroe Islands",
+          "Finland",
+          "France",
+          "Georgia",
+          "Germany",
+          "Greece",
+          "Guatemala",
+          "Guyana",
+          "Hong Kong",
+          "Hungary",
+          "Iceland",
+          "India",
+          "Ireland",
+          "Israel",
+          "Italy",
+          "Jamaica",
+          "Japan",
+          "Kenya",
+          "Latvia",
+          "Lebanon",
+          "Lithuania",
+          "Luxembourg",
+          "Malaysia",
+          "Mali",
+          "Mexico",
+          "Moldova",
+          "Mozambique",
+          "Nepal",
+          "Netherlands",
+          "New Zealand",
+          "Nigeria",
+          "Norway",
+          "Pakistan",
+          "Peru",
+          "Poland",
+          "Portugal",
+          "Puerto Rico",
+          "Romania",
+          "Russian Federation",
+          "Senegal",
+          "Serbia",
+          "Singapore",
+          "Slovakia",
+          "Slovenia",
+          "South Africa",
+          "South Korea",
+          "Spain",
+          "Sweden",
+          "Switzerland",
+          "Taiwan",
+          "Thailand",
+          "Trinidad and Tobago",
+          "Tunisia",
+          "Turkey",
+          "USA",
+          "Ukraine",
+          "United Kingdom",
+          "Unknown",
+          "Uruguay",
+          "Venezuela",
+          "Virgin Islands"
+        ],
+        "noteId": "2ANGJVNH2"
+      },
+      {
+        "name": "artist_country",
+        "object": "USA",
+        "noteId": "2ANGJVNH2"
+      },
+      {
+        "name": "album_year",
+        "object": "[1980 TO 2005]",
+        "noteId": "2ANGJVNH2"
+      }
+    ]
+  },
+  "config": {
+    "looknfeel": "default"
+  },
+  "info": {}
+}

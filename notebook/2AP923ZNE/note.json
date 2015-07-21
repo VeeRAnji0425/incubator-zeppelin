@@ -1,0 +1,89 @@
+{
+  "paragraphs": [
+    {
+      "title": "Cleanup tasks",
+      "text": "%md\n\nThe following step will **wipe all data** created for the previous demos, mainly:\n\n1. Drop `spark_demo` keyspace in Cassandra\n2. Delete the folder `/tmp/spark_cassandra_demo`",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorHide": true,
+        "tableHide": false,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432500435383_-320279472",
+      "id": "20150524-224715_1080062633",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cp\u003eThe following step will \u003cstrong\u003ewipe all data\u003c/strong\u003e created for the previous demos, mainly:\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eDrop \u003ccode\u003espark_demo\u003c/code\u003e keyspace in Cassandra\u003c/li\u003e\n\u003cli\u003eDelete the folder \u003ccode\u003e/tmp/spark_cassandra_demo\u003c/code\u003e\u003c/li\u003e\n\u003c/ol\u003e\n"
+      },
+      "dateCreated": "May 24, 2015 10:47:15 PM",
+      "dateStarted": "May 24, 2015 10:49:21 PM",
+      "dateFinished": "May 24, 2015 10:49:21 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sh\n\n`which cqlsh` -e \"DROP KEYSPACE spark_demo\"\n\nrm -rf /tmp/spark_cassandra_demo",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432500547764_-308166722",
+      "id": "20150524-224907_1501471916",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "May 24, 2015 10:49:07 PM",
+      "dateStarted": "May 24, 2015 10:50:25 PM",
+      "dateFinished": "May 24, 2015 10:50:29 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432500625672_-531619345",
+      "id": "20150524-225025_2140441786",
+      "dateCreated": "May 24, 2015 10:50:25 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "09-Demos Cleanup",
+  "id": "2AP923ZNE",
+  "angularObjects": {},
+  "config": {
+    "looknfeel": "default"
+  },
+  "info": {}
+}

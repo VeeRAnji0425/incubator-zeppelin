@@ -1,0 +1,173 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n\nHow to use SparkSQL for analytics\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\nI am not a developer, and I still want to use the **Cassandra/Spark** plateform",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "tableHide": false,
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432055381634_1511349703",
+      "id": "20150519-190941_901589394",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch1\u003eHow to use SparkSQL for analytics\u003c/h1\u003e\n\u003cp\u003eI am not a developer, and I still want to use the \u003cstrong\u003eCassandra/Spark\u003c/strong\u003e plateform\u003c/p\u003e\n"
+      },
+      "dateCreated": "May 19, 2015 7:09:41 PM",
+      "dateStarted": "May 20, 2015 4:26:43 PM",
+      "dateFinished": "May 20, 2015 4:26:43 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "prepare data",
+      "text": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\n\nval cc \u003d new CassandraSQLContext(sc)\n\ndef computeDecade(year:Int):String \u003d {\n    s\"${(year/10)*10}-${((year/10)+1)*10}\"\n}\n\ncc.udf.register(\"computeDecade\",computeDecade _)\n",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "title": true,
+        "editorHide": false,
+        "tableHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432482039662_-1172636874",
+      "id": "20150524-174039_852332121",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\ncc: org.apache.spark.sql.cassandra.CassandraSQLContext \u003d org.apache.spark.sql.cassandra.CassandraSQLContext@7366cc98\ncomputeDecade: (year: Int)String\nres61: org.apache.spark.sql.UserDefinedFunction \u003d UserDefinedFunction(\u003cfunction1\u003e,StringType)\n"
+      },
+      "dateCreated": "May 24, 2015 5:40:39 PM",
+      "dateStarted": "Jul 20, 2015 6:41:33 PM",
+      "dateFinished": "Jul 20, 2015 6:41:37 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Albums Release By Decade",
+      "text": "cc.sql(s\"\"\"\n    SELECT computeDecade(a.year),p.country,count(a.title)\n    FROM spark_demo.performers p JOIN spark_demo.albums a\n    ON p.name \u003d a.performer\n    WHERE p.country is not null\n    AND p.country !\u003d \u0027Unknown\u0027\n    AND a.year \u003e\u003d 1900\n    GROUP BY computeDecade(a.year),p.country\n    HAVING count(a.title) \u003e ${z.input(\"Albums Count Threshold\",\"99999\")}\n\"\"\".stripMargin).\nmap(row \u003d\u003e (row.getString(0),row.getString(1),row.getLong(2))).\nsortBy[String](tuple \u003d\u003e tuple._1,true,1).\ndisplay(\"Decade\",\"Country\",\"Count\")\n\n\n",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "multiBarChart",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "Decade",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "Country",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "Decade",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "editorHide": false,
+        "tableHide": false,
+        "title": true
+      },
+      "settings": {
+        "params": {
+          "countThreshold": "1000",
+          "Albums Count Threshold": "250"
+        },
+        "forms": {
+          "Albums Count Threshold": {
+            "name": "Albums Count Threshold",
+            "displayName": "Albums Count Threshold",
+            "defaultValue": "99999",
+            "hidden": false
+          }
+        }
+      },
+      "jobName": "paragraph_1431979407672_-74322143",
+      "id": "20150518-220327_1132207280",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "Decade\tCountry\tCount\n1950-1960\tUSA\t638\n1960-1970\tUnited Kingdom\t513\n1960-1970\tUSA\t1455\n1970-1980\tUnited Kingdom\t1228\n1970-1980\tUSA\t1768\n1980-1990\tUnited Kingdom\t2811\n1980-1990\tGermany\t394\n1980-1990\tFrance\t299\n1980-1990\tJamaica\t264\n1980-1990\tUSA\t2803\n1990-2000\tSpain\t279\n1990-2000\tJapan\t1328\n1990-2000\tPoland\t284\n1990-2000\tNorway\t366\n1990-2000\tAustralia\t316\n1990-2000\tItaly\t451\n1990-2000\tCanada\t557\n1990-2000\tJamaica\t419\n1990-2000\tUnited Kingdom\t4001\n1990-2000\tUSA\t7843\n1990-2000\tGermany\t1409\n1990-2000\tFinland\t490\n1990-2000\tSweden\t783\n1990-2000\tFrance\t475\n2000-2010\tBrazil\t360\n2000-2010\tTurkey\t256\n2000-2010\tUnited Kingdom\t5450\n2000-2010\tSpain\t511\n2000-2010\tGermany\t2543\n2000-2010\tJapan\t2569\n2000-2010\tRussian Federation\t291\n2000-2010\tFinland\t1321\n2000-2010\tSweden\t1811\n2000-2010\tAustralia\t649\n2000-2010\tFrance\t1113\n2000-2010\tItaly\t711\n2000-2010\tJamaica\t355\n2000-2010\tDenmark\t261\n2000-2010\tUSA\t13589\n2000-2010\tBelgium\t334\n2000-2010\tNetherlands\t496\n2000-2010\tPoland\t522\n2000-2010\tNorway\t741\n2000-2010\tCanada\t1349\n2010-2020\tJapan\t305\n2010-2020\tSweden\t370\n2010-2020\tCanada\t373\n2010-2020\tUSA\t3457\n2010-2020\tGermany\t484\n2010-2020\tFinland\t263\n2010-2020\tFrance\t272\n2010-2020\tUnited Kingdom\t979\n"
+      },
+      "dateCreated": "May 18, 2015 10:03:27 PM",
+      "dateStarted": "Jul 20, 2015 6:43:56 PM",
+      "dateFinished": "Jul 20, 2015 6:44:34 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "tableHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432416390614_-1432612695",
+      "id": "20150523-232630_1520927567",
+      "dateCreated": "May 23, 2015 11:26:30 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "06-Cassandra SparkSQL Analytics",
+  "id": "2ARM1VD5R",
+  "angularObjects": {
+    "2ANYRH787": [],
+    "2AQBHNCAB": [],
+    "2ANRWDJG1": [],
+    "2ANNAMCUB": [],
+    "2ARR8D6R9": [],
+    "2AQAS485Z": []
+  },
+  "config": {
+    "looknfeel": "default"
+  },
+  "info": {}
+}
