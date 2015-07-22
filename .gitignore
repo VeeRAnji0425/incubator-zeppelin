@@ -37,7 +37,7 @@ zeppelin-web/bower_components
 /zan-repo/
 /drivers/
 /warehouse/
-/notebook/
+#/notebook/
 /local-repo/
 
 **/sessions/

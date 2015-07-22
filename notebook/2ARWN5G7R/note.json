@@ -1,0 +1,261 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n\nDSE Search in action\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\n\u003eWarning: to use this demo, you\u0027ll need to have **Datastax Enterprise 4.7.1** at least",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432132051136_2048479810",
+      "id": "20150520-162731_216480735",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch1\u003eDSE Search in action\u003c/h1\u003e\n\u003cblockquote\u003e\u003cp\u003eWarning: to use this demo, you\u0027ll need to have \u003cstrong\u003eDatastax Enterprise 4.7.1\u003c/strong\u003e at least\u003c/p\u003e\n\u003c/blockquote\u003e\n"
+      },
+      "dateCreated": "May 20, 2015 4:27:31 PM",
+      "dateStarted": "Jul 23, 2015 12:32:39 AM",
+      "dateFinished": "Jul 23, 2015 12:32:39 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Solr in action",
+      "text": "%cassandra\n\nUSE spark_demo;\n\nSELECT year,performer,title \nFROM albums \nWHERE solr_query\u003d\u0027performer:\"*{{Artist Name\u003dJackson}}*\" \nAND title:\"{{Song Tile\u003d }}\" \nAND year:{{Release Year\u003d1980}}\u0027;",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 294.0,
+          "optionOpen": true,
+          "keys": [
+            {
+              "name": "year",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "performer",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "year",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "performer",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "tableHide": false,
+        "title": true,
+        "editorHide": false
+      },
+      "settings": {
+        "params": {
+          "Performer": "Jackson",
+          "Title": "Extra",
+          "Year": "[1980 TO 1991]",
+          "Artist Name": "Jackson",
+          "Song Release Year": "[2018 TO *]",
+          "Song Title": "",
+          "Song Tile": " ",
+          "ReleaseYear": "[1980 TO 1991]",
+          "Release Year": "[1980 TO *]"
+        },
+        "forms": {
+          "Artist Name": {
+            "name": "Artist Name",
+            "displayName": "Artist Name",
+            "defaultValue": "Jackson",
+            "hidden": false
+          },
+          "Song Tile": {
+            "name": "Song Tile",
+            "displayName": "Song Tile",
+            "defaultValue": " ",
+            "hidden": false
+          },
+          "Release Year": {
+            "name": "Release Year",
+            "displayName": "Release Year",
+            "defaultValue": "1980",
+            "hidden": false
+          }
+        }
+      },
+      "jobName": "paragraph_1432132071013_-936570723",
+      "id": "20150520-162751_335620342",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "year\tperformer\ttitle\n2007\tThe Jackson 5\tABC\n2007\tTNT Jackson\tAcross the Towers\n2007\tAndrew Jackson Jihad\tArt Of The Underground Single Series Volume 19\n2002\tThe Sleepy Jackson\tCaffeine in the Morning Sun\n2000\tThe Jackson 5\tCan You Feel It\n2009\tAndrew Jackson Jihad\tCan\u0027t Maintain\n1994\tLuscious Jackson\tCitysong\n2010\tJackson do Pandeiro\tColeção Folha Raízes da Música Popular Brasileira Volume 15\n2004\tThe Sleepy Jackson\tCome to This\n1994\tLuscious Jackson\tDeep Shag\n2004\tAndrew Jackson Jihad\tDemo II\n1983\tJanet Jackson\tDon\u0027t Mess Up This Good Thing\n1984\tJanet Jackson\tDream Street\n1982\tMichael Jackson\tE.T. the Extra-Terrestrial\n2005\tThe Samuel Jackson Five\tEasily Misunderstood\n1999\tAlan Jackson\tGrandes Sucessos\n1994\tLuscious Jackson\tHere\n2000\tAlan Jackson\tHonky Tonk Christmas\n1992\tLuscious Jackson\tIn Search of Manny\n2006\tAndrew Jackson Jihad\tIssue Problems\n1982\tJanet Jackson\tJanet Jackson\n1981\tJoe Jackson\tJumpin’ Jive\n2011\tAndrew Jackson Jihad\tKnife Man\n1999\tLuscious Jackson\tLadyfingers\n2002\tAlan Jackson\tLet It Be Christmas\n2002\tThe Sleepy Jackson\tLet Your Love Be Love\n1998\tJackson do Pandeiro\tMillennium\n2000\tThe Sleepy Jackson\tMiniskirt\n1997\tLuscious Jackson\tNaked Eye\n1987\tAlan Jackson\tNew Traditional\n1981\tMichael Jackson\tOne Day in Your Life\n2009\tAndrew Jackson Jihad\tOperation Stackola\n2006\tThe Sleepy Jackson\tPersonality: One Was a Spider One Was a Bird\n1982\tJoe Jackson\tReal Men\n1998\tJackson do Pandeiro\tRevisito e Sampleado\n2012\tAndrew Jackson Jihad\tRompilation\n1982\tJanet Jackson\tSay You Do\n1998\tJackson and His Computer Band\tSense Juice EP\n2009\tThe Jackson 5\tSkywriter\n1982\tMichael Jackson\tSomeone in the Dark\n1985\tJanet Jackson\tStart Anew\n2000\tStonewall Jackson\tStoner\n1980\tJoe Jackson\tThe Harder They Come\n2012\tThe Samuel Jackson Five\tThe Samuel Jackson Five\n2003\tThe Sleepy Jackson\tThe Sleepy Jackson\n1982\tMichael Jackson\tThriller\n1997\tLuscious Jackson\tTip Top Starlets\n1984\tJanet Jackson\tTwo to the Power of Love\n1997\tLuscious Jackson\tUnder Your Skin / Naked Eye\n2003\tThe Sleepy Jackson\tVampire Racecourse\n2004\tAlan Jackson\tVery Best Of\n"
+      },
+      "dateCreated": "May 20, 2015 4:27:51 PM",
+      "dateStarted": "Jul 23, 2015 12:33:26 AM",
+      "dateFinished": "Jul 23, 2015 12:33:26 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Solr Counting via cQL",
+      "text": "%cassandra\nUSE spark_demo;\n\nSELECT * FROM performers \nWHERE solr_query\u003d\u0027{\"q\":\"name:*\",\"facet\":{\"query\":\"country:{{Country\u003dUSA}} AND styles:*{{Style\u003dRock}}*\"}}\u0027;",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 94.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "facet_queries",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "facet_queries",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "title": true,
+        "editorHide": false
+      },
+      "settings": {
+        "params": {
+          "Country": "USA",
+          "Styl": "Rock",
+          "Style": "Pop"
+        },
+        "forms": {
+          "Country": {
+            "name": "Country",
+            "displayName": "Country",
+            "defaultValue": "USA",
+            "hidden": false
+          },
+          "Style": {
+            "name": "Style",
+            "displayName": "Style",
+            "defaultValue": "Rock",
+            "hidden": false
+          }
+        }
+      },
+      "jobName": "paragraph_1432136732180_-974160468",
+      "id": "20150520-174532_376890182",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "facet_queries\n{\"country:USA AND styles:*Pop*\":818}\n"
+      },
+      "dateCreated": "May 20, 2015 5:45:32 PM",
+      "dateStarted": "Jul 23, 2015 12:33:49 AM",
+      "dateFinished": "Jul 23, 2015 12:33:50 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Solr Facetting via CQL",
+      "text": "%cassandra\nUSE spark_demo;\n\nSELECT * FROM performers \nWHERE solr_query\u003d\u0027{\"q\":\"*\",\"facet\":{\"field\":\"country\"}}\u0027;\n",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 184.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "facet_fields",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "facet_fields",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "title": true,
+        "editorHide": false
+      },
+      "settings": {
+        "params": {
+          "Low Threshold": "100"
+        },
+        "forms": {}
+      },
+      "jobName": "paragraph_1433190102899_-1831046649",
+      "id": "20150601-222142_2094408376",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "facet_fields\n{\"country\":{\"USA\":5675,\"Unknown\":3316,\"United Kingdom\":2477,\"Germany\":700,\"Sweden\":569,\"Canada\":566,\"Japan\":501,\"France\":418,\"Finland\":332,\"Italy\":272,\"Jamaica\":262,\"Norway\":258,\"Australia\":236,\"Poland\":205,\"Spain\":188,\"Brazil\":164,\"Netherlands\":153,\"Turkey\":124,\"Belgium\":118,\"Argentina\":88,\"Ireland\":80,\"Denmark\":77,\"Russian Federation\":76,\"Mexico\":67,\"Austria\":54,\"Switzerland\":53,\"New Zealand\":52,\"Czech Republic\":47,\"Estonia\":46,\"Iceland\":39,\"Chile\":38,\"Israel\":31,\"Portugal\":29,\"Greece\":27,\"India\":23,\"South Africa\":22,\"Slovakia\":20,\"South Korea\":17,\"Cuba\":15,\"Romania\":15,\"Serbia\":14,\"Ukraine\":14,\"Lithuania\":13,\"Taiwan\":13,\"Colombia\":12,\"Latvia\":11,\"Puerto Rico\":11,\"Hong Kong\":10,\"Hungary\":10,\"Bulgaria\":9,\"Croatia\":9,\"Uruguay\":9,\"Venezuela\":8,\"Slovenia\":7,\"Bermuda\":6,\"China\":6,\"Malaysia\":6,\"Nigeria\":6,\"Singapore\":6,\"Mali\":5,\"Peru\":5,\"Cape Verde\":4,\"Cyprus\":4,\"Democratic Republic of the Congo\":4,\"Faroe Islands\":4,\"Lebanon\":4,\"Egypt\":3,\"Luxembourg\":3,\"Moldova\":3,\"Senegal\":3,\"Trinidad and Tobago\":3,\"Algeria\":2,\"Bolivia\":2,\"Bosnia and Herzegovina\":2,\"Dominica\":2,\"Ethiopia\":2,\"Guatemala\":2,\"Guyana\":2,\"Kenya\":2,\"Nepal\":2,\"Pakistan\":2,\"Thailand\":2,\"Tunisia\":2,\"Armenia\":1,\"Belize\":1,\"Cameroon\":1,\"Georgia\":1,\"Mozambique\":1,\"Virgin Islands\":1}}\n"
+      },
+      "dateCreated": "Jun 1, 2015 10:21:42 PM",
+      "dateStarted": "Jul 23, 2015 12:33:52 AM",
+      "dateFinished": "Jul 23, 2015 12:33:52 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1437399245466_622363495",
+      "id": "20150720-153405_852047846",
+      "dateCreated": "Jul 20, 2015 3:34:05 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "07-DSE Search in action",
+  "id": "2ARWN5G7R",
+  "angularObjects": {
+    "2ARKVF46K": [],
+    "2ANYRH787": [],
+    "2AQBHNCAB": [],
+    "2ANRWDJG1": [],
+    "2ANNAMCUB": [],
+    "2ARR8D6R9": [],
+    "2AQAS485Z": []
+  },
+  "config": {
+    "looknfeel": "default"
+  },
+  "info": {}
+}
