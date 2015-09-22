@@ -1,0 +1,242 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n\nHow to use Spark to copy data from old schema\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432130828543_-1202605713",
+      "id": "20150520-160708_1993643854",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch1\u003eHow to use Spark to copy data from old schema\u003c/h1\u003e\n"
+      },
+      "dateCreated": "May 20, 2015 4:07:08 PM",
+      "dateStarted": "May 20, 2015 4:08:01 PM",
+      "dateFinished": "May 20, 2015 4:08:02 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\nDepending on the partition key of the new schema, we may or may not have **perfect data locality**\n\nWe want to migrate data from\n\n```sql\nCREATE TABLE spark_demo.albums (\n    title text PRIMARY KEY,\n    country text,\n    performer text,\n    quality text,\n    status text,\n    year int\n)\n```\nto this new table\n\n```sql\nCREATE TABLE spark_demo.albums_by_country (\n    title text,\n    country text,\n    performer text,\n    quality text,\n    status text,\n    year int,\n    PRIMARY KEY((country,year),title)\n)\n```",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432130881795_-96929319",
+      "id": "20150520-160801_427876585",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cp\u003eDepending on the partition key of the new schema, we may or may not have \u003cstrong\u003eperfect data locality\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003eWe want to migrate data from\u003c/p\u003e\n\u003cpre\u003e\u003ccode class\u003d\"sql\"\u003eCREATE TABLE spark_demo.albums (\n    title text PRIMARY KEY,\n    country text,\n    performer text,\n    quality text,\n    status text,\n    year int\n)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eto this new table\u003c/p\u003e\n\u003cpre\u003e\u003ccode class\u003d\"sql\"\u003eCREATE TABLE spark_demo.albums_by_country (\n    title text,\n    country text,\n    performer text,\n    quality text,\n    status text,\n    year int,\n    PRIMARY KEY((country,year),title)\n)\n\u003c/code\u003e\u003c/pre\u003e\n"
+      },
+      "dateCreated": "May 20, 2015 4:08:01 PM",
+      "dateStarted": "May 24, 2015 10:04:27 PM",
+      "dateFinished": "May 24, 2015 10:04:29 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "truncate table albums_by_country",
+      "text": "%cassandra\nTruncate spark_demo.albums_by_country;\n",
+      "dateUpdated": "Sep 23, 2015 10:53:10 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "title": true,
+        "tableHide": true,
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432130928531_-1930981353",
+      "id": "20150520-160848_1834682060",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\n\n\u003cdiv class\u003d\"container\"\u003e\n\u003cdiv class\u003d\"row text-center\"\u003e\n\u003ch4\u003eNo Result\u003c/h4\u003e\n\u003c/div\u003e\n\u003cbr/\u003e\n    \u003cdiv class\u003d\"row\"\u003e\n    \u003cdiv class\u003d\"col-md-3\"\u003e\u003c/div\u003e\n    \u003cdiv class\u003d\"col-md-6 col-offset-md-3 table-responsive table-bordered\"\u003e\n        \u003ctable class\u003d\"table\"\u003e\n            \u003ccaption\u003e\u003ch5\u003eLast query execution info\u003c/h5\u003e\u003c/caption\u003e\n            \u003cthead\u003e\n                \u003ctr\u003e\n                    \u003cth\u003eInfo\u003c/th\u003e\n                    \u003cth\u003eValue\u003c/th\u003e\n                \u003c/tr\u003e\n            \u003c/thead\u003e\n            \u003ctbody\u003e\n                \u003ctr\u003e\n                    \u003ctd\u003eStatement\u003c/td\u003e\n                    \u003ctd\u003eTruncate spark_demo.albums_by_country;\u003c/td\u003e\n                \u003c/tr\u003e\n                \u003ctr\u003e\n                    \u003ctd\u003eAchieved Consistency\u003c/td\u003e\n                    \u003ctd\u003eN/A\u003c/td\u003e\n                \u003c/tr\u003e\n                \u003ctr\u003e\n                    \u003ctd\u003eTried Hosts\u003c/td\u003e\n                    \u003ctd\u003e127.0.0.1:9042\u003c/td\u003e\n                \u003c/tr\u003e\n                \u003ctr\u003e\n                    \u003ctd\u003eQueried Hosts\u003c/td\u003e\n                    \u003ctd\u003e127.0.0.1:9042\u003c/td\u003e\n                \u003c/tr\u003e\n                \u003ctr\u003e\n                    \u003ctd\u003eSchema In Agreement\u003c/td\u003e\n                    \u003ctd\u003etrue\u003c/td\u003e\n                \u003c/tr\u003e\n            \u003c/tbody\u003e\n        \u003c/table\u003e\n    \u003c/div\u003e\n    \u003c/div\u003e\n\u003c/div\u003e"
+      },
+      "dateCreated": "May 20, 2015 4:08:48 PM",
+      "dateStarted": "Sep 23, 2015 10:53:05 AM",
+      "dateFinished": "Sep 23, 2015 10:53:05 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Migrate data with spark",
+      "text": "import scala.collection.JavaConversions._\nimport com.datastax.spark.connector._\nimport com.datastax.spark.connector.cql.CassandraConnector\nimport org.apache.spark.{SparkConf, SparkContext}\n\ncase class Albums(title: String, country: String, performer:String, quality:Option[String],status:Option[String],year:Int)\n\nsc.cassandraTable[Albums](\"spark_demo\", \"albums\").saveToCassandra(\"spark_demo\",\"albums_by_country\")\n",
+      "dateUpdated": "Sep 23, 2015 10:53:11 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "tableHide": false,
+        "title": true,
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432131174055_-2116093191",
+      "id": "20150520-161254_1942103078",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import scala.collection.JavaConversions._\nimport com.datastax.spark.connector._\nimport com.datastax.spark.connector.cql.CassandraConnector\nimport org.apache.spark.{SparkConf, SparkContext}\ndefined class Albums\n"
+      },
+      "dateCreated": "May 20, 2015 4:12:54 PM",
+      "dateStarted": "Sep 23, 2015 10:53:11 AM",
+      "dateFinished": "Sep 23, 2015 10:53:27 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Search Table Albums_by_country_and_year",
+      "text": "%cassandra\nSELECT country,year,performer,title FROM spark_demo.albums_by_country\nWHERE country\u003d\u0027{{country\u003dHungary}}\u0027 AND year\u003d{{year\u003d2010}}\nLIMIT 100;",
+      "dateUpdated": "Sep 23, 2015 11:09:23 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": true,
+          "keys": [
+            {
+              "name": "country",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "year",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "country",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "year",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "title": true,
+        "editorHide": false,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {
+          "country": "Hungary",
+          "year": "2000"
+        },
+        "forms": {
+          "country": {
+            "name": "country",
+            "displayName": "country",
+            "defaultValue": "Hungary",
+            "hidden": false
+          },
+          "year": {
+            "name": "year",
+            "displayName": "year",
+            "defaultValue": "2010",
+            "hidden": false
+          }
+        }
+      },
+      "jobName": "paragraph_1432131588210_1727541219",
+      "id": "20150520-161948_459128832",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "country\tyear\tperformer\ttitle\nHungary\t2000\tSolaris\tBack to the Roots\nHungary\t2000\tSolaris\tNOAB\nHungary\t2000\tYonderboi\tShallow and Profound\nHungary\t2000\tAfter Crying\tStruggle for Life\n"
+      },
+      "dateCreated": "May 20, 2015 4:19:48 PM",
+      "dateStarted": "Sep 23, 2015 11:09:23 AM",
+      "dateFinished": "Sep 23, 2015 11:09:23 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432131634668_1347686786",
+      "id": "20150520-162034_2044470361",
+      "dateCreated": "May 20, 2015 4:20:34 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "06-Cassandra Spark For Schema Migration",
+  "id": "2AR1MKVYA",
+  "angularObjects": {
+    "2ARKVF46K": [],
+    "2ANYRH787": [],
+    "2AQBHNCAB": [],
+    "2ANRWDJG1": [],
+    "2ANNAMCUB": [],
+    "2ARR8D6R9": [],
+    "2AQAS485Z": []
+  },
+  "config": {
+    "looknfeel": "default"
+  },
+  "info": {}
+}

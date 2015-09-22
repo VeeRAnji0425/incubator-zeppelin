@@ -106,8 +106,8 @@
     },
     {
       "title": "Writing to Cassandra",
-      "text": "//import com.datastax.spark.connector.cql.CassandraConnector\n//import com.datastax.spark.connector._\nimport com.datastax.spark.connector.{SomeColumns, _}\nimport org.apache.spark.{SparkConf, SparkContext}\n\nval CSV: String \u003d \"/tmp/spark_cassandra_demo/us_unemployment.csv\"\nval TABLE_COLUMNS \u003d SomeColumns(\"year\", \"civil_non_institutional_count\", \"civil_labor_count\", \"labor_population_percentage\",\n    \"employed_count\", \"employed_percentage\", \"agriculture_part_count\", \"non_agriculture_part_count\", \"unemployed_count\",\n    \"unemployed_percentage_to_labor\", \"not_labor_count\", \"footnotes\")\n\nsc.textFile(CSV).\n    zipWithIndex().\n    filter {case (line, index) \u003d\u003e index \u003e 0}.\n    map{case (line,index) \u003d\u003e {\n        val lines \u003d line.split(\",\")\n    \n        (lines(0).toInt, lines(1).toInt, lines(2).toInt, lines(3).toDouble, lines(4).toInt, lines(5).toDouble, lines(6).toInt, lines(7).toInt,\n        lines(8).toInt, lines(9).toDouble, lines(10).toInt,\"\")\n    }}.\n    saveToCassandra(\"spark_demo\", \"us_unemployment_stats\", TABLE_COLUMNS)    \n    ",
-      "dateUpdated": "Sep 22, 2015 3:04:12 PM",
+      "text": "import com.datastax.spark.connector.{SomeColumns, _}\nimport org.apache.spark.{SparkConf, SparkContext}\n\nval CSV: String \u003d \"/tmp/spark_cassandra_demo/us_unemployment.csv\"\nval TABLE_COLUMNS \u003d SomeColumns(\"year\", \"civil_non_institutional_count\", \"civil_labor_count\", \"labor_population_percentage\",\n    \"employed_count\", \"employed_percentage\", \"agriculture_part_count\", \"non_agriculture_part_count\", \"unemployed_count\",\n    \"unemployed_percentage_to_labor\", \"not_labor_count\", \"footnotes\")\n\nsc.textFile(CSV).\n    zipWithIndex().\n    filter {case (line, index) \u003d\u003e index \u003e 0}.\n    map{case (line,index) \u003d\u003e {\n        val lines \u003d line.split(\",\")\n    \n        (lines(0).toInt, lines(1).toInt, lines(2).toInt, lines(3).toDouble, lines(4).toInt, lines(5).toDouble, lines(6).toInt, lines(7).toInt,\n        lines(8).toInt, lines(9).toDouble, lines(10).toInt,\"\")\n    }}.\n    saveToCassandra(\"spark_demo\", \"us_unemployment_stats\", TABLE_COLUMNS)    \n    ",
+      "dateUpdated": "Sep 28, 2015 10:35:10 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -121,7 +121,8 @@
         },
         "title": true,
         "editorHide": false,
-        "tableHide": true
+        "tableHide": true,
+        "editorMode": "ace/mode/scala"
       },
       "settings": {
         "params": {},

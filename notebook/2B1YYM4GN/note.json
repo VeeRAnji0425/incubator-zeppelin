@@ -1,0 +1,127 @@
+{
+  "paragraphs": [
+    {
+      "title": "Truncate twitter stream table",
+      "text": "%cassandra\n\n//Truncate spark_demo.twitter_stream;",
+      "dateUpdated": "Sep 28, 2015 1:37:26 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala",
+        "tableHide": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1443012297645_1182428865",
+      "id": "20150923-144457_1380406081",
+      "result": {
+        "code": "ERROR",
+        "type": "TEXT",
+        "msg": "Error parsing input:\n\t\u0027\n//Truncate spark_demo.twitter_stream;\u0027\nDid you forget to add ; (semi-colon) at the end of each CQL statement ?"
+      },
+      "dateCreated": "Sep 23, 2015 2:44:57 PM",
+      "dateStarted": "Sep 28, 2015 1:37:26 PM",
+      "dateFinished": "Sep 28, 2015 1:37:26 PM",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Check for Tweets",
+      "text": "%cassandra\n\nSELECT * FROM spark_demo.twitter_stream \nLIMIT 100;",
+      "dateUpdated": "Sep 28, 2015 1:50:57 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "keyword",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "interval",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "keyword",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "interval",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "editorMode": "ace/mode/scala",
+        "editorHide": false,
+        "tableHide": false,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1443000071022_-40829775",
+      "id": "20150923-112111_1638709867",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\n\n\u003cdiv class\u003d\"container\"\u003e\n\u003cdiv class\u003d\"row text-center\"\u003e\n\u003ch4\u003eNo Result\u003c/h4\u003e\n\u003c/div\u003e\n\u003cbr/\u003e\n    \u003cdiv class\u003d\"row\"\u003e\n    \u003cdiv class\u003d\"col-md-3\"\u003e\u003c/div\u003e\n    \u003cdiv class\u003d\"col-md-6 col-offset-md-3 table-responsive table-bordered\"\u003e\n        \u003ctable class\u003d\"table\"\u003e\n            \u003ccaption\u003e\u003ch5\u003eLast query execution info\u003c/h5\u003e\u003c/caption\u003e\n            \u003cthead\u003e\n                \u003ctr\u003e\n                    \u003cth\u003eInfo\u003c/th\u003e\n                    \u003cth\u003eValue\u003c/th\u003e\n                \u003c/tr\u003e\n            \u003c/thead\u003e\n            \u003ctbody\u003e\n                \u003ctr\u003e\n                    \u003ctd\u003eStatement\u003c/td\u003e\n                    \u003ctd\u003eSELECT * FROM spark_demo.twitter_stream \nLIMIT 100;\u003c/td\u003e\n                \u003c/tr\u003e\n                \u003ctr\u003e\n                    \u003ctd\u003eAchieved Consistency\u003c/td\u003e\n                    \u003ctd\u003eN/A\u003c/td\u003e\n                \u003c/tr\u003e\n                \u003ctr\u003e\n                    \u003ctd\u003eTried Hosts\u003c/td\u003e\n                    \u003ctd\u003e127.0.0.1:9042\u003c/td\u003e\n                \u003c/tr\u003e\n                \u003ctr\u003e\n                    \u003ctd\u003eQueried Hosts\u003c/td\u003e\n                    \u003ctd\u003e127.0.0.1:9042\u003c/td\u003e\n                \u003c/tr\u003e\n                \u003ctr\u003e\n                    \u003ctd\u003eSchema In Agreement\u003c/td\u003e\n                    \u003ctd\u003etrue\u003c/td\u003e\n                \u003c/tr\u003e\n            \u003c/tbody\u003e\n        \u003c/table\u003e\n    \u003c/div\u003e\n    \u003c/div\u003e\n\u003c/div\u003e"
+      },
+      "dateCreated": "Sep 23, 2015 11:21:11 AM",
+      "dateStarted": "Sep 28, 2015 1:50:57 PM",
+      "dateFinished": "Sep 28, 2015 1:51:07 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1443011530255_1364127224",
+      "id": "20150923-143210_753219777",
+      "dateCreated": "Sep 23, 2015 2:32:10 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "04-Spark Streaming",
+  "id": "2B1YYM4GN",
+  "angularObjects": {
+    "2ARKVF46K": [],
+    "2ANYRH787": [],
+    "2AQBHNCAB": [],
+    "2ANRWDJG1": [],
+    "2ANNAMCUB": [],
+    "2ARR8D6R9": [],
+    "2AQAS485Z": []
+  },
+  "config": {
+    "looknfeel": "default"
+  },
+  "info": {}
+}

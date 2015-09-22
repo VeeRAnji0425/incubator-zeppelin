@@ -1,0 +1,182 @@
+{
+  "paragraphs": [
+    {
+      "title": "Read Data Using SparkSQL Programmatically",
+      "text": "import org.apache.spark.sql.cassandra.CassandraSQLContext\n\nval cc \u003d new CassandraSQLContext(sc)\n\nval row \u003d cc.cassandraSql(s\"SELECT year,unemployed_percentage_to_labor \" +\n                                     s\"FROM spark_demo.us_unemployment_stats WHERE unemployed_percentage_to_labor \u003e 8 \" +\n                                     s\"ORDER BY year DESC\")\nrow.\n    map(row \u003d\u003e (row.getInt(0),row.getDouble(1))).\n    sortBy{case(year,_) \u003d\u003e year}.\n    display(\"Year\",\"Unemployment Percentage\")  ",
+      "dateUpdated": "Sep 28, 2015 1:32:58 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "Year",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "Unemployment Percentage",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "Year",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "Unemployment Percentage",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "editorMode": "ace/mode/scala",
+        "tableHide": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1443439935636_82248556",
+      "id": "20150928-133215_1131909059",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "Year\tUnemployment Percentage\n1941\t9.9\n1975\t8.5\n1982\t9.7\n1983\t9.6\n2009\t9.3\n2010\t9.6\n"
+      },
+      "dateCreated": "Sep 28, 2015 1:32:15 PM",
+      "dateStarted": "Sep 28, 2015 1:32:32 PM",
+      "dateFinished": "Sep 28, 2015 1:32:38 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Register Cassandra Table Into DataFrame",
+      "text": "sqlContext\n  .read\n  .format(\"org.apache.spark.sql.cassandra\")\n  .options(Map(\"keyspace\" -\u003e \"spark_demo\", \"table\" -\u003e \"us_unemployment_stats\"))\n  .load()\n  .registerTempTable(\"us_unemployment_stats\")",
+      "dateUpdated": "Sep 28, 2015 1:35:33 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1443439952311_-1839941625",
+      "id": "20150928-133232_1157339759",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "Sep 28, 2015 1:32:32 PM",
+      "dateStarted": "Sep 28, 2015 1:35:33 PM",
+      "dateFinished": "Sep 28, 2015 1:35:33 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Display Using DataFrame",
+      "text": "%sql\nSELECT year,unemployed_percentage_to_labor\nFROM us_unemployment_stats \nWHERE unemployed_percentage_to_labor \u003e 8 \nORDER BY year ASC",
+      "dateUpdated": "Sep 28, 2015 1:36:15 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "year",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "unemployed_percentage_to_labor",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "year",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "unemployed_percentage_to_labor",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "editorMode": "ace/mode/scala",
+        "tableHide": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1443440004512_2898338",
+      "id": "20150928-133324_994967912",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "year\tunemployed_percentage_to_labor\n1941\t9.9\n1975\t8.5\n1982\t9.7\n1983\t9.6\n2009\t9.3\n2010\t9.6\n"
+      },
+      "dateCreated": "Sep 28, 2015 1:33:24 PM",
+      "dateStarted": "Sep 28, 2015 1:35:53 PM",
+      "dateFinished": "Sep 28, 2015 1:35:55 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1443440153936_2056100714",
+      "id": "20150928-133553_1815979260",
+      "dateCreated": "Sep 28, 2015 1:35:53 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "03-SparkSQL/DataFrame",
+  "id": "2AZSH3ASB",
+  "angularObjects": {
+    "2ARKVF46K": [],
+    "2ANYRH787": [],
+    "2AQBHNCAB": [],
+    "2ANRWDJG1": [],
+    "2ANNAMCUB": [],
+    "2ARR8D6R9": [],
+    "2AQAS485Z": []
+  },
+  "config": {},
+  "info": {}
+}
