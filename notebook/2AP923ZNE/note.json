@@ -79,9 +79,16 @@
       "progressUpdateIntervalMs": 500
     }
   ],
-  "name": "09-Demos Cleanup",
+  "name": "04-Demos Cleanup",
   "id": "2AP923ZNE",
-  "angularObjects": {},
+  "angularObjects": {
+    "2ANYRH787": [],
+    "2AQBHNCAB": [],
+    "2ANRWDJG1": [],
+    "2ANNAMCUB": [],
+    "2ARR8D6R9": [],
+    "2AQAS485Z": []
+  },
   "config": {
     "looknfeel": "default"
   },

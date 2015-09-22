@@ -35,7 +35,8 @@
     },
     {
       "title": "prepare data",
-      "text": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\n\nval cc \u003d new CassandraSQLContext(sc)\n\ndef computeDecade(year:Int):String \u003d {\n    s\"${(year/10)*10}-${((year/10)+1)*10}\"\n}\n\ncc.udf.register(\"computeDecade\",computeDecade _)\n",
+      "text": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\nimport org.apache.spark.sql.functions._\n\n//val cc \u003d new CassandraSQLContext(sc)\n\ndef computeDecade(year:Int):String \u003d {\n    s\"${(year/10)*10}-${((year/10)+1)*10}\"\n}\n\nsqlContext.udf.register(\"computeDecade\", computeDecade _)\n//cc.udf.register(\"computeDecade\",computeDecade _)\n",
+      "dateUpdated": "Sep 22, 2015 3:32:19 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -49,7 +50,8 @@
         },
         "title": true,
         "editorHide": false,
-        "tableHide": true
+        "tableHide": false,
+        "editorMode": "ace/mode/scala"
       },
       "settings": {
         "params": {},
@@ -60,11 +62,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\ncc: org.apache.spark.sql.cassandra.CassandraSQLContext \u003d org.apache.spark.sql.cassandra.CassandraSQLContext@7366cc98\ncomputeDecade: (year: Int)String\nres61: org.apache.spark.sql.UserDefinedFunction \u003d UserDefinedFunction(\u003cfunction1\u003e,StringType)\n"
+        "msg": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\nimport org.apache.spark.sql.functions._\ncomputeDecade: (year: Int)String\nres101: org.apache.spark.sql.UserDefinedFunction \u003d UserDefinedFunction(\u003cfunction1\u003e,StringType)\n"
       },
       "dateCreated": "May 24, 2015 5:40:39 PM",
-      "dateStarted": "Jul 20, 2015 6:41:33 PM",
-      "dateFinished": "Jul 20, 2015 6:41:37 PM",
+      "dateStarted": "Sep 22, 2015 3:32:19 PM",
+      "dateFinished": "Sep 22, 2015 3:32:23 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -132,31 +134,80 @@
       "progressUpdateIntervalMs": 500
     },
     {
+      "text": "sqlContext.sql(\"\"\"CREATE TEMPORARY TABLE performers\n    |USING org.apache.spark.sql.cassandra\n    |OPTIONS(table \"performers\", keyspace \"spark_demo\")\"\"\".stripMargin)\n\nsqlContext.sql(\"\"\"CREATE TEMPORARY TABLE albums\n    |USING org.apache.spark.sql.cassandra\n    |OPTIONS(table \"albums\", keyspace \"spark_demo\")\"\"\".stripMargin)\n    \n val resultDF \u003d sql(s\"\"\"\n    SELECT computeDecade(a.year) as decade, p.country,count(a.title) as titles_count\n    FROM performers p JOIN albums a\n    ON p.name \u003d a.performer\n    WHERE p.country is not null\n    AND p.country !\u003d \u0027Unknown\u0027\n    AND a.year \u003e\u003d 1900\n    GROUP BY computeDecade(a.year),p.country\n    HAVING count(a.title) \u003e ${z.input(\"Albums Count Threshold\",\"99999\")}\n    ORDER BY decade\n    \"\"\".stripMargin)\nz.show(resultDF)    ",
+      "dateUpdated": "Sep 22, 2015 3:38:28 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
-          "mode": "table",
+          "mode": "multiBarChart",
           "height": 300.0,
           "optionOpen": false,
-          "keys": [],
-          "values": [],
+          "keys": [
+            {
+              "name": "decade",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "country",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
           "groups": [],
-          "scatter": {}
+          "scatter": {
+            "yAxis": {
+              "name": "country",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
         },
-        "tableHide": true
+        "tableHide": false,
+        "editorMode": "ace/mode/scala"
       },
+      "settings": {
+        "params": {
+          "Albums Count Threshold": "250"
+        },
+        "forms": {
+          "Albums Count Threshold": {
+            "name": "Albums Count Threshold",
+            "displayName": "Albums Count Threshold",
+            "defaultValue": "99999",
+            "hidden": false
+          }
+        }
+      },
+      "jobName": "paragraph_1432416390614_-1432612695",
+      "id": "20150523-232630_1520927567",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "decade\tcountry\ttitles_count\n1950-1960\tUSA\t637\n1960-1970\tUnited Kingdom\t509\n1960-1970\tUSA\t1444\n1970-1980\tUnited Kingdom\t1218\n1970-1980\tUSA\t1762\n1980-1990\tUSA\t2797\n1980-1990\tFrance\t295\n1980-1990\tGermany\t387\n1980-1990\tUnited Kingdom\t2818\n1980-1990\tJamaica\t269\n1990-2000\tFinland\t490\n1990-2000\tGermany\t1396\n1990-2000\tAustralia\t320\n1990-2000\tJapan\t1328\n1990-2000\tFrance\t476\n1990-2000\tUSA\t7841\n1990-2000\tUnited Kingdom\t3966\n1990-2000\tItaly\t450\n1990-2000\tPoland\t282\n1990-2000\tNorway\t369\n1990-2000\tSpain\t273\n1990-2000\tJamaica\t415\n1990-2000\tCanada\t553\n1990-2000\tSweden\t781\n2000-2010\tUnited Kingdom\t5423\n2000-2010\tPoland\t513\n2000-2010\tJapan\t2573\n2000-2010\tDenmark\t269\n2000-2010\tRussian Federation\t293\n2000-2010\tFinland\t1321\n2000-2010\tSweden\t1808\n2000-2010\tFrance\t1084\n2000-2010\tItaly\t707\n2000-2010\tNorway\t760\n2000-2010\tGermany\t2569\n2000-2010\tCanada\t1348\n2000-2010\tSpain\t514\n2000-2010\tAustralia\t656\n2000-2010\tTurkey\t253\n2000-2010\tUSA\t13542\n2000-2010\tJamaica\t356\n2000-2010\tNetherlands\t511\n2000-2010\tBelgium\t332\n2000-2010\tBrazil\t356\n2010-2020\tUSA\t3493\n2010-2020\tFrance\t271\n2010-2020\tSweden\t374\n2010-2020\tJapan\t300\n2010-2020\tGermany\t500\n2010-2020\tFinland\t272\n2010-2020\tUnited Kingdom\t969\n2010-2020\tCanada\t375\n"
+      },
+      "dateCreated": "May 23, 2015 11:26:30 PM",
+      "dateStarted": "Sep 22, 2015 3:38:28 PM",
+      "dateFinished": "Sep 22, 2015 3:38:53 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
       "settings": {
         "params": {},
         "forms": {}
       },
-      "jobName": "paragraph_1432416390614_-1432612695",
-      "id": "20150523-232630_1520927567",
-      "dateCreated": "May 23, 2015 11:26:30 PM",
+      "jobName": "paragraph_1442928969465_-571472822",
+      "id": "20150922-153609_134935692",
+      "dateCreated": "Sep 22, 2015 3:36:09 PM",
       "status": "READY",
       "progressUpdateIntervalMs": 500
     }
   ],
-  "name": "06-Cassandra SparkSQL Analytics",
+  "name": "03-Cassandra SparkSQL Analytics",
   "id": "2ARM1VD5R",
   "angularObjects": {
     "2ANYRH787": [],

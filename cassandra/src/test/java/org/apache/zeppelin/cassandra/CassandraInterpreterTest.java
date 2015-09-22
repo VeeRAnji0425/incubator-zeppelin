@@ -60,11 +60,11 @@ public class CassandraInterpreterTest {
 
     @ClassRule
     public static AchillesResource resource = AchillesResourceBuilder
-        .noEntityPackages()
-        .withKeyspaceName("zeppelin")
-        .withScript("prepare_schema.cql")
-        .withScript("prepare_data.cql")
-        .build();
+            .noEntityPackages()
+            .withKeyspaceName("zeppelin")
+            .withScript("prepare_schema.cql")
+            .withScript("prepare_data.cql")
+            .build();
 
     private static Session session = resource.getNativeSession();
 
@@ -155,7 +155,7 @@ public class CassandraInterpreterTest {
                 "Fanfarlo\t2006-01-01\tUnited Kingdom\tnull\tnull\t[Rock, Indie, Pop, Classic]\tGroup\n" +
                 "Jeff Beck\t1944-06-24\tUnited Kingdom\tnull\tMale\t[Rock, Pop, Classic]\tPerson\n" +
                 "Los Paranoias\tnull\tUnknown\tnull\tnull\t[Unknown]\tnull\n" +
-                "ÉAnd You Will Know Us by the Trail of Dead\t1994-01-01\tUSA\tnull\tnull\t[Rock, Pop, Classic]\tGroup\n");
+                "â€¦And You Will Know Us by the Trail of Dead\t1994-01-01\tUSA\tnull\tnull\t[Rock, Pop, Classic]\tGroup\n");
 
     }
 
@@ -199,7 +199,7 @@ public class CassandraInterpreterTest {
                 "The Way You Are\tTears for Fears\t1983\n" +
                 "Primitive\tSoulfly\t2003\n");
     }
-    
+
     @Test
     public void should_throw_statement_not_having_semi_colon() throws Exception {
         //Given
@@ -538,7 +538,7 @@ public class CassandraInterpreterTest {
     }
 
     @Test
-         public void should_describe_keyspace() throws Exception {
+    public void should_describe_keyspace() throws Exception {
         //Given
         String query = "DESCRIBE KEYSPACE live_data;";
         final String expected = reformatHtml(
