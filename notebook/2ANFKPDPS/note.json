@@ -36,6 +36,7 @@
     {
       "title": "Reset Data",
       "text": "import org.apache.spark.rdd.RDD\n\nvar groupDistributionByStyles:RDD[(String,Int)] \u003d sc.parallelize(Nil)\nvar soloArtistsDistributionByStyles:RDD[(String,Int)] \u003d sc.parallelize(Nil)\nvar groups:RDD[(String,Int)] \u003d sc.parallelize(Nil)\nvar soloArtists:RDD[(String,Int)] \u003d sc.parallelize(Nil)\n",
+      "dateUpdated": "Sep 23, 2015 10:55:30 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -49,7 +50,8 @@
         },
         "title": true,
         "editorHide": true,
-        "tableHide": true
+        "tableHide": true,
+        "editorMode": "ace/mode/scala"
       },
       "settings": {
         "params": {},

@@ -35,6 +35,7 @@
     {
       "title": "Downloading cassandra data for demo",
       "text": "%sh\n\nrm -rf /tmp/spark_cassandra_demo 2\u003e/dev/null\n\nmkdir /tmp/spark_cassandra_demo\nchmod -R 777 /tmp/spark_cassandra_demo\n\nwget -O /tmp/spark_cassandra_demo/music.cql \u0027https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/data/music.cql\u0027\nwget -O /tmp/spark_cassandra_demo/performers.csv \u0027https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/data/performers.csv\u0027\nwget -O /tmp/spark_cassandra_demo/albums.csv \u0027https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/data/albums.csv\u0027\nwget -O /tmp/spark_cassandra_demo/countries.csv \u0027https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/data/countries.csv\u0027\n\nwget -O /tmp/spark_cassandra_demo/us_unemployment.cql \u0027https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/data/us_unemployment.cql\u0027\nwget -O /tmp/spark_cassandra_demo/us_unemployment.csv \u0027https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/data/us_unemployment.csv\u0027\n\nwget -O /tmp/spark_cassandra_demo/solrconfig.xml \u0027https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/solr_config/solrconfig.xml\u0027\nwget -O /tmp/spark_cassandra_demo/performers_schema.xml \u0027https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/solr_config/performers_schema.xml\u0027\nwget -O /tmp/spark_cassandra_demo/albums_schema.xml \u0027https://raw.githubusercontent.com/doanduyhai/Cassandra-Spark-Demo/master/src/main/solr_config/albums_schema.xml\u0027",
+      "dateUpdated": "Sep 23, 2015 10:50:55 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -48,7 +49,8 @@
         },
         "title": true,
         "tableHide": true,
-        "editorHide": true
+        "editorHide": true,
+        "editorMode": "ace/mode/sh"
       },
       "settings": {
         "params": {},

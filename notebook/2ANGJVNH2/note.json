@@ -35,6 +35,7 @@
     {
       "title": "Prepare data",
       "text": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\nimport com.datastax.spark.connector.cql.CassandraConnector\nimport scala.collection.JavaConversions._\nimport scala.collection.JavaConverters._\nval cc \u003d new CassandraSQLContext(sc)\n\nvar musicStyles:List[String] \u003d Nil \nvar countries:List[String] \u003d Nil \n\nCassandraConnector(sc.getConf).withSessionDo { \n    session \u003d\u003e {\n        musicStyles \u003d session.execute(\"SELECT style FROM spark_demo.performers_distribution_by_style\").\n            all().\n            toList.\n            map(row \u003d\u003e row.getString(\"style\")).\n            toSet.\n            toList.\n            sorted\n            \n        countries \u003d session.execute(\"SELECT DISTINCT name FROM spark_demo.countries\").\n            all().\n            toList.\n            map(row \u003d\u003e row.getString(\"name\")).\n            toSet.\n            toList.\n            sorted   \n    }\n}\n\nval context \u003d z.getInterpreterContext()\ndef search(before:Object, after:Object):Unit \u003d {\n    z.run(3,context)\n}\nz.angularUnbind(\"countries\")\nz.angularUnbind(\"styles\")\nz.angularUnbind(\"album_year\")\nz.angularUnbind(\"artist_country\")\nz.angularUnbind(\"artist_style\")\nz.angularUnbind(\"updateDisplay\")\n\nz.angularUnwatch(\"updateDisplay\")\n\nz.angularBind(\"countries\", countries.asJava)\nz.angularBind(\"styles\", musicStyles.asJava)\nz.angularBind(\"album_year\",\"[2010 TO *]\")\nz.angularBind(\"artist_country\",\"USA\")\nz.angularBind(\"artist_style\",\"Rock\")\nz.angularBind(\"updateDisplay\",true)\nz.angularWatch(\"updateDisplay\",search _)",
+      "dateUpdated": "Sep 23, 2015 11:01:04 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -48,7 +49,8 @@
         },
         "tableHide": true,
         "title": true,
-        "editorHide": true
+        "editorHide": false,
+        "editorMode": "ace/mode/scala"
       },
       "settings": {
         "params": {},

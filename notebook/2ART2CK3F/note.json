@@ -66,182 +66,9 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "title": "Reset table display",
-      "text": "import org.apache.spark.rdd.RDD\n\nvar data:RDD[(Int,Double)] \u003d sc.parallelize(Nil)",
-      "config": {
-        "colWidth": 12.0,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {}
-        },
-        "title": true,
-        "tableHide": true,
-        "editorHide": false
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "jobName": "paragraph_1432125938553_1725190640",
-      "id": "20150520-144538_434871993",
-      "result": {
-        "code": "SUCCESS",
-        "type": "TEXT",
-        "msg": "import org.apache.spark.rdd.RDD\ndata: org.apache.spark.rdd.RDD[(Int, Double)] \u003d ParallelCollectionRDD[94] at parallelize at \u003cconsole\u003e:52\n"
-      },
-      "dateCreated": "May 20, 2015 2:45:38 PM",
-      "dateStarted": "Jul 20, 2015 3:42:52 PM",
-      "dateFinished": "Jul 20, 2015 3:42:52 PM",
-      "status": "FINISHED",
-      "progressUpdateIntervalMs": 500
-    },
-    {
       "title": "Reading data using plain CassandraRow",
-      "text": "import org.apache.spark.SparkContext._\nimport com.datastax.spark.connector._\nimport com.datastax.spark.connector.rdd.CassandraRDD\nimport org.apache.spark.{SparkConf, SparkContext}\n\n\ndata \u003d sc.cassandraTable(\"spark_demo\", \"us_unemployment_stats\").\n    map( row \u003d\u003e (row.getInt(\"year\"),row.getDouble(\"unemployed_percentage_to_labor\")))",
-      "config": {
-        "colWidth": 12.0,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {}
-        },
-        "tableHide": true,
-        "title": true,
-        "editorHide": false
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "jobName": "paragraph_1432125315541_2118499250",
-      "id": "20150520-143515_1959047089",
-      "result": {
-        "code": "SUCCESS",
-        "type": "TEXT",
-        "msg": "import org.apache.spark.SparkContext._\nimport com.datastax.spark.connector._\nimport com.datastax.spark.connector.rdd.CassandraRDD\nimport org.apache.spark.{SparkConf, SparkContext}\ndata: org.apache.spark.rdd.RDD[(Int, Double)] \u003d MapPartitionsRDD[96] at map at \u003cconsole\u003e:64\n"
-      },
-      "dateCreated": "May 20, 2015 2:35:15 PM",
-      "dateStarted": "Jul 20, 2015 3:43:09 PM",
-      "dateFinished": "Jul 20, 2015 3:43:11 PM",
-      "status": "FINISHED",
-      "progressUpdateIntervalMs": 500
-    },
-    {
-      "title": "read data using scala tuples",
-      "text": "data \u003d sc.cassandraTable(\"spark_demo\", \"us_unemployment_stats\").\n    select(\"year\", \"unemployed_percentage_to_labor\").\n    as((_: Int, _: Double)).\n    sortByKey()",
-      "config": {
-        "colWidth": 12.0,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {}
-        },
-        "title": true,
-        "editorHide": false,
-        "tableHide": true
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "jobName": "paragraph_1432126014638_1008677629",
-      "id": "20150520-144654_1348217378",
-      "result": {
-        "code": "SUCCESS",
-        "type": "TEXT",
-        "msg": "data: org.apache.spark.rdd.RDD[(Int, Double)] \u003d ShuffledRDD[26] at sortByKey at \u003cconsole\u003e:52\n"
-      },
-      "dateCreated": "May 20, 2015 2:46:54 PM",
-      "dateStarted": "Jun 15, 2015 1:40:37 PM",
-      "dateFinished": "Jun 15, 2015 1:40:38 PM",
-      "status": "FINISHED",
-      "progressUpdateIntervalMs": 500
-    },
-    {
-      "title": "Read data using scala case class",
-      "text": "case class UsUnemploymentRate(year: Int, unemployedPercentageToLabor: Double)\n\ndata \u003d sc.cassandraTable[UsUnemploymentRate](\"spark_demo\", \"us_unemployment_stats\").\n    sortBy(bean \u003d\u003e bean.year,true,1).\n    map(bean \u003d\u003e (bean.year,bean.unemployedPercentageToLabor))",
-      "config": {
-        "colWidth": 12.0,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {}
-        },
-        "title": true,
-        "tableHide": true,
-        "editorHide": true
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "jobName": "paragraph_1433842506554_-1567680288",
-      "id": "20150609-113506_374130940",
-      "result": {
-        "code": "SUCCESS",
-        "type": "TEXT",
-        "msg": "defined class UsUnemploymentRate\ndata: org.apache.spark.rdd.RDD[(Int, Double)] \u003d MappedRDD[23] at map at \u003cconsole\u003e:40\n"
-      },
-      "dateCreated": "Jun 9, 2015 11:35:06 AM",
-      "dateStarted": "Jun 17, 2015 10:31:25 AM",
-      "dateFinished": "Jun 17, 2015 10:31:27 AM",
-      "status": "FINISHED",
-      "progressUpdateIntervalMs": 500
-    },
-    {
-      "title": "Read data using sparkSQL",
-      "text": "import org.apache.spark.sql.cassandra.CassandraSQLContext\n\nval cc \u003d new CassandraSQLContext(sc)\n\nval row \u003d cc.cassandraSql(s\"SELECT year,unemployed_percentage_to_labor \" +\n                                     s\"FROM spark_demo.us_unemployment_stats WHERE unemployed_percentage_to_labor \u003e 8 \" +\n                                     s\"ORDER BY year DESC\")\ndata \u003d row.\n    map(row \u003d\u003e (row.getInt(0),row.getDouble(1))).\n    sortBy{case(year,_) \u003d\u003e year}\n",
-      "config": {
-        "colWidth": 12.0,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {}
-        },
-        "title": true,
-        "tableHide": false,
-        "editorHide": false
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "jobName": "paragraph_1432126280851_1108867753",
-      "id": "20150520-145120_1566314701",
-      "result": {
-        "code": "SUCCESS",
-        "type": "TEXT",
-        "msg": "import org.apache.spark.sql.cassandra.CassandraSQLContext\ncc: org.apache.spark.sql.cassandra.CassandraSQLContext \u003d org.apache.spark.sql.cassandra.CassandraSQLContext@5afaded9\nrow: org.apache.spark.sql.DataFrame \u003d [year: int, unemployed_percentage_to_labor: double]\ndata: org.apache.spark.rdd.RDD[(Int, Double)] \u003d MapPartitionsRDD[112] at sortBy at \u003cconsole\u003e:68\n"
-      },
-      "dateCreated": "May 20, 2015 2:51:20 PM",
-      "dateStarted": "Jul 20, 2015 3:43:47 PM",
-      "dateFinished": "Jul 20, 2015 3:43:49 PM",
-      "status": "FINISHED",
-      "progressUpdateIntervalMs": 500
-    },
-    {
-      "text": "data.display(\"Year\",\"Unemployment Percentage\")",
+      "text": "import org.apache.spark.SparkContext._\nimport com.datastax.spark.connector._\n\nsc.cassandraTable(\"spark_demo\", \"us_unemployment_stats\").\n    map( row \u003d\u003e (row.getInt(\"year\"),row.getDouble(\"unemployed_percentage_to_labor\"))).\n    display(\"Year\",\"Unemployment Percentage\")",
+      "dateUpdated": "Sep 23, 2015 10:47:46 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -268,30 +95,218 @@
               "name": "Year",
               "index": 0.0,
               "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "Unemployment Percentage",
+              "index": 1.0,
+              "aggr": "sum"
             }
           }
         },
+        "tableHide": true,
+        "title": true,
+        "editorHide": false,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432125315541_2118499250",
+      "id": "20150520-143515_1959047089",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "Year\tUnemployment Percentage\n1942\t4.7\n1944\t1.2\n1992\t7.5\n1999\t4.2\n1971\t5.9\n1953\t2.9\n1976\t7.7\n1982\t9.7\n1981\t7.6\n1954\t5.5\n1965\t4.5\n1983\t9.6\n2003\t6.0\n1952\t3.0\n1945\t1.9\n1972\t5.6\n1988\t5.5\n1978\t6.1\n2009\t9.3\n1995\t5.6\n2010\t9.6\n2005\t5.1\n2006\t4.6\n1960\t5.5\n1950\t5.3\n1979\t5.8\n1951\t3.3\n1962\t5.5\n1967\t3.8\n1968\t3.6\n2007\t4.6\n1955\t4.4\n1998\t4.5\n2001\t4.7\n2002\t5.8\n1969\t3.5\n1974\t5.6\n1990\t5.6\n2000\t4.0\n1977\t7.1\n1964\t5.2\n1984\t7.5\n1985\t7.2\n1989\t5.3\n1941\t9.9\n1943\t1.9\n1958\t6.8\n1957\t4.3\n1991\t6.8\n1993\t6.9\n1949\t5.9\n1996\t5.4\n1959\t5.5\n1994\t6.1\n1963\t5.7\n1946\t3.9\n2004\t5.5\n1970\t4.9\n1947\t3.9\n1966\t3.8\n1973\t4.9\n1961\t6.7\n1956\t4.1\n1987\t6.2\n1980\t7.1\n1986\t7.0\n1948\t3.8\n1997\t4.9\n2008\t5.8\n1975\t8.5\n"
+      },
+      "dateCreated": "May 20, 2015 2:35:15 PM",
+      "dateStarted": "Sep 23, 2015 10:37:35 AM",
+      "dateFinished": "Sep 23, 2015 10:37:39 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "read data using scala tuples",
+      "text": "import org.apache.spark.SparkContext._\nimport com.datastax.spark.connector._\n\nsc.cassandraTable(\"spark_demo\", \"us_unemployment_stats\").\n    select(\"year\", \"unemployed_percentage_to_labor\").\n    as((_: Int, _: Double)).\n    sortByKey().\n    display(\"Year\",\"Unemployment Percentage\")",
+      "dateUpdated": "Sep 23, 2015 10:48:03 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "Year",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "Unemployment Percentage",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "Year",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "Unemployment Percentage",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "title": true,
+        "editorHide": false,
+        "tableHide": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432126014638_1008677629",
+      "id": "20150520-144654_1348217378",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "Year\tUnemployment Percentage\n1941\t9.9\n1942\t4.7\n1943\t1.9\n1944\t1.2\n1945\t1.9\n1946\t3.9\n1947\t3.9\n1948\t3.8\n1949\t5.9\n1950\t5.3\n1951\t3.3\n1952\t3.0\n1953\t2.9\n1954\t5.5\n1955\t4.4\n1956\t4.1\n1957\t4.3\n1958\t6.8\n1959\t5.5\n1960\t5.5\n1961\t6.7\n1962\t5.5\n1963\t5.7\n1964\t5.2\n1965\t4.5\n1966\t3.8\n1967\t3.8\n1968\t3.6\n1969\t3.5\n1970\t4.9\n1971\t5.9\n1972\t5.6\n1973\t4.9\n1974\t5.6\n1975\t8.5\n1976\t7.7\n1977\t7.1\n1978\t6.1\n1979\t5.8\n1980\t7.1\n1981\t7.6\n1982\t9.7\n1983\t9.6\n1984\t7.5\n1985\t7.2\n1986\t7.0\n1987\t6.2\n1988\t5.5\n1989\t5.3\n1990\t5.6\n1991\t6.8\n1992\t7.5\n1993\t6.9\n1994\t6.1\n1995\t5.6\n1996\t5.4\n1997\t4.9\n1998\t4.5\n1999\t4.2\n2000\t4.0\n2001\t4.7\n2002\t5.8\n2003\t6.0\n2004\t5.5\n2005\t5.1\n2006\t4.6\n2007\t4.6\n2008\t5.8\n2009\t9.3\n2010\t9.6\n"
+      },
+      "dateCreated": "May 20, 2015 2:46:54 PM",
+      "dateStarted": "Sep 23, 2015 10:38:11 AM",
+      "dateFinished": "Sep 23, 2015 10:38:12 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Read data using scala case class",
+      "text": "import org.apache.spark.SparkContext._\nimport com.datastax.spark.connector._\n\ncase class UsUnemploymentRate(year: Int, unemployedPercentageToLabor: Double)\n\nsc.cassandraTable[UsUnemploymentRate](\"spark_demo\", \"us_unemployment_stats\").\n    sortBy(bean \u003d\u003e bean.year,true,1).\n    map(bean \u003d\u003e (bean.year,bean.unemployedPercentageToLabor)).\n    display(\"Year\",\"Unemployment Percentage\")",
+      "dateUpdated": "Sep 23, 2015 10:48:13 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "Year",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "Unemployment Percentage",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "Year",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "Unemployment Percentage",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "title": true,
+        "tableHide": true,
         "editorHide": false
       },
       "settings": {
         "params": {},
         "forms": {}
       },
-      "jobName": "paragraph_1432125489739_1001031913",
-      "id": "20150520-143809_1476305925",
+      "jobName": "paragraph_1433842506554_-1567680288",
+      "id": "20150609-113506_374130940",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "Year\tUnemployment Percentage\n1941\t9.9\n1942\t4.7\n1943\t1.9\n1944\t1.2\n1945\t1.9\n1946\t3.9\n1947\t3.9\n1948\t3.8\n1949\t5.9\n1950\t5.3\n1951\t3.3\n1952\t3.0\n1953\t2.9\n1954\t5.5\n1955\t4.4\n1956\t4.1\n1957\t4.3\n1958\t6.8\n1959\t5.5\n1960\t5.5\n1961\t6.7\n1962\t5.5\n1963\t5.7\n1964\t5.2\n1965\t4.5\n1966\t3.8\n1967\t3.8\n1968\t3.6\n1969\t3.5\n1970\t4.9\n1971\t5.9\n1972\t5.6\n1973\t4.9\n1974\t5.6\n1975\t8.5\n1976\t7.7\n1977\t7.1\n1978\t6.1\n1979\t5.8\n1980\t7.1\n1981\t7.6\n1982\t9.7\n1983\t9.6\n1984\t7.5\n1985\t7.2\n1986\t7.0\n1987\t6.2\n1988\t5.5\n1989\t5.3\n1990\t5.6\n1991\t6.8\n1992\t7.5\n1993\t6.9\n1994\t6.1\n1995\t5.6\n1996\t5.4\n1997\t4.9\n1998\t4.5\n1999\t4.2\n2000\t4.0\n2001\t4.7\n2002\t5.8\n2003\t6.0\n2004\t5.5\n2005\t5.1\n2006\t4.6\n2007\t4.6\n2008\t5.8\n2009\t9.3\n2010\t9.6\n"
+      },
+      "dateCreated": "Jun 9, 2015 11:35:06 AM",
+      "dateStarted": "Sep 23, 2015 10:39:37 AM",
+      "dateFinished": "Sep 23, 2015 10:39:40 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Read data using sparkSQL programmatically",
+      "text": "import org.apache.spark.sql.cassandra.CassandraSQLContext\n\nval cc \u003d new CassandraSQLContext(sc)\n\nval row \u003d cc.cassandraSql(s\"SELECT year,unemployed_percentage_to_labor \" +\n                                     s\"FROM spark_demo.us_unemployment_stats WHERE unemployed_percentage_to_labor \u003e 8 \" +\n                                     s\"ORDER BY year DESC\")\nrow.\n    map(row \u003d\u003e (row.getInt(0),row.getDouble(1))).\n    sortBy{case(year,_) \u003d\u003e year}.\n    display(\"Year\",\"Unemployment Percentage\")\n",
+      "dateUpdated": "Sep 23, 2015 10:44:38 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "Year",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "Unemployment Percentage",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "Year",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "Unemployment Percentage",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "title": true,
+        "tableHide": false,
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1432126280851_1108867753",
+      "id": "20150520-145120_1566314701",
       "result": {
         "code": "SUCCESS",
         "type": "TABLE",
         "msg": "Year\tUnemployment Percentage\n1941\t9.9\n1975\t8.5\n1982\t9.7\n1983\t9.6\n2009\t9.3\n2010\t9.6\n"
       },
-      "dateCreated": "May 20, 2015 2:38:09 PM",
-      "dateStarted": "Jul 20, 2015 3:43:51 PM",
-      "dateFinished": "Jul 20, 2015 3:43:52 PM",
+      "dateCreated": "May 20, 2015 2:51:20 PM",
+      "dateStarted": "Sep 23, 2015 10:41:53 AM",
+      "dateFinished": "Sep 23, 2015 10:41:57 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%cassandra\n\nSELECT * FROM spark_demo.twitter_stream;",
+      "title": "Register Cassandra table into DataFrame",
+      "text": "sqlContext\n  .read\n  .format(\"org.apache.spark.sql.cassandra\")\n  .options(Map(\"keyspace\" -\u003e \"spark_demo\", \"table\" -\u003e \"us_unemployment_stats\"))\n  .load()\n  .registerTempTable(\"us_unemployment_stats\")\n\n",
+      "dateUpdated": "Sep 23, 2015 10:46:35 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -325,7 +340,9 @@
               "aggr": "sum"
             }
           }
-        }
+        },
+        "editorMode": "ace/mode/scala",
+        "title": true
       },
       "settings": {
         "params": {},
@@ -335,12 +352,47 @@
       "id": "20150520-144056_1766733826",
       "result": {
         "code": "SUCCESS",
-        "type": "TABLE",
-        "msg": "keyword\tinterval\tcount\nlove\t2015-07-20 13:49:00\t3\nlove\t2015-07-20 13:48:55\t2\nlove\t2015-07-20 13:48:50\t4\nlove\t2015-07-20 13:48:45\t1\nlove\t2015-07-20 13:48:40\t6\nlove\t2015-07-20 13:48:35\t3\nlove\t2015-07-20 13:48:30\t4\nlove\t2015-07-20 13:48:25\t2\njoy\t2015-07-20 13:49:00\t1\njoy\t2015-07-20 13:48:55\t1\njoy\t2015-07-20 13:48:50\t2\njoy\t2015-07-20 13:48:45\t1\njoy\t2015-07-20 13:48:40\t1\njoy\t2015-07-20 13:48:35\t1\njoy\t2015-07-20 13:48:30\t1\nsadness\t2015-07-20 13:48:55\t2\nsadness\t2015-07-20 13:48:45\t3\nsadness\t2015-07-20 13:48:35\t1\n"
+        "type": "TEXT",
+        "msg": ""
       },
       "dateCreated": "May 20, 2015 2:40:56 PM",
-      "dateStarted": "Jul 20, 2015 3:49:03 PM",
-      "dateFinished": "Jul 20, 2015 3:49:03 PM",
+      "dateStarted": "Sep 23, 2015 10:46:35 AM",
+      "dateFinished": "Sep 23, 2015 10:46:40 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Display using SparkSQL",
+      "text": "%sql\nSELECT year,unemployed_percentage_to_labor\nFROM us_unemployment_stats \nWHERE unemployed_percentage_to_labor \u003e 8 \nORDER BY year ASC",
+      "dateUpdated": "Sep 23, 2015 10:47:33 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "title": true,
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1437400112265_-103467212",
+      "id": "20150720-154832_1356318778",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "year\tunemployed_percentage_to_labor\n1941\t9.9\n1975\t8.5\n1982\t9.7\n1983\t9.6\n2009\t9.3\n2010\t9.6\n"
+      },
+      "dateCreated": "Jul 20, 2015 3:48:32 PM",
+      "dateStarted": "Sep 23, 2015 10:47:33 AM",
+      "dateFinished": "Sep 23, 2015 10:47:35 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -350,9 +402,9 @@
         "params": {},
         "forms": {}
       },
-      "jobName": "paragraph_1437400112265_-103467212",
-      "id": "20150720-154832_1356318778",
-      "dateCreated": "Jul 20, 2015 3:48:32 PM",
+      "jobName": "paragraph_1442998053869_373680540",
+      "id": "20150923-104733_1188924077",
+      "dateCreated": "Sep 23, 2015 10:47:33 AM",
       "status": "READY",
       "progressUpdateIntervalMs": 500
     }

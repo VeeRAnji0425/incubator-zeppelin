@@ -35,7 +35,8 @@
     },
     {
       "title": "prepare data",
-      "text": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\n\nval cc \u003d new CassandraSQLContext(sc)\n\ndef computeDecade(year:Int):String \u003d {\n    s\"${(year/10)*10}-${((year/10)+1)*10}\"\n}\n\ncc.udf.register(\"computeDecade\",computeDecade _)\n",
+      "text": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\n\n\ndef computeDecade(year:Int):String \u003d {\n    s\"${(year/10)*10}-${((year/10)+1)*10}\"\n}\n\nsqlContext.udf.register(\"computeDecade\",computeDecade _)\n\nsqlContext\n  .read\n  .format(\"org.apache.spark.sql.cassandra\")\n  .options(Map( \"keyspace\" -\u003e \"spark_demo\", \"table\" -\u003e \"performers\"))\n  .load()\n  .registerTempTable(\"performers\")\n\nsqlContext\n  .read\n  .format(\"org.apache.spark.sql.cassandra\")\n  .options(Map( \"keyspace\" -\u003e \"spark_demo\", \"table\" -\u003e \"albums\"))\n  .load()\n  .registerTempTable(\"albums\")",
+      "dateUpdated": "Sep 23, 2015 10:57:53 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -49,7 +50,8 @@
         },
         "title": true,
         "editorHide": false,
-        "tableHide": true
+        "tableHide": true,
+        "editorMode": "ace/mode/scala"
       },
       "settings": {
         "params": {},
@@ -60,17 +62,18 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\ncc: org.apache.spark.sql.cassandra.CassandraSQLContext \u003d org.apache.spark.sql.cassandra.CassandraSQLContext@7366cc98\ncomputeDecade: (year: Int)String\nres61: org.apache.spark.sql.UserDefinedFunction \u003d UserDefinedFunction(\u003cfunction1\u003e,StringType)\n"
+        "msg": "import org.apache.spark.{SparkConf, SparkContext}\nimport com.datastax.spark.connector._\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.sql.SchemaRDD\nimport org.apache.spark.sql.cassandra.CassandraSQLContext\ncomputeDecade: (year: Int)String\nres38: org.apache.spark.sql.UserDefinedFunction \u003d UserDefinedFunction(\u003cfunction1\u003e,StringType)\n"
       },
       "dateCreated": "May 24, 2015 5:40:39 PM",
-      "dateStarted": "Jul 20, 2015 6:41:33 PM",
-      "dateFinished": "Jul 20, 2015 6:41:37 PM",
+      "dateStarted": "Sep 23, 2015 10:57:53 AM",
+      "dateFinished": "Sep 23, 2015 10:57:56 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Albums Release By Decade",
-      "text": "cc.sql(s\"\"\"\n    SELECT computeDecade(a.year),p.country,count(a.title)\n    FROM spark_demo.performers p JOIN spark_demo.albums a\n    ON p.name \u003d a.performer\n    WHERE p.country is not null\n    AND p.country !\u003d \u0027Unknown\u0027\n    AND a.year \u003e\u003d 1900\n    GROUP BY computeDecade(a.year),p.country\n    HAVING count(a.title) \u003e ${z.input(\"Albums Count Threshold\",\"99999\")}\n\"\"\".stripMargin).\nmap(row \u003d\u003e (row.getString(0),row.getString(1),row.getLong(2))).\nsortBy[String](tuple \u003d\u003e tuple._1,true,1).\ndisplay(\"Decade\",\"Country\",\"Count\")\n\n\n",
+      "text": "%sql\n\nSELECT computeDecade(a.year) as decade, p.country, count(a.title) as title_count\nFROM performers p JOIN albums a\nON p.name \u003d a.performer\nWHERE p.country is not null\nAND p.country !\u003d \u0027Unknown\u0027\nAND a.year \u003e\u003d 1900\nGROUP BY computeDecade(a.year),p.country\nHAVING count(a.title) \u003e ${Albums Count Threshold\u003d99999}\nORDER BY decade",
+      "dateUpdated": "Sep 23, 2015 10:59:53 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -79,30 +82,36 @@
           "optionOpen": false,
           "keys": [
             {
-              "name": "Decade",
+              "name": "decade",
               "index": 0.0,
               "aggr": "sum"
             }
           ],
           "values": [
             {
-              "name": "Country",
-              "index": 1.0,
+              "name": "title_count",
+              "index": 2.0,
               "aggr": "sum"
             }
           ],
           "groups": [],
           "scatter": {
             "xAxis": {
-              "name": "Decade",
+              "name": "decade",
               "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "country",
+              "index": 1.0,
               "aggr": "sum"
             }
           }
         },
         "editorHide": false,
         "tableHide": false,
-        "title": true
+        "title": true,
+        "editorMode": "ace/mode/sql"
       },
       "settings": {
         "params": {
@@ -112,7 +121,6 @@
         "forms": {
           "Albums Count Threshold": {
             "name": "Albums Count Threshold",
-            "displayName": "Albums Count Threshold",
             "defaultValue": "99999",
             "hidden": false
           }
@@ -123,11 +131,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TABLE",
-        "msg": "Decade\tCountry\tCount\n1950-1960\tUSA\t638\n1960-1970\tUnited Kingdom\t513\n1960-1970\tUSA\t1455\n1970-1980\tUnited Kingdom\t1228\n1970-1980\tUSA\t1768\n1980-1990\tUnited Kingdom\t2811\n1980-1990\tGermany\t394\n1980-1990\tFrance\t299\n1980-1990\tJamaica\t264\n1980-1990\tUSA\t2803\n1990-2000\tSpain\t279\n1990-2000\tJapan\t1328\n1990-2000\tPoland\t284\n1990-2000\tNorway\t366\n1990-2000\tAustralia\t316\n1990-2000\tItaly\t451\n1990-2000\tCanada\t557\n1990-2000\tJamaica\t419\n1990-2000\tUnited Kingdom\t4001\n1990-2000\tUSA\t7843\n1990-2000\tGermany\t1409\n1990-2000\tFinland\t490\n1990-2000\tSweden\t783\n1990-2000\tFrance\t475\n2000-2010\tBrazil\t360\n2000-2010\tTurkey\t256\n2000-2010\tUnited Kingdom\t5450\n2000-2010\tSpain\t511\n2000-2010\tGermany\t2543\n2000-2010\tJapan\t2569\n2000-2010\tRussian Federation\t291\n2000-2010\tFinland\t1321\n2000-2010\tSweden\t1811\n2000-2010\tAustralia\t649\n2000-2010\tFrance\t1113\n2000-2010\tItaly\t711\n2000-2010\tJamaica\t355\n2000-2010\tDenmark\t261\n2000-2010\tUSA\t13589\n2000-2010\tBelgium\t334\n2000-2010\tNetherlands\t496\n2000-2010\tPoland\t522\n2000-2010\tNorway\t741\n2000-2010\tCanada\t1349\n2010-2020\tJapan\t305\n2010-2020\tSweden\t370\n2010-2020\tCanada\t373\n2010-2020\tUSA\t3457\n2010-2020\tGermany\t484\n2010-2020\tFinland\t263\n2010-2020\tFrance\t272\n2010-2020\tUnited Kingdom\t979\n"
+        "msg": "decade\tcountry\ttitle_count\n1950-1960\tUSA\t637\n1960-1970\tUnited Kingdom\t509\n1960-1970\tUSA\t1444\n1970-1980\tUnited Kingdom\t1218\n1970-1980\tUSA\t1762\n1980-1990\tUSA\t2795\n1980-1990\tFrance\t295\n1980-1990\tGermany\t387\n1980-1990\tUnited Kingdom\t2818\n1980-1990\tJamaica\t269\n1990-2000\tFinland\t490\n1990-2000\tGermany\t1396\n1990-2000\tAustralia\t320\n1990-2000\tSweden\t781\n1990-2000\tJapan\t1328\n1990-2000\tFrance\t476\n1990-2000\tUSA\t7858\n1990-2000\tUnited Kingdom\t3957\n1990-2000\tItaly\t450\n1990-2000\tPoland\t282\n1990-2000\tNorway\t369\n1990-2000\tSpain\t273\n1990-2000\tJamaica\t415\n1990-2000\tCanada\t553\n2000-2010\tUnited Kingdom\t5421\n2000-2010\tPoland\t513\n2000-2010\tJapan\t2573\n2000-2010\tDenmark\t269\n2000-2010\tRussian Federation\t293\n2000-2010\tFinland\t1315\n2000-2010\tSweden\t1808\n2000-2010\tFrance\t1084\n2000-2010\tItaly\t707\n2000-2010\tNorway\t760\n2000-2010\tGermany\t2569\n2000-2010\tCanada\t1348\n2000-2010\tSpain\t514\n2000-2010\tAustralia\t648\n2000-2010\tUSA\t13546\n2000-2010\tJamaica\t356\n2000-2010\tNetherlands\t511\n2000-2010\tBelgium\t332\n2000-2010\tBrazil\t356\n2010-2020\tUSA\t3493\n2010-2020\tFrance\t271\n2010-2020\tSweden\t374\n2010-2020\tJapan\t300\n2010-2020\tGermany\t500\n2010-2020\tFinland\t269\n2010-2020\tUnited Kingdom\t970\n2010-2020\tCanada\t375\n"
       },
       "dateCreated": "May 18, 2015 10:03:27 PM",
-      "dateStarted": "Jul 20, 2015 6:43:56 PM",
-      "dateFinished": "Jul 20, 2015 6:44:34 PM",
+      "dateStarted": "Sep 23, 2015 10:59:53 AM",
+      "dateFinished": "Sep 23, 2015 11:00:18 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
