@@ -1,0 +1,74 @@
+{
+  "paragraphs": [
+    {
+      "text": "%angular\n\n\u003d\u003d First Section\n\n* item 1\n* item 2\n\n*Bold*\n\n_italic_\n\n\nDairy::\n* Milk\n* Eggs\nBakery::\n* Bread\nProduce::\n* Bananas",
+      "dateUpdated": "Sep 25, 2015 1:50:37 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1443179481220_-559712978",
+      "id": "20150925-131121_1896418267",
+      "result": {
+        "code": "SUCCESS",
+        "type": "ANGULAR",
+        "msg": "\n\u003d\u003d First Section\n\n* item 1\n* item 2\n\n*Bold*\n\n_italic_\n\n\nDairy::\n* Milk\n* Eggs\nBakery::\n* Bread\nProduce::\n* Bananas"
+      },
+      "dateCreated": "Sep 25, 2015 1:11:21 PM",
+      "dateStarted": "Sep 25, 2015 1:50:37 PM",
+      "dateFinished": "Sep 25, 2015 1:50:38 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1443181690478_1923564216",
+      "id": "20150925-134810_1003588746",
+      "dateCreated": "Sep 25, 2015 1:48:10 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "05-Simple AsciiDoc interpreter",
+  "id": "2AZ23VFPD",
+  "angularObjects": {
+    "2BBQBKBJ5": [],
+    "2BANCZC3Z": [],
+    "2BBY6XM77": [],
+    "2BC9M7S89": [],
+    "2BBR2HDJW": [],
+    "2B8JMS281": [],
+    "2BC871N7K": [],
+    "2BBJ594CV": [],
+    "2BCB17X88": [],
+    "2BFD76NPB": [],
+    "2BAFPSB8K": [],
+    "2B8QVVF1M": [],
+    "2B8WT72N8": [],
+    "2BC3GHKMD": [],
+    "2BAYRRJYM": [],
+    "2BB6RD2TH": []
+  },
+  "config": {
+    "looknfeel": "default"
+  },
+  "info": {}
+}

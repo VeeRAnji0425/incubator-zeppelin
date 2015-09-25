@@ -1,0 +1,72 @@
+{
+  "paragraphs": [
+    {
+      "text": "%cassandra\n",
+      "dateUpdated": "Sep 25, 2015 4:07:32 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1443183803262_-119433306",
+      "id": "20150925-142323_737973903",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\n\n\u003cdiv class\u003d\"container\"\u003e\n    \u003cdiv class\u003d\"row text-center\"\u003e\n        \u003ch4\u003eNo Result\u003c/h4\u003e\n    \u003c/div\u003e\n    \u003cbr\u003e\n\u003c/div\u003e"
+      },
+      "dateCreated": "Sep 25, 2015 2:23:23 PM",
+      "dateStarted": "Sep 25, 2015 4:07:32 PM",
+      "dateFinished": "Sep 25, 2015 4:07:32 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1443183813290_-226362852",
+      "id": "20150925-142333_1356595676",
+      "dateCreated": "Sep 25, 2015 2:23:33 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "06-Cassandra Interpreter",
+  "id": "2B2K43XC4",
+  "angularObjects": {
+    "2BBQBKBJ5": [],
+    "2BANCZC3Z": [],
+    "2BBY6XM77": [],
+    "2BC9M7S89": [],
+    "2BBR2HDJW": [],
+    "2B8JMS281": [],
+    "2BC871N7K": [],
+    "2BBJ594CV": [],
+    "2BCB17X88": [],
+    "2BAFPSB8K": [],
+    "2B8QVVF1M": [],
+    "2B8WT72N8": [],
+    "2BC3GHKMD": [],
+    "2BAYRRJYM": [],
+    "2BB6RD2TH": []
+  },
+  "config": {
+    "looknfeel": "default"
+  },
+  "info": {}
+}

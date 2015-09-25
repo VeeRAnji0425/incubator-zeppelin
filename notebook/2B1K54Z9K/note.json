@@ -1,0 +1,445 @@
+{
+  "paragraphs": [
+    {
+      "title": "Raw Display",
+      "text": "println(\"Raw display\")",
+      "dateUpdated": "Sep 24, 2015 4:48:19 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1443106057429_-830253397",
+      "id": "20150924-164737_2051342783",
+      "dateCreated": "Sep 24, 2015 4:47:37 PM",
+      "dateStarted": "Sep 24, 2015 4:48:09 PM",
+      "dateFinished": "Sep 24, 2015 4:48:10 PM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Table display",
+      "text": "print(s\"\"\"%table\nName\\tAge\nJohn DOE\\t32\nHelen SUE\\t27\nRichard SMITH\\t45\n\"\"\")",
+      "dateUpdated": "Sep 24, 2015 4:54:44 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 144.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "Name",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "Age",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "Name",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "Age",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1443106084619_2147180424",
+      "id": "20150924-164804_551753723",
+      "dateCreated": "Sep 24, 2015 4:48:04 PM",
+      "dateStarted": "Sep 24, 2015 4:54:13 PM",
+      "dateFinished": "Sep 24, 2015 4:54:13 PM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "HTML Display",
+      "text": "println(\"%html \u003ch1\u003eHTML Display\u003c/h1\u003e\u003cstrong\u003e\u003cem\u003eThis is a simple HTML code\u003c/strong\u003e\u003c/em\u003e\u003cbr/\u003e\u003cbr/\u003e\")",
+      "dateUpdated": "Sep 24, 2015 4:56:08 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1443106233636_146653065",
+      "id": "20150924-165033_1199936351",
+      "dateCreated": "Sep 24, 2015 4:50:33 PM",
+      "dateStarted": "Sep 24, 2015 4:55:58 PM",
+      "dateFinished": "Sep 24, 2015 4:55:58 PM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Angular display using Scala",
+      "text": "import org.apache.zeppelin.display.angular.paragraphscope._\nimport AngularElem._\n\n\u003cdiv\u003e\n  \u003cdiv class\u003d\"alert alert-info\"\u003eThis is an alert panel\u003c/div\u003e\n  \u003cform class\u003d\"form-inline\"\u003e\n    \u003cdiv class\u003d\"form-group\"\u003e\n      \u003cinput type\u003d\"text\" class\u003d\"form-control\"  placeholder\u003d\"Input Text\"\u003e\u003c/input\u003e\n    \u003c/div\u003e\n    \u003cbutton type\u003d\"submit\" class\u003d\"btn btn-primary\"\u003eClick Me\u003c/button\u003e\n  \u003c/form\u003e\n\u003c/div\u003e.display",
+      "authenticationInfo": {},
+      "dateUpdated": "Feb 28, 2016 9:39:28 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1456691579062_1354339376",
+      "id": "20160228-213259_1377691779",
+      "dateCreated": "Feb 28, 2016 9:32:59 PM",
+      "dateStarted": "Feb 28, 2016 9:39:28 PM",
+      "dateFinished": "Feb 28, 2016 9:39:31 PM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Table display with nested HTML code",
+      "text": "print(s\"\"\"%table\nName\\tAge\nJohn DOE\\t%html \u003cstrong\u003e32\u003c/strong\u003e\nHelen SUE\\t%html \u003cspan style\u003d\"color:red; font-weight:bold\"\u003e27\u003c/span\u003e\nRichard SMITH\\t%html \u003cem\u003e45\u003c/em\u003e\n\"\"\")",
+      "dateUpdated": "Sep 24, 2015 4:58:29 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 124.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "Name",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "Age",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "Name",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "Age",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1443106517485_1127776440",
+      "id": "20150924-165517_682930688",
+      "dateCreated": "Sep 24, 2015 4:55:17 PM",
+      "dateStarted": "Sep 24, 2015 4:58:07 PM",
+      "dateFinished": "Sep 24, 2015 4:58:07 PM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Graphs display",
+      "text": "val people \u003d Seq((\"John DOE\", 32),(\"Helen SUE\",27),(\"Richard SMITH\",45),(\"Bob\",32),(\"Alice\",27),(\"Alison\", 27))\n\nval filteredPeople \u003d people.filter{case(_,age) \u003d\u003e age \u003e\u003d z.input(\"Age Filter\", \"20\").asInstanceOf[String].toInt}\n\nval builder \u003d new StringBuilder(\"\")\nbuilder.append(\"Name\\tAge\\n\") //Headers\n\nfilteredPeople.foreach{case(name,age) \u003d\u003e builder.append(name).append(\"\\t\").append(age).append(\"\\n\")}\nprintln(builder.insert(0, \"%table\\n\").toString)",
+      "dateUpdated": "Sep 24, 2015 10:01:41 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "multiBarChart",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "Name",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "Age",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "Name",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "Age",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "title": true,
+        "editorHide": true,
+        "editorMode": "ace/mode/scala",
+        "tableHide": false
+      },
+      "settings": {
+        "params": {
+          "Age Filter": "20"
+        },
+        "forms": {
+          "Age Filter": {
+            "name": "Age Filter",
+            "displayName": "Age Filter",
+            "defaultValue": "20",
+            "hidden": false
+          }
+        }
+      },
+      "jobName": "paragraph_1443106604137_776270831",
+      "id": "20150924-165644_1235706109",
+      "dateCreated": "Sep 24, 2015 4:56:44 PM",
+      "dateStarted": "Sep 24, 2015 10:01:41 PM",
+      "dateFinished": "Sep 24, 2015 10:01:42 PM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\n#### View modes\n\n1. Default view (code + result)\n2. Simple view (code + result), no paragraphe separator\n3. Report view (only result)\n",
+      "dateUpdated": "Sep 24, 2015 6:01:54 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1443106768218_206270531",
+      "id": "20150924-165928_563689783",
+      "dateCreated": "Sep 24, 2015 4:59:28 PM",
+      "dateStarted": "Sep 24, 2015 6:01:52 PM",
+      "dateFinished": "Sep 24, 2015 6:01:52 PM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Dynamic form syntax",
+      "text": "%md\n\n## This is a ${Value\u003dtitle}\n\n",
+      "dateUpdated": "Sep 24, 2015 6:04:19 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "title": true,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {
+          "Title": "test"
+        },
+        "forms": {
+          "Value": {
+            "name": "Value",
+            "defaultValue": "title",
+            "hidden": false
+          }
+        }
+      },
+      "jobName": "paragraph_1443110447390_-1910330384",
+      "id": "20150924-180047_287440990",
+      "dateCreated": "Sep 24, 2015 6:00:47 PM",
+      "dateStarted": "Sep 24, 2015 6:04:19 PM",
+      "dateFinished": "Sep 24, 2015 6:04:19 PM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Dynamic form with Spark",
+      "text": "%spark\n\nprintln(\"Using z.input. z \u003d instance of class ZeppelinContext\")\nprintln(\"The ZeppelinContext is available only for the Spark interpreter\")\nprintln(\"\\n\")\nprintln(s\"\"\"This is a ${z.input(\"1 Input Text\", \"DEFAULT VALUE\")}\"\"\")\nprintln(\"\\n\")\nprintln(\"\"\"You can also have HTML SELECT element with z.select(\"HTML Label\", Seq((\"value1\",\"label1\"),(\"value2\",\"label2\"), ...)\"\"\")\nprintln(\"\\n\")\nprintln(s\"\"\"This is the selected value ${z.select(\"2 Drop Down\", Seq((1: java.lang.Integer,\"One\"),(2: java.lang.Integer, \"Two\"),(3: java.lang.Integer, \"Three\")))}\"\"\")",
+      "dateUpdated": "Feb 28, 2016 9:39:46 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "title": true,
+        "editorMode": "ace/mode/scala",
+        "editorHide": true,
+        "lineNumbers": false,
+        "enabled": true
+      },
+      "settings": {
+        "params": {
+          "Value": "DEFAULT VALUE",
+          "Input Text": "DEFAULT VALUE",
+          "DropDown": 1.0,
+          "1 Input Text": "DEFAULT VALUE",
+          "2 Drop Down": 3.0
+        },
+        "forms": {
+          "1 Input Text": {
+            "name": "1 Input Text",
+            "displayName": "1 Input Text",
+            "defaultValue": "DEFAULT VALUE",
+            "hidden": false
+          },
+          "2 Drop Down": {
+            "name": "2 Drop Down",
+            "displayName": "2 Drop Down",
+            "defaultValue": "",
+            "options": [
+              {
+                "value": 1.0,
+                "displayName": "One"
+              },
+              {
+                "value": 2.0,
+                "displayName": "Two"
+              },
+              {
+                "value": 3.0,
+                "displayName": "Three"
+              }
+            ],
+            "hidden": false
+          }
+        }
+      },
+      "jobName": "paragraph_1443110628065_-1707908134",
+      "id": "20150924-180348_737586433",
+      "dateCreated": "Sep 24, 2015 6:03:48 PM",
+      "dateStarted": "Sep 24, 2015 9:35:49 PM",
+      "dateFinished": "Sep 24, 2015 9:35:50 PM",
+      "status": "FINISHED",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1443110749454_-568081033",
+      "id": "20150924-180549_1778128778",
+      "dateCreated": "Sep 24, 2015 6:05:49 PM",
+      "status": "READY",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "02-Zeppelin Display System",
+  "id": "2B1K54Z9K",
+  "angularObjects": {
+    "2BBQBKBJ5": [],
+    "2BANCZC3Z": [],
+    "2BBY6XM77": [],
+    "2BC9M7S89": [],
+    "2BBR2HDJW": [],
+    "2B8JMS281": [],
+    "2BC871N7K": [],
+    "2BBJ594CV": [],
+    "2BCB17X88": [],
+    "2BAFPSB8K": [],
+    "2B8QVVF1M": [],
+    "2B8WT72N8": [],
+    "2BC3GHKMD": [],
+    "2BAYRRJYM": [],
+    "2BB6RD2TH": []
+  },
+  "config": {
+    "looknfeel": "default"
+  },
+  "info": {}
+}

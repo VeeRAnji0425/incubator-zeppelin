@@ -1,0 +1,296 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n\n## 01-Zeppelin UI Layout is a note",
+      "authenticationInfo": {},
+      "dateUpdated": "Feb 29, 2016 7:25:37 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false,
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1443105215317_-994748614",
+      "id": "20150924-163335_2118370338",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch2\u003e01-Zeppelin UI Layout is a note\u003c/h2\u003e\n"
+      },
+      "dateCreated": "Sep 24, 2015 4:33:35 PM",
+      "dateStarted": "Feb 28, 2016 9:12:11 PM",
+      "dateFinished": "Feb 28, 2016 9:12:12 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\n###A note consists of many paragraphs\n\nThis is one **paragraph**",
+      "authenticationInfo": {},
+      "dateUpdated": "Feb 28, 2016 9:12:22 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false,
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1443105245653_-1259025136",
+      "id": "20150924-163405_690745822",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch3\u003eA note consists of many paragraphs\u003c/h3\u003e\n\u003cp\u003eThis is one \u003cstrong\u003eparagraph\u003c/strong\u003e\u003c/p\u003e\n"
+      },
+      "dateCreated": "Sep 24, 2015 4:34:05 PM",
+      "dateStarted": "Feb 28, 2016 9:12:21 PM",
+      "dateFinished": "Feb 28, 2016 9:12:21 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\nAnother **paragraph**",
+      "dateUpdated": "Sep 24, 2015 4:39:45 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1443105274549_-831923208",
+      "id": "20150924-163434_1560209949",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cp\u003eAnother \u003cstrong\u003eparagraph\u003c/strong\u003e\u003c/p\u003e\n"
+      },
+      "dateCreated": "Sep 24, 2015 4:34:34 PM",
+      "dateStarted": "Sep 24, 2015 4:45:30 PM",
+      "dateFinished": "Sep 24, 2015 4:45:30 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n####Paragraph features\n1. each paragraph has an **id**\n1. each paragraph can be **run individually**\n2. each paragraph can be be configured **individually**\n3. each paragraph has a **title**\n4. paragraph position can be re-ordered\n5. parapgrah width can be changed using **Bootstrap** grid system (size from 1 to 12)\n6. you can display **line number** in each paragraph\n7. each paragraph has a **code section** and **result section**. Each section is expandable/closable\n",
+      "authenticationInfo": {},
+      "dateUpdated": "Feb 28, 2016 9:12:48 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false,
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1443105307729_-1921285262",
+      "id": "20150924-163507_134879501",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch4\u003eParagraph features\u003c/h4\u003e\n\u003col\u003e\n\u003cli\u003eeach paragraph has an \u003cstrong\u003eid\u003c/strong\u003e\u003c/li\u003e\n\u003cli\u003eeach paragraph can be \u003cstrong\u003erun individually\u003c/strong\u003e\u003c/li\u003e\n\u003cli\u003eeach paragraph can be be configured \u003cstrong\u003eindividually\u003c/strong\u003e\u003c/li\u003e\n\u003cli\u003eeach paragraph has a \u003cstrong\u003etitle\u003c/strong\u003e\u003c/li\u003e\n\u003cli\u003eparagraph position can be re-ordered\u003c/li\u003e\n\u003cli\u003eparapgrah width can be changed using \u003cstrong\u003eBootstrap\u003c/strong\u003e grid system (size from 1 to 12)\u003c/li\u003e\n\u003cli\u003eyou can display \u003cstrong\u003eline number\u003c/strong\u003e in each paragraph\u003c/li\u003e\n\u003cli\u003eeach paragraph has a \u003cstrong\u003ecode section\u003c/strong\u003e and \u003cstrong\u003eresult section\u003c/strong\u003e. Each section is expandable/closable\u003c/li\u003e\n\u003c/ol\u003e\n"
+      },
+      "dateCreated": "Sep 24, 2015 4:35:07 PM",
+      "dateStarted": "Feb 28, 2016 9:12:47 PM",
+      "dateFinished": "Feb 28, 2016 9:12:47 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\n####Note features\n1. You can run all paragraphs in one notebook sequentially\n2. You can expand/close the **code section** and **output section** of **all** paragraphs at once\n3. You can **clear all paragraphs output**\n4. You can **clone the entire note** to create a new note\n5. You can **export** a note to a JSON file\n6. You can **import** a note from a JSON file\n7. You can **commit** the content of a note\n8. You can **schedule** a notebook execution using CRON style\n9. Each paragraph can use different **interpreter**",
+      "authenticationInfo": {},
+      "dateUpdated": "Feb 28, 2016 9:14:39 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorHide": true,
+        "editorMode": "ace/mode/markdown",
+        "tableHide": false,
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1443105453716_-1512884433",
+      "id": "20150924-163733_999207662",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch4\u003eNote features\u003c/h4\u003e\n\u003col\u003e\n\u003cli\u003eYou can run all paragraphs in one notebook sequentially\u003c/li\u003e\n\u003cli\u003eYou can expand/close the \u003cstrong\u003ecode section\u003c/strong\u003e and \u003cstrong\u003eoutput section\u003c/strong\u003e of \u003cstrong\u003eall\u003c/strong\u003e paragraphs at once\u003c/li\u003e\n\u003cli\u003eYou can \u003cstrong\u003eclear all paragraphs output\u003c/strong\u003e\u003c/li\u003e\n\u003cli\u003eYou can \u003cstrong\u003eclone the entire note\u003c/strong\u003e to create a new note\u003c/li\u003e\n\u003cli\u003eYou can \u003cstrong\u003eexport\u003c/strong\u003e a note to a JSON file\u003c/li\u003e\n\u003cli\u003eYou can \u003cstrong\u003eimport\u003c/strong\u003e a note from a JSON file\u003c/li\u003e\n\u003cli\u003eYou can \u003cstrong\u003ecommit\u003c/strong\u003e the content of a note\u003c/li\u003e\n\u003cli\u003eYou can \u003cstrong\u003eschedule\u003c/strong\u003e a notebook execution using CRON style\u003c/li\u003e\n\u003cli\u003eEach paragraph can use different \u003cstrong\u003einterpreter\u003c/strong\u003e\u003c/li\u003e\n\u003c/ol\u003e\n"
+      },
+      "dateCreated": "Sep 24, 2015 4:37:33 PM",
+      "dateStarted": "Feb 28, 2016 9:14:38 PM",
+      "dateFinished": "Feb 28, 2016 9:14:38 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Displaying current time using shell",
+      "text": "%sh\necho \"Fire this command every 5 seconds, CRON expression \u003d 0/5 * * ? * *\"\necho \"************\"\necho \"Current time \u003d \"`date +\"%T\"`\necho \"************\"",
+      "dateUpdated": "Feb 29, 2016 7:25:55 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/sh",
+        "tableHide": false,
+        "title": true,
+        "editorHide": true,
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1443105643911_1196192224",
+      "id": "20150924-164043_795883784",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "Fire this command every 5 seconds, CRON expression \u003d 0/5 * * ? * *\n************\nCurrent time \u003d 16:47:10\n************\n"
+      },
+      "dateCreated": "Sep 24, 2015 4:40:43 PM",
+      "dateStarted": "Sep 24, 2015 4:47:10 PM",
+      "dateFinished": "Sep 24, 2015 4:47:10 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Choosing interpreter",
+      "text": "%angular\n\n\u003cdiv class\u003d\"row\"\u003e\n    \u003cdiv class\u003d\"col-md-2\"\u003e\u003c/div\u003e\n    \u003cdiv class\u003d\"col-md-8 col-offset-md-2\"\u003e\n        \u003ch3\u003eStart a paragraph with %xxx where xxx \u003d name of interpreter\u003c/h3\u003e\n    \u003c/div\u003e\n\u003c/div\u003e\n\u003cdiv class\u003d\"row\"\u003e\n    \u003cdiv class\u003d\"col-md-2\"\u003e\u003c/div\u003e\n    \u003cdiv class\u003d\"col-md-8 col-offset-md-2\"\u003e\n        \u003ch5\u003eExamples:\u003c/h5\u003e\u003cbr/\u003e\n        \u003cdiv class\u003d\"panel panel-primary\"\u003e\n            \u003cdiv class\u003d\"panel-heading\"\u003e\n                \u003ch3 class\u003d\"panel-title\"\u003eMarkdown Interpreter\u003c/h3\u003e\n            \u003c/div\u003e\n            \u003cdiv class\u003d\"panel-body\"\u003e\n                %md\n                \u003cbr/\u003e\u003cbr/\u003e\n                ### Title\n                \u003cbr/\u003e\u003cbr/\u003e            \n                **bold text**\n                \u003cbr/\u003e\u003cbr/\u003e                            \n                ...\n            \u003c/div\u003e\n        \u003c/div\u003e\n        \n        \u003cdiv class\u003d\"panel panel-primary\"\u003e\n            \u003cdiv class\u003d\"panel-heading\"\u003e\n                \u003ch3 class\u003d\"panel-title\"\u003eShell Interpreter\u003c/h3\u003e\n            \u003c/div\u003e\n            \u003cdiv class\u003d\"panel-body\"\u003e\n                %sh\n                \u003cbr/\u003e\u003cbr/\u003e\n                Echo \u0027This is a test\u0027\n                \u003cbr/\u003e\u003cbr/\u003e            \n                mkdir /tmp/zeppelin_logs\n                \u003cbr/\u003e\u003cbr/\u003e                            \n                ...\n            \u003c/div\u003e\n        \u003c/div\u003e    \n        \n        \u003cdiv class\u003d\"panel panel-primary\"\u003e\n            \u003cdiv class\u003d\"panel-heading\"\u003e\n                \u003ch3 class\u003d\"panel-title\"\u003eAngular Interpreter (used for this paragraph)\u003c/h3\u003e\n            \u003c/div\u003e\n            \u003cdiv class\u003d\"panel-body\"\u003e\n                %angular\n                \u003cbr/\u003e\u003cbr/\u003e\n                HTML code here\n                ...\n            \u003c/div\u003e\n        \u003c/div\u003e      \n        \n        \u003cdiv class\u003d\"panel panel-primary\"\u003e\n            \u003cdiv class\u003d\"panel-heading\"\u003e\n                \u003ch3 class\u003d\"panel-title\"\u003eSpark Interpreter (default)\u003c/h3\u003e\n            \u003c/div\u003e\n            \u003cdiv class\u003d\"panel-body\"\u003e\n                %spark (or nothing because it\u0027s the default interpreter)\n                \u003cbr/\u003e\u003cbr/\u003e\n                Scala Spark code here\n                ...\n            \u003c/div\u003e\n        \u003c/div\u003e         \n    \u003c/div\u003e    \n\u003c/div\u003e\n",
+      "dateUpdated": "Sep 24, 2015 10:15:19 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1443105661475_-1994884505",
+      "id": "20150924-164101_1127264541",
+      "result": {
+        "code": "SUCCESS",
+        "type": "ANGULAR",
+        "msg": "\n\u003cdiv class\u003d\"row\"\u003e\n    \u003cdiv class\u003d\"col-md-2\"\u003e\u003c/div\u003e\n    \u003cdiv class\u003d\"col-md-8 col-offset-md-2\"\u003e\n        \u003ch3\u003eStart a paragraph with %xxx where xxx \u003d name of interpreter\u003c/h3\u003e\n    \u003c/div\u003e\n\u003c/div\u003e\n\u003cdiv class\u003d\"row\"\u003e\n    \u003cdiv class\u003d\"col-md-2\"\u003e\u003c/div\u003e\n    \u003cdiv class\u003d\"col-md-8 col-offset-md-2\"\u003e\n        \u003ch5\u003eExamples:\u003c/h5\u003e\u003cbr/\u003e\n        \u003cdiv class\u003d\"panel panel-primary\"\u003e\n            \u003cdiv class\u003d\"panel-heading\"\u003e\n                \u003ch3 class\u003d\"panel-title\"\u003eMarkdown Interpreter\u003c/h3\u003e\n            \u003c/div\u003e\n            \u003cdiv class\u003d\"panel-body\"\u003e\n                %md\n                \u003cbr/\u003e\u003cbr/\u003e\n                ### Title\n                \u003cbr/\u003e\u003cbr/\u003e            \n                **bold text**\n                \u003cbr/\u003e\u003cbr/\u003e                            \n                ...\n            \u003c/div\u003e\n        \u003c/div\u003e\n        \n        \u003cdiv class\u003d\"panel panel-primary\"\u003e\n            \u003cdiv class\u003d\"panel-heading\"\u003e\n                \u003ch3 class\u003d\"panel-title\"\u003eShell Interpreter\u003c/h3\u003e\n            \u003c/div\u003e\n            \u003cdiv class\u003d\"panel-body\"\u003e\n                %sh\n                \u003cbr/\u003e\u003cbr/\u003e\n                Echo \u0027This is a test\u0027\n                \u003cbr/\u003e\u003cbr/\u003e            \n                mkdir /tmp/zeppelin_logs\n                \u003cbr/\u003e\u003cbr/\u003e                            \n                ...\n            \u003c/div\u003e\n        \u003c/div\u003e    \n        \n        \u003cdiv class\u003d\"panel panel-primary\"\u003e\n            \u003cdiv class\u003d\"panel-heading\"\u003e\n                \u003ch3 class\u003d\"panel-title\"\u003eAngular Interpreter (used for this paragraph)\u003c/h3\u003e\n            \u003c/div\u003e\n            \u003cdiv class\u003d\"panel-body\"\u003e\n                %angular\n                \u003cbr/\u003e\u003cbr/\u003e\n                HTML code here\n                ...\n            \u003c/div\u003e\n        \u003c/div\u003e      \n        \n        \u003cdiv class\u003d\"panel panel-primary\"\u003e\n            \u003cdiv class\u003d\"panel-heading\"\u003e\n                \u003ch3 class\u003d\"panel-title\"\u003eSpark Interpreter (default)\u003c/h3\u003e\n            \u003c/div\u003e\n            \u003cdiv class\u003d\"panel-body\"\u003e\n                %spark (or nothing because it\u0027s the default interpreter)\n                \u003cbr/\u003e\u003cbr/\u003e\n                Scala Spark code here\n                ...\n            \u003c/div\u003e\n        \u003c/div\u003e         \n    \u003c/div\u003e    \n\u003c/div\u003e\n"
+      },
+      "dateCreated": "Sep 24, 2015 4:41:01 PM",
+      "dateStarted": "Sep 24, 2015 10:15:18 PM",
+      "dateFinished": "Sep 24, 2015 10:15:18 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1443125065878_-82152066",
+      "id": "20150924-220425_248333131",
+      "dateCreated": "Sep 24, 2015 10:04:25 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "01-Zeppelin UI Layout",
+  "id": "2B1J34Z7N",
+  "angularObjects": {
+    "2BBQBKBJ5": [],
+    "2BANCZC3Z": [],
+    "2BBY6XM77": [],
+    "2BC9M7S89": [],
+    "2BBR2HDJW": [],
+    "2B8JMS281": [],
+    "2BC871N7K": [],
+    "2BBJ594CV": [],
+    "2BCB17X88": [],
+    "2BAFPSB8K": [],
+    "2B8QVVF1M": [],
+    "2B8WT72N8": [],
+    "2BC3GHKMD": [],
+    "2BAYRRJYM": [],
+    "2BB6RD2TH": []
+  },
+  "config": {
+    "looknfeel": "default"
+  },
+  "info": {}
+}
