@@ -69,7 +69,7 @@
     {
       "title": "Reload Performers Original Data",
       "text": "%sh\n\n`which cqlsh` -e \"TRUNCATE spark_demo.performers\"\n`which cqlsh` -e \"COPY spark_demo.performers(name, country, gender, type, born, died,styles) FROM \u0027/tmp/spark_cassandra_demo/performers.csv\u0027\"",
-      "dateUpdated": "Sep 23, 2015 10:52:20 AM",
+      "dateUpdated": "Nov 3, 2015 10:41:18 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -95,11 +95,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "Processed 10000 rows; Write: 6737.96 rows/s\r\n11100 rows imported in 1.808 seconds.\n"
+        "msg": "Processed 10000 rows; Write: 7638.98 rows/s\r\n11100 rows imported in 1.574 seconds.\n"
       },
       "dateCreated": "May 24, 2015 2:08:54 PM",
-      "dateStarted": "Sep 23, 2015 10:52:20 AM",
-      "dateFinished": "Sep 23, 2015 10:52:23 AM",
+      "dateStarted": "Nov 3, 2015 10:41:18 AM",
+      "dateFinished": "Nov 3, 2015 10:41:21 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },

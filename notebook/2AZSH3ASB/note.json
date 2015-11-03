@@ -60,9 +60,9 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "title": "Register Cassandra Table Into DataFrame",
+      "title": "Register Cassandra Table Into DataFrame Programmatically",
       "text": "sqlContext\n  .read\n  .format(\"org.apache.spark.sql.cassandra\")\n  .options(Map(\"keyspace\" -\u003e \"spark_demo\", \"table\" -\u003e \"us_unemployment_stats\"))\n  .load()\n  .registerTempTable(\"us_unemployment_stats\")",
-      "dateUpdated": "Sep 28, 2015 1:35:33 PM",
+      "dateUpdated": "Nov 3, 2015 10:29:34 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -95,9 +95,56 @@
       "progressUpdateIntervalMs": 500
     },
     {
+      "title": "Register Cassandra table into dataFrame using sparkSQL",
+      "text": "%sql\nCREATE TEMPORARY TABLE us_unemployment_stats \nUSING org.apache.spark.sql.cassandra \nOPTIONS ( cluster \"Test Cluster\", keyspace \"spark_demo\", table \"us_unemployment_stats\", pushdown \"true\")",
+      "dateUpdated": "Nov 3, 2015 10:40:10 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 103.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "null",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "null",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "editorMode": "ace/mode/sql",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1446542978075_-1256996578",
+      "id": "20151103-102938_609452344",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "null\n"
+      },
+      "dateCreated": "Nov 3, 2015 10:29:38 AM",
+      "dateStarted": "Nov 3, 2015 10:40:10 AM",
+      "dateFinished": "Nov 3, 2015 10:40:10 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
       "title": "Display Using DataFrame",
-      "text": "%sql\nSELECT year,unemployed_percentage_to_labor\nFROM us_unemployment_stats \nWHERE unemployed_percentage_to_labor \u003e 8 \nORDER BY year ASC",
-      "dateUpdated": "Sep 28, 2015 1:36:15 PM",
+      "text": "%sql\nSELECT year,unemployed_percentage_to_labor\nFROM us_unemployment_stats \nWHERE unemployed_percentage_to_labor \u003e 0\nORDER BY year ASC",
+      "dateUpdated": "Nov 3, 2015 10:40:23 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -133,7 +180,7 @@
           }
         },
         "editorMode": "ace/mode/scala",
-        "tableHide": true,
+        "tableHide": false,
         "title": true
       },
       "settings": {
@@ -145,11 +192,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TABLE",
-        "msg": "year\tunemployed_percentage_to_labor\n1941\t9.9\n1975\t8.5\n1982\t9.7\n1983\t9.6\n2009\t9.3\n2010\t9.6\n"
+        "msg": "year\tunemployed_percentage_to_labor\n1941\t9.9\n1942\t4.7\n1943\t1.9\n1944\t1.2\n1945\t1.9\n1946\t3.9\n1947\t3.9\n1948\t3.8\n1949\t5.9\n1950\t5.3\n1951\t3.3\n1952\t3.0\n1953\t2.9\n1954\t5.5\n1955\t4.4\n1956\t4.1\n1957\t4.3\n1958\t6.8\n1959\t5.5\n1960\t5.5\n1961\t6.7\n1962\t5.5\n1963\t5.7\n1964\t5.2\n1965\t4.5\n1966\t3.8\n1967\t3.8\n1968\t3.6\n1969\t3.5\n1970\t4.9\n1971\t5.9\n1972\t5.6\n1973\t4.9\n1974\t5.6\n1975\t8.5\n1976\t7.7\n1977\t7.1\n1978\t6.1\n1979\t5.8\n1980\t7.1\n1981\t7.6\n1982\t9.7\n1983\t9.6\n1984\t7.5\n1985\t7.2\n1986\t7.0\n1987\t6.2\n1988\t5.5\n1989\t5.3\n1990\t5.6\n1991\t6.8\n1992\t7.5\n1993\t6.9\n1994\t6.1\n1995\t5.6\n1996\t5.4\n1997\t4.9\n1998\t4.5\n1999\t4.2\n2000\t4.0\n2001\t4.7\n2002\t5.8\n2003\t6.0\n2004\t5.5\n2005\t5.1\n2006\t4.6\n2007\t4.6\n2008\t5.8\n2009\t9.3\n2010\t9.6\n"
       },
       "dateCreated": "Sep 28, 2015 1:33:24 PM",
-      "dateStarted": "Sep 28, 2015 1:35:53 PM",
-      "dateFinished": "Sep 28, 2015 1:35:55 PM",
+      "dateStarted": "Nov 3, 2015 10:40:23 AM",
+      "dateFinished": "Nov 3, 2015 10:40:24 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },

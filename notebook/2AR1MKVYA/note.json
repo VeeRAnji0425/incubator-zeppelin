@@ -138,8 +138,8 @@
     },
     {
       "title": "Search Table Albums_by_country_and_year",
-      "text": "%cassandra\nSELECT country,year,performer,title FROM spark_demo.albums_by_country\nWHERE country\u003d\u0027{{country\u003dHungary}}\u0027 AND year\u003d{{year\u003d2010}}\nLIMIT 100;",
-      "dateUpdated": "Sep 23, 2015 11:09:23 AM",
+      "text": "%cassandra\nSELECT country,year,performer,title FROM spark_demo.albums_by_country\nWHERE country\u003d\u0027{{country\u003dGermany}}\u0027 AND year\u003d{{year\u003d2010}}\nLIMIT 100;",
+      "dateUpdated": "Nov 3, 2015 10:41:56 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -180,14 +180,14 @@
       },
       "settings": {
         "params": {
-          "country": "Hungary",
-          "year": "2000"
+          "country": "Germany",
+          "year": "2010"
         },
         "forms": {
           "country": {
             "name": "country",
             "displayName": "country",
-            "defaultValue": "Hungary",
+            "defaultValue": "Germany",
             "hidden": false
           },
           "year": {
@@ -203,11 +203,11 @@
       "result": {
         "code": "SUCCESS",
         "type": "TABLE",
-        "msg": "country\tyear\tperformer\ttitle\nHungary\t2000\tSolaris\tBack to the Roots\nHungary\t2000\tSolaris\tNOAB\nHungary\t2000\tYonderboi\tShallow and Profound\nHungary\t2000\tAfter Crying\tStruggle for Life\n"
+        "msg": "country\tyear\tperformer\ttitle\nGermany\t2010\tHellsongs\t2010-08-23: Nachtmix Bayerischer Rundfunk Munich Germany\nGermany\t2010\tBurnt Friedman \u0026 Jaki Liebezeit\t5 7\nGermany\t2010\tFaith and the Muse\t:ankoku butoh:\nGermany\t2010\tHenrik Schwarz\tA Critical Mass Live EP\nGermany\t2010\tWynardtage\tA Flicker of Hope\nGermany\t2010\tSopor Aeternus \u0026 The Ensemble of Shadows\tA Strange Thing to Say\nGermany\t2010\tGrossstadtgeflüster\tAlles muss man selber machen\nGermany\t2010\tAntimatter\tAlternative Matter\nGermany\t2010\tO Yuki Conjugate\tAmbiguism 1983-1987\nGermany\t2010\tBloody Dead and Sexy\tAn Eye on You\nGermany\t2010\tPara One\tAnimal Style / Nevrosis\nGermany\t2010\tThe Ocean\tAnthropocentric\nGermany\t2010\tLeaves’ Eyes\tAt Heaven\u0027s End\nGermany\t2010\tSND\tAtavism\nGermany\t2010\tEgotronic\tAusflug mit Freunden\nGermany\t2010\tLordi\tBabez for Breakfast\nGermany\t2010\tThe Sonic Boom Foundation\tBad News Always Good News\nGermany\t2010\tAudio Lotion\tBad Timing\nGermany\t2010\tJahcoozi\tBarefoot Wanderer\nGermany\t2010\tJahcoozi\tBarefoot Wanderer Remixes Part 1\nGermany\t2010\tMartyn\tBerghain 04 | Part I\nGermany\t2010\tDapayk Solo\tBerlin Bedlam\nGermany\t2010\tEight Legs\tBest of Me\nGermany\t2010\tIszoloscope\tBeyond Within\nGermany\t2010\tFjernlys\tBeyond the Undulant Quiescence\nGermany\t2010\tJapanische Kampfhörspiele\tBilder fressen Strom\nGermany\t2010\tFaderhead\tBlack Friday\nGermany\t2010\tConsole\tBlank Air / By This River\nGermany\t2010\tDJ Koze\tBlume Der Nacht / Rue Burnout\nGermany\t2010\tSAM\tBrainwasher\nGermany\t2010\tBloodbath\tBreeding Death\nGermany\t2010\tGOOSE\tCan\u0027t Stop Me Now\nGermany\t2010\tDiorama\tChild of Entertainment\nGermany\t2010\tThe Puppini Sisters\tChristmas With The Puppini Sisters\nGermany\t2010\tIris\tCloser to Real\nGermany\t2010\tClueso\tClueso \u0026 Stüba Philharmonie\nGermany\t2010\tSolitary Experiments\tCompendium 2\nGermany\t2010\tOjos de Brujo\tCorriente Vital: 10 Años\nGermany\t2010\tKoop\tCoup de Grâce 1997-2007\nGermany\t2010\tThe Sounds\tCrossing the Rubicon\nGermany\t2010\tDiorama\tCubed\nGermany\t2010\tCœur de pirate\tCœur de pirate\nGermany\t2010\tState of the Union\tDancing in the Dark\nGermany\t2010\tMagica\tDark Diary\nGermany\t2010\tCats on Fire\tDealing in Antiques\nGermany\t2010\tExciter\tDeath Machine\nGermany\t2010\tDapayk Solo\tDecade One\nGermany\t2010\tDeathstars\tDecade of Debauchery\nGermany\t2010\tRedman\tDef Jammable\nGermany\t2010\tAdversus\tDer Zeit abhanden\nGermany\t2010\tDaniel Kehlmann\tDer fernste Ort\nGermany\t2010\tMarcel Dettmann\tDettmann\nGermany\t2010\tMarcel Dettmann\tDettmann Remixed\nGermany\t2010\tMax Richter\tDie Fremde\nGermany\t2010\txotox\tDie Unruhe 2.0\nGermany\t2010\tReaper\tDirty Cash\nGermany\t2010\tSamy Deluxe\tDis wo ich herkomm Live\nGermany\t2010\tExtrawelt\tDistTheme\nGermany\t2010\tGentleman\tDiversity\nGermany\t2010\tOrdo Rosarius Equilibrio\tDo Angels Never Cry and Heaven Never Fall?\nGermany\t2010\tFormat:B\tDog Tag\nGermany\t2010\tEisbrecher\tEiszeit\nGermany\t2010\tMinor Majority\tEither Way I Think You Know\nGermany\t2010\tDino Saluzzi\tEl Encuentro\nGermany\t2010\tReamonn\tEleven\nGermany\t2010\tRuede Hagelstein\tEmergency / This Way\nGermany\t2010\tSaalschutz\tEntweder Saalschutz\nGermany\t2010\tBuddy Peace\tEquinox Presents: The 25th - The Equinox Megamixes\nGermany\t2010\tEluveitie\tEverything Remains as It Never Was\nGermany\t2010\tFrank Bretschneider\tExp\nGermany\t2010\tIsrael Kamakawiwoʻole\tFacing Future\nGermany\t2010\tBarbara Morgenstern\tFan No.2\nGermany\t2010\tMasterplan\tFar From the End of the World\nGermany\t2010\tFarben\tFarben EP\nGermany\t2010\tBombay Bicycle Club\tFlaws\nGermany\t2010\tKettcar\tFliegende Bauten\nGermany\t2010\t5F-X\tFlight Recorder 5.0\nGermany\t2010\tBurden of Grief\tFollow the Flames\nGermany\t2010\tLou Bega\tFree Again\nGermany\t2010\tBipol\tFritter Away\nGermany\t2010\tDapayk Solo\tFutu\nGermany\t2010\tMelchior Productions\tGentlemen Jack EP\nGermany\t2010\tMy Ruin\tGhosts and Good Stories\nGermany\t2010\tFehlfarben\tGlücksmaschinen\nGermany\t2010\tKollektiv Turmstrasse\tGrillen Im Park\nGermany\t2010\tThomas Fehlmann\tGute Luft\nGermany\t2010\tThomas Fehlmann\tGute Luft Remixe\nGermany\t2010\tDie Aeronauten\tHallo Leidenschaft!\nGermany\t2010\tPure Reason Revolution\tHammer and Anvil\nGermany\t2010\tGrand Magus\tHammer of the North\nGermany\t2010\tUntoten\tHaus der Lüge\nGermany\t2010\tVolbeat\tHeaven nor Hell\nGermany\t2010\tThe Ocean\tHeliocentric\nGermany\t2010\tThe Ocean\tHeliocentric / Anthropocentric\nGermany\t2010\tThe Big Bopper\tHello Baby! You Know What I Like!\nGermany\t2010\tPopNoName\tHello Gorgeous\nGermany\t2010\tConsole\tHerself\nGermany\t2010\tJan Delay\tHoffnung\nGermany\t2010\tKnorkator\tIch hasse Musik\nGermany\t2010\tTelefon Tel Aviv\tImmolate Yourself Remixes\n"
       },
       "dateCreated": "May 20, 2015 4:19:48 PM",
-      "dateStarted": "Sep 23, 2015 11:09:23 AM",
-      "dateFinished": "Sep 23, 2015 11:09:23 AM",
+      "dateStarted": "Nov 3, 2015 10:41:56 AM",
+      "dateFinished": "Nov 3, 2015 10:41:56 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
